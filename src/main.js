@@ -14,4 +14,4 @@ new Vue({
 
 
 // Erik
-//Sofie 
+//SofieK

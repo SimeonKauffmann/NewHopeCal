@@ -1,4 +1,4 @@
-# final-project
+# new-hope
 
 ## Project setup
 ```

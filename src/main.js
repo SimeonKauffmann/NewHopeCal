@@ -13,8 +13,8 @@ new Vue({
 }).$mount("#app");
 
 
-
+// Simeon
 // Erik
-//SofieK
-//Sofia
+// SofieK
+// Sofia
 

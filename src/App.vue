@@ -1,21 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style lang="scss">
+
   #app{
     background-color: #608B96;
+    margin: 0;
+  font-family: 'Cabin', sans-serif;
+  font-size: 15px;
   }
-  p{
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+
+  h1 {
+    font-size: 40px;
+    font-weight: 900;
   }
-  h1, h2, h3, h4{
-    font-family: 'Cabin', 'Times New Roman', Times, serif ;
+  h2 {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
   }
 </style>

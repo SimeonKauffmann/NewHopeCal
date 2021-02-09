@@ -1,0 +1,11 @@
+$theme-colors: (
+  "primary": rgba(96, 139, 150, 1),
+  "danger": rgba(229, 152, 118, 1),
+  "secondry": rgba(132, 146, 131, 1),
+  "info": rgba(132, 146, 131, 1),
+);
+
+$input-bg: rgba(96, 139, 150, 1);
+
+@import "~bootstrap";
+@import "~bootstrap-vue";

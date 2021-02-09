@@ -21,6 +21,8 @@ new Vue({
   render: (h) => h(App),
 }).$mount("#app");
 
+// Simeon
 // Erik
-//SofieK
-//Sofia
+// SofieK
+// Sofia
+// Patrik

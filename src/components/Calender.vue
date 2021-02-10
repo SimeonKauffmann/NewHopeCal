@@ -35,14 +35,16 @@ export default {
       this.context = ctx;
     },
 
-    onClick(ymd, date) {
-      const day = date.getDate();
-      router.push({ path: `/edit/${day}` });
+    onClick(ymd) {
+      router.push({ path: `/edit/${ymd}` });
     },
-    cellStyling(ymd, date) {
-      const day = date.getDate();
+    cellStyling(ymd) {
+      var days = [];
+      this.$store.state.information.forEach((element) => {
+        days.push(element.date);
+      });
 
-      return day == 22 ? "calendar-cell-marked" : "calendar-cell";
+      return days.includes(ymd) ? "calendar-cell-marked" : "calendar-cell";
     },
   },
   components: {},

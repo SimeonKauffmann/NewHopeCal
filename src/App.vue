@@ -43,16 +43,11 @@ h3 {
   top: 40px;
 }
 </style>
-<<<<<<< HEAD
-
-
-=======
 <script>
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from "@/components/Sidebar.vue";
 export default {
   components: {
-    Sidebar
-  }
+    Sidebar,
+  },
 };
 </script>
->>>>>>> 60fc72f8c509a9e435a830fdfbad6752df1f90de

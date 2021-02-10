@@ -32,6 +32,7 @@ export default {
   name: "Edit",
   data() {
     return {
+      date: null,
       title: null,
       startTime: null,
       endTime: null,
@@ -45,6 +46,7 @@ export default {
     },
     createEvent(title, startTime, endTime, text) {
       var info = {
+        date: this.$route.params.day,
         title: title,
         startTime: startTime,
         endTime: endTime,

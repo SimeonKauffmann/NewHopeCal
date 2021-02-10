@@ -12,6 +12,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setInfo(state, info) {
+      state.information.push(info);
       state.events.push(info);
       localStorage.setItem("events", JSON.stringify(state.events));
     },

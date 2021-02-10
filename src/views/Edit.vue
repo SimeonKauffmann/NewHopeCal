@@ -17,7 +17,7 @@
         Starts:
         <input v-model="startTime" placeholder="Starts time.." />
       </label>
-      <label> Ends: <input v-model="endTime" placeholder="End time.." /></label>
+      <label> Ends: <input v-model="endTime" placeholder="End time.."/></label>
       <div>
         <label>
           <textarea v-model="text"></textarea>
@@ -37,7 +37,6 @@ export default {
       startTime: null,
       endTime: null,
       text: null,
-      date: null,
       modalShow: false,
     };
   },

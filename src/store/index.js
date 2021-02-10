@@ -8,10 +8,12 @@ export default new Vuex.Store({
   state: {
     today: parseInt(moment().format("YYYYMMDD")),
     information: [],
+    events: JSON.parse(localStorage.getItem("events") || "[]"),
   },
   mutations: {
     setInfo(state, info) {
-      state.information.push(info);
+      state.events.push(info);
+      localStorage.setItem("events", JSON.stringify(state.events));
     },
   },
   actions: {

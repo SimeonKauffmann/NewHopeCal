@@ -13,12 +13,12 @@
     </svg>
 
     <b-sidebar class="w-25" id="navbar" title="Sidebar" shadow>
-      <ul>
-        <li><router-link to="/">Home</router-link></li>
+      <ul class="nav-list">
+        <li><router-link to="/" class="nav-link">Home</router-link></li>
         <!--li><router-link>Day</router-link></li-->
-        <li><router-link to="/week">Week</router-link></li>
-        <li><router-link to="/month">Month</router-link></li>
-        <li><router-link to="/year">Year</router-link></li>
+        <li><router-link to="/week" class="nav-link">Week</router-link></li>
+        <li><router-link to="/month" class="nav-link">Month</router-link></li>
+        <li><router-link to="/year" class="nav-link">Year</router-link></li>
         <!--li><router-link>Year</router-link></li-->
       </ul>
     </b-sidebar>
@@ -35,5 +35,29 @@ export default {
 #hamburger {
   float: right;
   margin-right: 30px;
+}
+.nav-list {
+  list-style: none;
+  padding: 0;
+  li {
+    .nav-link {
+      font-size: 20px;
+      font-weight: 400;
+      text-align: center;
+      padding-top: 40px;
+      padding-bottom: 15px;
+      color: rgb(49, 49, 49);
+      position: relative;
+    }
+    .nav-link::before {
+      content: '';
+      width: 80%;
+      height: 2px;
+      bottom: 0;
+      left: 10%;
+      background: black;
+      position: absolute;
+    }
+  }
 }
 </style>

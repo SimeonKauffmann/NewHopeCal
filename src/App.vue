@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  created() {},
+  created() {}
 };
 </script>
 
@@ -19,7 +19,7 @@ html {
 #app {
   background-color: #608b96;
   margin: 0;
-  font-family: "Cabin", Arial, sans-serif;
+  font-family: 'Cabin', Arial, sans-serif;
   font-size: 15px;
   color: rgb(49, 49, 49);
 }
@@ -43,10 +43,6 @@ h3 {
   top: 40px;
 }
 </style>
-<<<<<<< HEAD
-
-
-=======
 <script>
 import Sidebar from '@/components/Sidebar.vue';
 export default {
@@ -55,4 +51,3 @@ export default {
   }
 };
 </script>
->>>>>>> 60fc72f8c509a9e435a830fdfbad6752df1f90de

@@ -35,14 +35,8 @@ export default {
       this.context = ctx;
     },
 
-<<<<<<< HEAD
     onClick(ymd) {
       router.push({ path: `/edit/${ymd}` });
-=======
-    onClick(ymd, date) {
-      const day = parseInt(date.getFullYear(), date.getMonth(), date.getDate());
-      router.push({ path: `/edit/${day}` });
->>>>>>> 82c5a3ca3b3435b0b412f6da5774d4c9fcd42278
     },
     cellStyling(ymd) {
       var days = [];

@@ -88,9 +88,6 @@ li::before {
 /* =================
        Layout
     ================*/
-.home {
-  height: 100vh;
-}
 .home-col {
   margin: 15px 0px;
 }

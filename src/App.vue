@@ -6,7 +6,6 @@
 
 <style lang="scss">
 #app {
-  background-color: #608b96;
   margin: 0;
   font-family: "Cabin", sans-serif;
   font-size: 15px;

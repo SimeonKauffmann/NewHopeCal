@@ -1,26 +1,19 @@
 <template>
   <b-container class="bv-example-row">
-    <b-row variant="danger">
-      <b-col md="auto">
-        <b-calendar
-          @selected="onClick"
-          class="bg-primary"
-          width="350px"
-          v-model="value"
-          @context="onContext"
-          locale="en-US"
-          today-variant="danger"
-          selected-variant="danger"
-        ></b-calendar>
-      </b-col>
-      <b-col>
-        <p>
-          Value: <b>'{{ value }}'</b>
-        </p>
-        <p class="mb-0">Context:</p>
-        <pre class="small">{{ context }}</pre>
-      </b-col>
-    </b-row>
+    <b-calendar
+      class="calendar-main"
+      block
+      @selected="onClick"
+      v-model="value"
+      @context="onContext"
+      locale="en-US"
+      today-variant="danger"
+      selected-variant="danger"
+      hide-header
+      nav-button-variant="dark"
+      no-key-nav
+      :date-info-fn="cellStyling"
+    ></b-calendar>
   </b-container>
 </template>
 
@@ -46,9 +39,31 @@ export default {
       const day = date.getDate();
       router.push({ path: `/edit/${day}` });
     },
+    cellStyling(ymd, date) {
+      const day = date.getDate();
+
+      return day == 22 ? "calendar-cell-marked" : "calendar-cell";
+    },
   },
   components: {},
 };
 </script>
 
-<style></style>
+<style>
+.calendar-main div {
+  border: none;
+}
+.calendar-main footer {
+  display: none;
+}
+.calendar-cell {
+  background-color: white;
+  border-radius: 0.8rem;
+  margin: 0.5rem;
+}
+.calendar-cell-marked {
+  background-color: rgba(229, 152, 118, 1);
+  border-radius: 0.8rem;
+  margin: 0.5rem;
+}
+</style>

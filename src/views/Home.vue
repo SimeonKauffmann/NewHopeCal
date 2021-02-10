@@ -22,9 +22,9 @@
 
       <b-row>
         <b-col class="home-col img-container">
-          <a href="*" target="_blank">
+          <router-link to="/month">
             <img alt="new-hope logo" src="../assets/logotyp.svg" />
-          </a>
+          </router-link>
         </b-col>
       </b-row>
     </b-container>
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: "Home",
 };
 </script>
 
@@ -67,7 +67,7 @@ li {
   line-height: 30px;
 }
 li::before {
-  content: ' ';
+  content: " ";
   border: 5px solid #e59876;
   border-radius: 100%;
   position: absolute;

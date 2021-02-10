@@ -13,7 +13,13 @@
     </svg>
 
     <b-sidebar class="w-25" id="navbar" title="Sidebar" shadow>
-      <div></div>
+      <ul>
+        <li><router-link to="/">Home</router-link></li>
+        <!--li><router-link>Day</router-link></li-->
+        <li><router-link to="/week">Week</router-link></li>
+        <li><router-link to="/month">Month</router-link></li>
+        <!--li><router-link>Year</router-link></li-->
+      </ul>
     </b-sidebar>
   </div>
 </template>

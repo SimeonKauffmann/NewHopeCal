@@ -21,7 +21,6 @@ html {
   font-size: 15px;
   color: rgb(49, 49, 49);
 }
-
 h1 {
   font-size: 40px;
   font-weight: 900;

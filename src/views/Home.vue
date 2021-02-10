@@ -22,9 +22,11 @@
 
       <b-row>
         <b-col class="home-col img-container">
-          <a href="*" target="_blank">
-            <img alt="new-hope logo" src="../assets/logotyp.svg" />
-          </a>
+          <div class="a-link-wrapper">
+            <router-link to="/month">
+              <img alt="new-hope logo" src="../assets/logotyp.svg" />
+            </router-link>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -75,8 +77,12 @@ li::before {
   left: 7.5px;
   box-sizing: border-box;
 }
-a {
-  text-decoration: none;
+.a.router-link-active {
+  text-decoration: black;
+}
+.a-link-wrapper {
+  margin: auto;
+  width: 200px;
 }
 
 /* =================

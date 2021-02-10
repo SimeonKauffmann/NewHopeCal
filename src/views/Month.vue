@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div id="navbar"><Sidebar /></div>
-
     <div class="calendar-container">
       <Calender />
     </div>
@@ -9,27 +7,16 @@
 </template>
 
 <script>
-import Calender from "@/components/Calender.vue";
-import Sidebar from "@/components/Sidebar.vue";
+import Calender from '@/components/Calender.vue';
 
 export default {
-  name: "Month",
+  name: 'Month',
   components: {
-    Calender,
-    Sidebar,
-  },
+    Calender
+  }
 };
 </script>
 <style lang="scss" scoped>
-#navbar {
-  width: 100vw;
-  height: 100px;
-  padding-top: 1rem;
-  position: fixed;
-  background-color: #608b96;
-  top: 0;
-  z-index: 100;
-}
 .calendar-container {
   width: 95vw;
   height: 100%;

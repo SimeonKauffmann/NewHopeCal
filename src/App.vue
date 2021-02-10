@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <div class="navbar-mobile"><Sidebar /></div>
+
     <router-view />
   </div>
 </template>
@@ -33,6 +35,24 @@ h3 {
   font-size: 20px;
   font-weight: 400;
 }
+
+.navbar-mobile {
+  z-index: 3;
+  position: absolute;
+  right: 0;
+  top: 40px;
+}
 </style>
+<<<<<<< HEAD
 
 
+=======
+<script>
+import Sidebar from '@/components/Sidebar.vue';
+export default {
+  components: {
+    Sidebar
+  }
+};
+</script>
+>>>>>>> 60fc72f8c509a9e435a830fdfbad6752df1f90de

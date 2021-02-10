@@ -18,6 +18,7 @@
         <!--li><router-link>Day</router-link></li-->
         <li><router-link to="/week">Week</router-link></li>
         <li><router-link to="/month">Month</router-link></li>
+        <li><router-link to="/year">Year</router-link></li>
         <!--li><router-link>Year</router-link></li-->
       </ul>
     </b-sidebar>
@@ -26,7 +27,7 @@
 
 <script>
 export default {
-  name: "Sidebar",
+  name: 'Sidebar'
 };
 </script>
 

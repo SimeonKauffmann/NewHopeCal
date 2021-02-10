@@ -50,6 +50,7 @@ export default {
         startTime: startTime,
         endTime: endTime,
         text: text,
+        date: parseInt(this.$route.params.day),
       };
 
       this.$store.dispatch("saveInfo", info);

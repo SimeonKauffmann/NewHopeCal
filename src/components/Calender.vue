@@ -36,8 +36,20 @@ export default {
     },
 
     onClick(ymd, date) {
-      const day = parseInt(date.getFullYear(), date.getMonth(), date.getDate());
-      router.push({ path: `/edit/${day}` });
+      let month = (date.getMonth() + 1).toString();
+      let day = date.getDate().toString();
+
+      if (month.length != 2) {
+        month = "0" + month;
+      }
+
+      if (day.length != 2) {
+        day = "0" + day;
+      }
+
+      let thisDate = `${date.getFullYear()}${month}${day}`;
+
+      router.push({ path: `/edit/${thisDate}` });
     },
     cellStyling(ymd, date) {
       const day = date.getDate();

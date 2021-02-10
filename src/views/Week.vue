@@ -72,10 +72,10 @@ export default {
   },
   methods: {
     pastDates() {
-      this.startDate -= 21;
+      this.startDate -= 7;
     },
     futureDates() {
-      this.startDate += 21;
+      this.startDate += 7;
     },
     backToday() {
       this.startDate = 0;

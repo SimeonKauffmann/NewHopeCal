@@ -1,71 +1,129 @@
 <template>
-<div>
-<div id="month"><h1>{{month}}</h1><Sidebar /></div>
-  
-  <div class="week-container">
-    
-    <div class='days' v-for="day in days" :key='day'>
-      <div class='text'><p>{{day}}</p></div>
+  <div>
+    <div id="month" class="row">
+      <div class="col-6">
+        <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
+      </div>
+      <div class="col-3">
+        <b-button @click="backToday">Today</b-button>
+      </div>
+      <div class="col-3"><Sidebar /></div>
     </div>
-  </div>
+
+    <div class="arrows">
+      <b-icon
+        icon="arrow-up-short"
+        animation="fade"
+        font-scale="4"
+        @click="pastDates"
+      ></b-icon>
+    </div>
+    <div class="week-container">
+      <div class="days" v-for="day in days" :key="day.date">
+        <div class="text">
+          <p>{{ day.dayName }}</p>
+        </div>
+        <div class="event-marker" v-if="day.event"></div>
+      </div>
+    </div>
+    <div class="arrows">
+      <b-icon
+        icon="arrow-down-short"
+        animation="fade"
+        font-scale="4"
+        @click="futureDates"
+      ></b-icon>
+    </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
-import Sidebar from "@/components/Sidebar.vue"
+import moment from "moment";
+import Sidebar from "@/components/Sidebar.vue";
 
 export default {
-  computed:{
-    days(){
-      const days = []
-        for(let x = 0; x < 40; x++){
-        let dayName = moment().add(x, 'days').format('dddd Do')
-        days.push(dayName) 
+  computed: {
+    days() {
+      const days = [];
+      for (let x = this.startDate; x < this.startDate + 7; x++) {
+        let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
+        let event = this.$store.state.events.find(
+          (event) => event.date === date
+        )
+          ? true
+          : false;
+
+        let dayObject = {
+          dayName: moment().add(x, "days").format("dddd Do MMMM"),
+          date: date,
+          event: event,
+          week: moment().add(x, "days").format("w"),
+          month: moment().add(x, "days").format("MMMM"),
+        };
+
+        days.push(dayObject);
       }
-      return days
-    } ,
-    month(){
-        return moment().format('MMMM')
-      }
+      return days;
+    },
   },
-  components: { Sidebar }
-}
+  data() {
+    return {
+      startDate: 0,
+    };
+  },
+  methods: {
+    pastDates() {
+      this.startDate -= 21;
+    },
+    futureDates() {
+      this.startDate += 21;
+    },
+    backToday() {
+      this.startDate = 0;
+    },
+  },
+  components: { Sidebar },
+};
 </script>
 
 <style lang="scss" scoped>
-#month{
+#month {
   width: 100vw;
-    height: 100px;
-    margin: 0 auto;
-    position: fixed;
-    background-color: #608B96;
-    top:0;
-    box-shadow:2px 2px 4px #000000;
+  height: 100px;
+  margin: 0 auto;
+  position: fixed;
+  background-color: #608b96;
+  top: 0;
+  box-shadow: 2px 2px 4px #000000;
+  z-index: 1;
 }
-  .week-container {
-    background-color: #608B96;
+.arrows {
+  margin: 100px auto 50px;
+  width: 60px;
+}
+.week-container {
+  background-color: #608b96;
+  width: 95vw;
+  height: 100%;
+  margin: 40px auto 10px;
+  .days {
+    margin: 2.5vw auto;
     width: 95vw;
-    height: 100%;
-    margin: 100px auto 10px;
-    .days { 
-      margin: 2.5vw auto;
-      width: 95vw;
-      height: 60px;
-      background-color:white;
-      border: 2px #D3D1C2;
-      border-radius: 15px;
-      box-shadow:2px 2px 4px #000000;
-      .text{
-        width:18vw;
-        margin: 5px;
-      }
+    height: 60px;
+    background-color: white;
+    border: 2px #d3d1c2;
+    border-radius: 15px;
+    box-shadow: 2px 2px 4px #000000;
+    .text {
+      margin: 5px;
+    }
+    .event-marker {
+      width: 30px;
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
+      float: right;
     }
   }
-  p{
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  }
-  h1, h2, h3, h4{
-    font-family: 'Cabin', 'Times New Roman', Times, serif ;
-  }
+}
 </style>

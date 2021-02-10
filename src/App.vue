@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from "@/components/Sidebar.vue";
 export default {
   components: {
-    Sidebar
-  }
+    Sidebar,
+  },
 };
 </script>
 
@@ -22,7 +22,7 @@ html {
 #app {
   background-color: #608b96;
   margin: 0;
-  font-family: 'Cabin', Arial, sans-serif;
+  font-family: "Cabin", Arial, sans-serif;
   font-size: 15px;
   color: rgb(49, 49, 49);
 }
@@ -41,17 +41,16 @@ h3 {
 
 .navbar-mobile {
   z-index: 3;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 40px;
 }
 </style>
-
 <script>
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from "@/components/Sidebar.vue";
 export default {
   components: {
-    Sidebar
-  }
+    Sidebar,
+  },
 };
 </script>

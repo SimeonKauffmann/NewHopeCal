@@ -70,7 +70,7 @@ li {
 }
 li::before {
   content: ' ';
-  border: 5px solid #e59876;
+  border: 4px solid #e59876;
   border-radius: 100%;
   position: absolute;
   margin-top: 11px;
@@ -88,9 +88,6 @@ li::before {
 /* =================
        Layout
     ================*/
-.home {
-  height: 100vh;
-}
 .home-col {
   margin: 15px 0px;
 }

@@ -49,12 +49,17 @@ export default {
 
       let thisDate = `${date.getFullYear()}${month}${day}`;
 
-      router.push({ path: `/edit/${thisDate}` });
+      router.push({ path: `/edit/${thisDate}` }); //Simeon's router.push
+      // onClick(ymd) {
+      //   router.push({ path: `/edit/${ymd}` });   Sofias router.push
     },
-    cellStyling(ymd, date) {
-      const day = date.getDate();
+    cellStyling(ymd) {
+      var days = [];
+      this.$store.state.information.forEach((element) => {
+        days.push(element.date);
+      });
 
-      return day == 22 ? "calendar-cell-marked" : "calendar-cell";
+      return days.includes(ymd) ? "calendar-cell-marked" : "calendar-cell";
     },
   },
   components: {},

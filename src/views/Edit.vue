@@ -17,7 +17,7 @@
         Starts:
         <input v-model="startTime" placeholder="Starts time.." />
       </label>
-      <label> Ends: <input v-model="endTime" placeholder="End time.." /></label>
+      <label> Ends: <input v-model="endTime" placeholder="End time.."/></label>
       <div>
         <label>
           <textarea v-model="text"></textarea>
@@ -32,11 +32,11 @@ export default {
   name: "Edit",
   data() {
     return {
+      date: null,
       title: null,
       startTime: null,
       endTime: null,
       text: null,
-      date: null,
       modalShow: false,
     };
   },
@@ -46,6 +46,7 @@ export default {
     },
     createEvent(title, startTime, endTime, text) {
       var info = {
+        date: this.$route.params.day,
         title: title,
         startTime: startTime,
         endTime: endTime,

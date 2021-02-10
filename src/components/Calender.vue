@@ -36,7 +36,7 @@ export default {
     },
 
     onClick(ymd, date) {
-      const day = date.getDate();
+      const day = parseInt(date.getFullYear(), date.getMonth(), date.getDate());
       router.push({ path: `/edit/${day}` });
     },
     cellStyling(ymd, date) {

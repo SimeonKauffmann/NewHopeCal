@@ -7,7 +7,7 @@
       <div class="col-3">
         <b-button @click="backToday">Today</b-button>
       </div>
-      <div class="col-3"><Sidebar /></div>
+      <div class="col-3"></div>
     </div>
 
     <div class="arrows">
@@ -39,7 +39,6 @@
 
 <script>
 import moment from "moment";
-import Sidebar from "@/components/Sidebar.vue";
 
 export default {
   computed: {
@@ -82,7 +81,6 @@ export default {
       this.startDate = 0;
     },
   },
-  components: { Sidebar },
 };
 </script>
 

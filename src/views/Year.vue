@@ -216,8 +216,8 @@ export default {
 }
 .year-col-buttons {
   text-align: center;
-
   margin-bottom: 10px;
+  animation: 2s ease-in 0s 1 growIn;
 }
 .year-col-svg {
   margin-top: 30px;
@@ -254,6 +254,7 @@ export default {
   transform: scale(1);
   transform-origin: center;
   transition: transform 250ms ease-in;
+  animation: 2s ease-out 0s 1 colorButton;
 }
 .btn:hover {
   transform: scale(1.1);
@@ -262,5 +263,33 @@ export default {
 .btn:active {
   background: #849283;
   border: none;
+}
+
+@keyframes growIn {
+  from {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    // background: rgba(229, 152, 118, 1);
+    transform: scale(1);
+  }
+}
+@keyframes colorButton {
+  from {
+    color: transparent;
+    font-size: 15px;
+  }
+  70% {
+    font-size: 25px;
+  }
+  to {
+    color: black;
+  }
 }
 </style>

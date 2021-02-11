@@ -45,7 +45,7 @@
       <b-row no-gutters>
         <b-col class="year-col">
           <b-row no-gutters>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons January">
               <b-button
                 size="lg"
                 class="date-button"
@@ -55,7 +55,7 @@
                 January
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons February">
               <b-button
                 size="lg"
                 class="date-button"
@@ -65,7 +65,7 @@
                 February
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons March">
               <b-button
                 size="lg"
                 class="date-button"
@@ -78,7 +78,7 @@
           </b-row>
 
           <b-row no-gutters>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons April">
               <b-button
                 size="lg"
                 class="date-button"
@@ -88,7 +88,7 @@
                 April
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons May">
               <b-button
                 size="lg"
                 class="date-button"
@@ -98,7 +98,7 @@
                 May
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons June">
               <b-button
                 size="lg"
                 class="date-button"
@@ -111,7 +111,7 @@
           </b-row>
 
           <b-row no-gutters>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons  July">
               <b-button
                 size="lg"
                 class="date-button"
@@ -121,7 +121,7 @@
                 July
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons August">
               <b-button
                 size="lg"
                 class="date-button"
@@ -131,7 +131,7 @@
                 August
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons September">
               <b-button
                 size="lg"
                 class="date-button"
@@ -144,7 +144,7 @@
           </b-row>
 
           <b-row no-gutters>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons October">
               <b-button
                 size="lg"
                 class="date-button"
@@ -154,7 +154,7 @@
                 October
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons November">
               <b-button
                 size="lg"
                 class="date-button"
@@ -164,7 +164,7 @@
                 November
               </b-button>
             </b-col>
-            <b-col class="year-col year-col-buttons">
+            <b-col class="year-col year-col-buttons December">
               <b-button
                 size="lg"
                 class="date-button"
@@ -217,7 +217,6 @@ export default {
 .year-col-buttons {
   text-align: center;
   margin-bottom: 10px;
-  animation: 2s ease-in 0s 1 growIn;
 }
 .year-col-svg {
   margin-top: 30px;
@@ -254,7 +253,6 @@ export default {
   transform: scale(1);
   transform-origin: center;
   transition: transform 250ms ease-in;
-  animation: 2s ease-out 0s 1 colorButton;
 }
 .btn:hover {
   transform: scale(1.1);
@@ -265,31 +263,50 @@ export default {
   border: none;
 }
 
-@keyframes growIn {
+/*===========
+  Animations
+============*/
+.January {
+  animation: 1.5s ease-in 0s 1 fadeIn;
+}
+.February,
+.April {
+  animation: 2s ease-in 0s 1 fadeIn;
+}
+.March,
+.May,
+.July {
+  animation: 2.5s ease-in 0s 1 fadeIn;
+}
+.June,
+.August,
+.October {
+  animation: 3s ease-in 0s 1 fadeIn;
+}
+
+.September,
+.November {
+  animation: 3.5s ease-in 0s 1 fadeIn;
+}
+
+.December {
+  animation: 4s ease-in 0s 1 fadeIn;
+}
+@keyframes fadeIn {
   from {
-    transform: scale(0.3);
+    opacity: 0;
+    display: none;
+  }
+  60% {
+    display: block;
     opacity: 0;
   }
-
-  80% {
-    transform: scale(1.1);
+  70% {
+    transform: scale(1.2);
   }
   to {
     opacity: 1;
-    // background: rgba(229, 152, 118, 1);
     transform: scale(1);
-  }
-}
-@keyframes colorButton {
-  from {
-    color: transparent;
-    font-size: 15px;
-  }
-  70% {
-    font-size: 25px;
-  }
-  to {
-    color: black;
   }
 }
 </style>

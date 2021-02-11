@@ -34,9 +34,16 @@
 </template>
 
 <script>
+// @ is an alias to /src
+// import BasicFetch from "@/components/BasicFetch.vue"
+// import VueXStore from "@/components/VuexStore.vue"
+
 export default {
-  name: 'Home'
-};
+  name: 'Home',
+  components: {
+    // VueXStore
+  }
+}
 </script>
 
 <style scoped lang="scss">

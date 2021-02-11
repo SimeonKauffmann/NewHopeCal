@@ -46,17 +46,32 @@
         <b-col class="year-col">
           <b-row no-gutters>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('01')"
+              >
                 January
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('02')"
+              >
                 February
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('03')"
+              >
                 March
               </b-button>
             </b-col>
@@ -64,17 +79,32 @@
 
           <b-row no-gutters>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('04')"
+              >
                 April
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('05')"
+              >
                 May
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('06')"
+              >
                 June
               </b-button>
             </b-col>
@@ -82,17 +112,32 @@
 
           <b-row no-gutters>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('07')"
+              >
                 July
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('08')"
+              >
                 August
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('09')"
+              >
                 September
               </b-button>
             </b-col>
@@ -100,17 +145,32 @@
 
           <b-row no-gutters>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('10')"
+              >
                 October
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('11')"
+              >
                 November
               </b-button>
             </b-col>
             <b-col class="year-col year-col-buttons">
-              <b-button size="lg" class="date-button" variant="light">
+              <b-button
+                size="lg"
+                class="date-button"
+                variant="light"
+                @click="submitYear('12')"
+              >
                 December
               </b-button>
             </b-col>
@@ -121,10 +181,11 @@
   </div>
 </template>
 <script>
+import moment from 'moment';
 export default {
   data() {
     return {
-      year: 2021
+      year: moment().format('YYYY')
     };
   },
   methods: {
@@ -133,6 +194,12 @@ export default {
     },
     increaseYear() {
       return this.year++;
+    },
+    submitYear(month) {
+      this.$store.commit('setYear', `${this.year}-${month}-01`);
+      setTimeout(() => {
+        this.$router.push('/month');
+      }, 300);
     }
   }
 };

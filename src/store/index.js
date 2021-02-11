@@ -1,26 +1,30 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import moment from "moment";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import moment from 'moment';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    today: parseInt(moment().format("YYYYMMDD")),
+    today: parseInt(moment().format('YYYYMMDD')),
     information: [],
-    events: JSON.parse(localStorage.getItem("events") || "[]"),
+    events: JSON.parse(localStorage.getItem('events') || '[]'),
+    year: null
   },
   mutations: {
+    setYear(state, year) {
+      this.state.year = year;
+    },
     setInfo(state, info) {
       state.information.push(info);
       state.events.push(info);
-      localStorage.setItem("events", JSON.stringify(state.events));
-    },
+      localStorage.setItem('events', JSON.stringify(state.events));
+    }
   },
   actions: {
     saveInfo(context, info) {
-      context.commit("setInfo", info);
-    },
+      context.commit('setInfo', info);
+    }
   },
-  modules: {},
+  modules: {}
 });

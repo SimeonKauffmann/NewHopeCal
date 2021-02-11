@@ -13,21 +13,23 @@
       nav-button-variant="dark"
       no-key-nav
       :date-info-fn="cellStyling"
+      :initial-date="getYear"
     ></b-calendar>
   </b-container>
 </template>
 
 <script>
-import router from "../router";
+import router from '../router';
 export default {
-  name: "Calender",
+  name: 'Calender',
 
   data() {
     return {
       startDate: null,
       slutDate: null,
-      value: "",
+      value: '',
       context: null,
+      getYear: this.$store.state.year
     };
   },
   methods: {
@@ -59,10 +61,10 @@ export default {
         days.push(element.date);
       });
 
-      return days.includes(ymd) ? "calendar-cell-marked" : "calendar-cell";
-    },
+      return days.includes(ymd) ? 'calendar-cell-marked' : 'calendar-cell';
+    }
   },
-  components: {},
+  components: {}
 };
 </script>
 

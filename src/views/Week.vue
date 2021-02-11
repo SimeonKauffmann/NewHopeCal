@@ -45,7 +45,7 @@ export default {
     days() {
       const days = [];
       for (let x = this.startDate; x < this.startDate + 7; x++) {
-        let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
+        let date = moment().add(x, "days").format("YYYY[-]MM[-]DD");
         let event = this.$store.state.events.find(
           (event) => event.date === date
         )

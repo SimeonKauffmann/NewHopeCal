@@ -13,6 +13,12 @@ export default {
   name: 'Month',
   components: {
     Calender
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.$store.state.year != null) {
+      this.$store.commit('setYear', null);
+    }
+    next();
   }
 };
 </script>

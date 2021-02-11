@@ -10,8 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     publicHoliday: [],
-    today: parseInt(moment().format("YYYYMMDD")),
-    information: [],
+    today: parseInt(moment().format("YYYY[-]MM[-]DD")),
     events: JSON.parse(localStorage.getItem("events") || "[]"),
 
   },
@@ -31,10 +30,10 @@ export default new Vuex.Store({
   actions: {
     getHoliday({ commit }) {
       axios.get('/api/v2/publicholidays/2021/SE')
-      .then(response => {
-        // commit till motutions funktion med innehåll data.
-        commit("importHoliday", response.data)
-      })
+        .then(response => {
+          // commit till motutions funktion med innehåll data.
+          commit("importHoliday", response.data)
+        })
     },
 
 

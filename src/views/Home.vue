@@ -34,6 +34,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+export default {
+  name: "Home",
+};
+=======
 // @ is an alias to /src
 // import BasicFetch from "@/components/BasicFetch.vue"
 // import VueXStore from "@/components/VuexStore.vue"
@@ -44,6 +49,7 @@ export default {
     // VueXStore
   }
 }
+>>>>>>> a17a49d2ba74db2d5d23bf5741dd6c2a94f9cf85
 </script>
 
 <style scoped lang="scss">
@@ -76,7 +82,7 @@ li {
   line-height: 30px;
 }
 li::before {
-  content: ' ';
+  content: " ";
   border: 4px solid #e59876;
   border-radius: 100%;
   position: absolute;

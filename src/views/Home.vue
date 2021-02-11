@@ -1,11 +1,5 @@
 <template>
   <div class="home">
-<<<<<<< HEAD
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <VueXStore />
-    <p> Erik S </p>
-=======
     <b-container>
       <b-row>
         <b-col class="home-col">
@@ -36,29 +30,13 @@
         </b-col>
       </b-row>
     </b-container>
->>>>>>> 84678b4dff3c7041e889c307b0613b008530d335
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-// import BasicFetch from "@/components/BasicFetch.vue"
-import VueXStore from "@/components/VuexStore.vue"
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld,
-    VueXStore
-  }
-}
-=======
-export default {
-  name: 'Home'
+  name: "Home",
 };
->>>>>>> 84678b4dff3c7041e889c307b0613b008530d335
 </script>
 
 <style scoped lang="scss">
@@ -91,7 +69,7 @@ li {
   line-height: 30px;
 }
 li::before {
-  content: ' ';
+  content: " ";
   border: 4px solid #e59876;
   border-radius: 100%;
   position: absolute;

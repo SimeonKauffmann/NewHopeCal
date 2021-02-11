@@ -71,14 +71,13 @@ export default {
         startTime: startTime,
         endTime: endTime,
         text: text,
-        // date: parseInt(this.$route.params.day), Simeons
       };
 
       this.$store.dispatch("saveInfo", info);
     },
     getTodaysEvents() {
       var todayEvents = [];
-      this.$store.state.information.forEach((element) => {
+      this.$store.state.events.forEach((element) => {
         if (element.date === this.$route.params.day) {
           todayEvents.push(element);
         }

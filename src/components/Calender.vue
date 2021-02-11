@@ -35,27 +35,12 @@ export default {
       this.context = ctx;
     },
 
-    // onClick(ymd, date) {
-    // let month = (date.getMonth() + 1).toString();
-    // let day = date.getDate().toString();
-    //
-    // if (month.length != 2) {
-    //   month = "0" + month;
-    // }
-    //
-    // if (day.length != 2) {
-    //   day = "0" + day;
-    // }
-    //
-    // let thisDate = `${date.getFullYear()}${month}${day}`;
-    //
-    // router.push({ path: `/edit/${thisDate}` }); //Simeon's router.push
     onClick(ymd) {
-      router.push({ path: `/edit/${ymd}` }); // Sofia's router.push
+      router.push({ path: `/edit/${ymd}` });
     },
     cellStyling(ymd) {
       var days = [];
-      this.$store.state.information.forEach((element) => {
+      this.$store.state.events.forEach((element) => {
         days.push(element.date);
       });
 

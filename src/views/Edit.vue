@@ -22,7 +22,6 @@
       class="h1 mb-2"
       @click="onClick"
     ></b-icon-plus-circle>
-
     <b-modal
       v-model="modalShow"
       @ok="createEvent(title, startTime, endTime, text)"
@@ -72,7 +71,7 @@ export default {
         startTime: startTime,
         endTime: endTime,
         text: text,
-        date: parseInt(this.$route.params.day),
+        // date: parseInt(this.$route.params.day), Simeons
       };
 
       this.$store.dispatch("saveInfo", info);

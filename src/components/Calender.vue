@@ -13,56 +13,46 @@
       nav-button-variant="dark"
       no-key-nav
       :date-info-fn="cellStyling"
+      :initial-date="getYear"
     ></b-calendar>
   </b-container>
 </template>
 
 <script>
-import router from "../router";
+import router from '../router';
 export default {
-  name: "Calender",
+  name: 'Calender',
 
   data() {
     return {
       startDate: null,
       slutDate: null,
-      value: "",
+      value: '',
       context: null,
+      actualYear: null,
+      getYear: this.$store.state.year
     };
   },
+
   methods: {
     onContext(ctx) {
+      this.actualYear = ctx.activeYMD;
       this.context = ctx;
     },
 
-    // onClick(ymd, date) {
-    // let month = (date.getMonth() + 1).toString();
-    // let day = date.getDate().toString();
-    //
-    // if (month.length != 2) {
-    //   month = "0" + month;
-    // }
-    //
-    // if (day.length != 2) {
-    //   day = "0" + day;
-    // }
-    //
-    // let thisDate = `${date.getFullYear()}${month}${day}`;
-    //
-    // router.push({ path: `/edit/${thisDate}` }); //Simeon's router.push
     onClick(ymd) {
-      router.push({ path: `/edit/${ymd}` }); // Sofia's router.push
+      router.push({ path: `/edit/${ymd}` });
     },
     cellStyling(ymd) {
       var days = [];
-      this.$store.state.information.forEach((element) => {
+      this.$store.state.events.forEach((element) => {
         days.push(element.date);
       });
 
-      return days.includes(ymd) ? "calendar-cell-marked" : "calendar-cell";
-    },
+      return days.includes(ymd) ? 'calendar-cell-marked' : 'calendar-cell';
+    }
   },
-  components: {},
+  components: {}
 };
 </script>
 

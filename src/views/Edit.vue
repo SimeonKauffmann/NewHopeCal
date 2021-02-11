@@ -37,7 +37,7 @@
         Starts:
         <input v-model="startTime" placeholder="Starts time.." />
       </label>
-      <label> Ends: <input v-model="endTime" placeholder="End time.."/></label>
+      <label> Ends: <input v-model="endTime" placeholder="End time.." /></label>
       <div>
         <label>
           <textarea v-model="text"></textarea>
@@ -66,19 +66,17 @@ export default {
     },
     createEvent(title, startTime, endTime, text) {
       var info = {
-        date: this.$route.params.day,
         title: title,
         startTime: startTime,
         endTime: endTime,
         text: text,
-        // date: parseInt(this.$route.params.day), Simeons
       };
 
       this.$store.dispatch("saveInfo", info);
     },
     getTodaysEvents() {
       var todayEvents = [];
-      this.$store.state.information.forEach((element) => {
+      this.$store.state.events.forEach((element) => {
         if (element.date === this.$route.params.day) {
           todayEvents.push(element);
         }

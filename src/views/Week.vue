@@ -48,7 +48,8 @@ export default {
       const calander = this.$store.state.publicHoliday;
       const days = [];
       for (let x = this.startDate; x < this.startDate + 7; x++) {
-        let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
+        // let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
+        let date = moment().add(x, "days").format("YYYY[-]MM[-]DD");
 
         // Added to check Date if holiday confirmed -Patrik
         let checkDate = moment().add(x, "days").format("YYYY-MM-DD")

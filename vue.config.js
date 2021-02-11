@@ -27,6 +27,7 @@ module.exports = {
                 target: 'https://date.nager.at/api'
                 // target: "https://avancera.app/cities/" < Test Run fetch if the link get error
             }
+            
         }
     }
 }

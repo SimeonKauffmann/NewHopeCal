@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     today: parseInt(moment().format('YYYYMMDD')),
     information: [],
+    quote: "",
     events: JSON.parse(localStorage.getItem('events') || '[]'),
     year: null,
     publicHoliday: []
@@ -23,6 +24,10 @@ export default new Vuex.Store({
       this.state.year = year;
     },
 
+    setQuote(state, quote) {
+      state.quote = quote;
+    },
+
     setInfo(state, info) {
       state.events.push(info);
       localStorage.setItem('events', JSON.stringify(state.events));
@@ -34,6 +39,14 @@ export default new Vuex.Store({
         // commit till motutions funktion med innehåll data.
         commit('importHoliday', response.data);
       });
+    },
+    fetchQuote({ commit }) {
+      axios.get('https://type.fit/api/quotes')
+      .then(({ data })=> {
+        const number = Math.floor(Math.random() * (data.length - 0));
+        const quote = data[number].text;
+        commit("setQuote", quote)
+      })
     },
 
     saveInfo(context, info) {

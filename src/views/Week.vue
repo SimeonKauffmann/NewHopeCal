@@ -40,12 +40,29 @@
 <script>
 import moment from "moment";
 
+
 export default {
+
   computed: {
     days() {
+      const calander = this.$store.state.publicHoliday;
       const days = [];
       for (let x = this.startDate; x < this.startDate + 7; x++) {
         let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
+
+        // Added to check Date if holiday confirmed -Patrik
+        let checkDate = moment().add(x, "days").format("YYYY-MM-DD")
+        let specialDay = ""
+        for (let i = 0; i < calander.length; i++){
+          if (calander[i].date === checkDate){
+            specialDay = calander[i].localName
+            i = calander.length
+          }
+          else{
+            i++
+          }
+        }
+
         let event = this.$store.state.events.find(
           (event) => event.date === date
         )
@@ -53,7 +70,7 @@ export default {
           : false;
 
         let dayObject = {
-          dayName: moment().add(x, "days").format("dddd Do MMMM"),
+          dayName: moment().add(x, "days").format("dddd Do MMMM") + " " + specialDay,
           date: date,
           event: event,
           week: moment().add(x, "days").format("w"),
@@ -81,6 +98,11 @@ export default {
       this.startDate = 0;
     },
   },
+
+  // Added so store from function work -Patrik
+  mounted(){
+    this.$store.dispatch("getHoliday")
+  }
 };
 </script>
 

@@ -1,5 +1,6 @@
 <template>
     <div class="BasicFetch">
+        <!-- This is a fetch test run and v-for to loop a list from API. -Patrik -->
         <button v-on:click="checkList">Chech Holiday Fetch</button>
 
         <div v-if="HolidayList">
@@ -17,12 +18,8 @@
     </div>
 </template>
 
-
-
 <script>
-
 export default {
-    
 
     data() {
         return {
@@ -46,10 +43,7 @@ export default {
         }
     },
 }
-
 </script>
-
-
 
 <style scoped>
 dl {

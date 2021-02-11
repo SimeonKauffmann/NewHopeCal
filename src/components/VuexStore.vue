@@ -1,9 +1,11 @@
 <template>
     <div class="VueXStore">
+        <!-- This is a upgrade version from BasicFetch.vue test run by using Vuex with store. -Patrik -->
         <h1> {{ msg }} </h1>
-        <button v-on:click="checkData"></button>
+        <button v-on:click="checkData">Test Button</button>
 
-        <h2> Today Special day is {{ SpecialDay }} at {{ dateDay }}. </h2> 
+        <h2>Today Special day is {{ SpecialDay }} at {{ dateDay }}. </h2> 
+
         <div v-for="holiday in holidays" :key="holiday.id">
             <dl> 
                     {{holiday.date}} 
@@ -43,6 +45,7 @@ export default {
 
     methods: {
         checkData: function() {
+
             let calander = this.$store.state.publicHoliday
 
             for (let i = 0; i < calander.length; i++){
@@ -52,7 +55,6 @@ export default {
                     this.dateDay = calander[i].date
                 }
             }
-            
         }
     }
 }

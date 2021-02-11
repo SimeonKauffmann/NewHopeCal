@@ -13,7 +13,7 @@ export default new Vuex.Store({
     today: parseInt(moment().format("YYYYMMDD")),
     information: [],
     events: JSON.parse(localStorage.getItem("events") || "[]"),
-
+    quote: "",
   },
   mutations: {
     // Importera från fetch data till state objekt
@@ -27,6 +27,10 @@ export default new Vuex.Store({
       localStorage.setItem("events", JSON.stringify(state.events));
     },
 
+    setQuote(state, quote) {
+      state.quote = quote;
+    }
+
   },
   actions: {
     getHoliday({ commit }) {
@@ -36,7 +40,14 @@ export default new Vuex.Store({
         commit("importHoliday", response.data)
       })
     },
-
+    fetchQuote({ commit }) {
+      axios.get('https://type.fit/api/quotes')
+      .then(({ data })=> {
+        const number = Math.floor(Math.random() * (data.length - 0));
+        const quote = data[number].text;
+        commit("setQuote", quote)
+      })
+    },
 
     saveInfo(context, info) {
       context.commit("setInfo", info);

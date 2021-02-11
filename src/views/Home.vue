@@ -1,11 +1,5 @@
 <template>
   <div class="home">
-<<<<<<< HEAD
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <VueXStore />
-    <p> Erik S </p>
-=======
     <b-container>
       <b-row>
         <b-col class="home-col">
@@ -26,6 +20,8 @@
         </b-col>
       </b-row>
 
+      <p v-if="quote">"{{ quote }}"</p>
+
       <b-row>
         <b-col class="home-col img-container">
           <div class="a-link-wrapper">
@@ -36,29 +32,29 @@
         </b-col>
       </b-row>
     </b-container>
->>>>>>> 84678b4dff3c7041e889c307b0613b008530d335
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
+import { mapState } from "vuex"
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 // import BasicFetch from "@/components/BasicFetch.vue"
-import VueXStore from "@/components/VuexStore.vue"
+// import VueXStore from "@/components/VuexStore.vue"
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld,
-    VueXStore
-  }
+    //VueXStore
+  },
+  created() {
+    this.$store.dispatch("fetchQuote");
+  },
+  computed: {
+    ...mapState({
+      quote: state => state.quote
+    })
+  },
 }
-=======
-export default {
-  name: 'Home'
-};
->>>>>>> 84678b4dff3c7041e889c307b0613b008530d335
 </script>
 
 <style scoped lang="scss">
@@ -72,6 +68,11 @@ h1 {
 
 h3 {
   padding-left: 20px;
+}
+
+p{
+  text-align: center;
+  font-style: italic ;
 }
 
 /* ==================

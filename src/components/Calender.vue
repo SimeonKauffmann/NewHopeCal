@@ -29,11 +29,14 @@ export default {
       slutDate: null,
       value: '',
       context: null,
+      actualYear: null,
       getYear: this.$store.state.year
     };
   },
+
   methods: {
     onContext(ctx) {
+      this.actualYear = ctx.activeYMD;
       this.context = ctx;
     },
 

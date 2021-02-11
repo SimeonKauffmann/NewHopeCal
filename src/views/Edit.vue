@@ -5,11 +5,11 @@
         <div v-for="event in getTodaysEvents()" :key="event.startTime">
           <div id="note">
             <p id="title">{{ event.title }}</p>
-            <span style="margin-right:2rem"
+            <span style="margin-right: 2rem"
               >Start Time: {{ event.startTime }}</span
             >
             <span>End Time{{ event.endTime }}</span>
-            <dl style="margin-top:2rem">
+            <dl style="margin-top: 2rem">
               {{ event.text }}
             </dl>
           </div>
@@ -70,6 +70,7 @@ export default {
         startTime: startTime,
         endTime: endTime,
         text: text,
+        date: this.$route.params.day,
       };
 
       this.$store.dispatch("saveInfo", info);

@@ -36,17 +36,14 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-export default {
-  name: "Home",
-=======
 import { mapState } from "vuex";
-// @ is an alias to /src
-// import BasicFetch from "@/components/BasicFetch.vue"
-// import VueXStore from "@/components/VuexStore.vue"
-
 export default {
   name: "Home",
+
+  // @ is an alias to /src
+  // import BasicFetch from "@/components/BasicFetch.vue"
+  // import VueXStore from "@/components/VuexStore.vue"
+
   components: {
     //VueXStore
   },
@@ -58,7 +55,6 @@ export default {
       quote: (state) => state.quote,
     }),
   },
->>>>>>> 2427fe1244175e842810b9fa05fa208ed96f13a2
 };
 </script>
 

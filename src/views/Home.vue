@@ -36,13 +36,13 @@
 </template>
 
 <script>
-import { mapState } from "vuex"
+import { mapState } from "vuex";
 // @ is an alias to /src
 // import BasicFetch from "@/components/BasicFetch.vue"
 // import VueXStore from "@/components/VuexStore.vue"
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     //VueXStore
   },
@@ -51,10 +51,10 @@ export default {
   },
   computed: {
     ...mapState({
-      quote: state => state.quote
-    })
+      quote: (state) => state.quote,
+    }),
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -70,9 +70,9 @@ h3 {
   padding-left: 20px;
 }
 
-p{
+p {
   text-align: center;
-  font-style: italic ;
+  font-style: italic;
 }
 
 /* ==================
@@ -92,7 +92,7 @@ li {
   line-height: 30px;
 }
 li::before {
-  content: ' ';
+  content: " ";
   border: 4px solid #e59876;
   border-radius: 100%;
   position: absolute;

@@ -19,7 +19,12 @@
       ></b-icon>
     </div>
     <div class="week-container">
-      <div class="days" v-for="day in days" :key="day.date">
+      <div
+        class="days"
+        v-for="day in days"
+        :key="day.date"
+        @click="openDayView(day.date)"
+      >
         <div class="text">
           <p>{{ day.dayName }}</p>
         </div>
@@ -38,6 +43,7 @@
 </template>
 
 <script>
+import router from "../router";
 import moment from "moment";
 
 
@@ -98,6 +104,9 @@ export default {
     },
     backToday() {
       this.startDate = 0;
+    },
+    openDayView(date) {
+      router.push({ path: `/day/${date}` });
     },
   },
 

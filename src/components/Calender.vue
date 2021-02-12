@@ -39,7 +39,6 @@ export default {
       this.actualYear = ctx.activeYMD;
       this.context = ctx;
     },
-
     onClick(ymd) {
       router.push({ path: `/day/${ymd}` });
     },

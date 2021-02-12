@@ -267,30 +267,30 @@ export default {
   Animations
 ============*/
 .January {
-  animation: 1.5s ease-in 0s 1 fadeIn;
+  animation: 1s ease-in 0s 1 fadeIn;
 }
 .February,
 .April {
-  animation: 2s ease-in 0s 1 fadeIn;
+  animation: 1.5s ease-in 0s 1 fadeIn;
 }
 .March,
 .May,
 .July {
-  animation: 2.5s ease-in 0s 1 fadeIn;
+  animation: 2s ease-in 0s 1 fadeIn;
 }
 .June,
 .August,
 .October {
-  animation: 3s ease-in 0s 1 fadeIn;
+  animation: 2.5s ease-in 0s 1 fadeIn;
 }
 
 .September,
 .November {
-  animation: 3.5s ease-in 0s 1 fadeIn;
+  animation: 3s ease-in 0s 1 fadeIn;
 }
 
 .December {
-  animation: 4s ease-in 0s 1 fadeIn;
+  animation: 3.5s ease-in 0s 1 fadeIn;
 }
 @keyframes fadeIn {
   from {
@@ -302,7 +302,7 @@ export default {
     opacity: 0;
   }
   70% {
-    transform: scale(1.2);
+    transform: scale(0.9);
   }
   to {
     opacity: 1;

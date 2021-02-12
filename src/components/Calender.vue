@@ -19,18 +19,18 @@
 </template>
 
 <script>
-import router from '../router';
+import router from "../router";
 export default {
-  name: 'Calender',
+  name: "Calender",
 
   data() {
     return {
       startDate: null,
       slutDate: null,
-      value: '',
+      value: "",
       context: null,
       actualYear: null,
-      getYear: this.$store.state.year
+      getYear: this.$store.state.year,
     };
   },
 
@@ -41,7 +41,7 @@ export default {
     },
 
     onClick(ymd) {
-      router.push({ path: `/edit/${ymd}` });
+      router.push({ path: `/day/${ymd}` });
     },
     cellStyling(ymd) {
       var days = [];
@@ -49,10 +49,10 @@ export default {
         days.push(element.date);
       });
 
-      return days.includes(ymd) ? 'calendar-cell-marked' : 'calendar-cell';
-    }
+      return days.includes(ymd) ? "calendar-cell-marked" : "calendar-cell";
+    },
   },
-  components: {}
+  components: {},
 };
 </script>
 

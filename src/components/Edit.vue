@@ -1,0 +1,64 @@
+<template>
+  <div>
+    <b-icon-plus-circle
+      id="plus"
+      class="h1 mb-2"
+      @click="onClick"
+    ></b-icon-plus-circle>
+    <b-modal
+      v-model="modalShow"
+      @ok="createEvent(title, startTime, endTime, text)"
+    >
+      <h1>New Event</h1>
+      <input
+        id="newEventInput"
+        v-model="title"
+        type="text"
+        placeholder="Event Name.."
+      />
+      <label>
+        Starts:
+        <input v-model="startTime" type="time" />
+      </label>
+      <label> Ends: <input v-model="endTime" type="time" /></label>
+      <div>
+        <label>
+          <textarea v-model="text"></textarea>
+        </label>
+      </div>
+    </b-modal>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  data() {
+    return {
+      date: null,
+      title: null,
+      startTime: null,
+      endTime: null,
+      text: null,
+      modalShow: false,
+    };
+  },
+  methods: {
+    onClick() {
+      this.modalShow = true;
+    },
+    createEvent(title, startTime, endTime, text) {
+      var info = {
+        title: title,
+        startTime: startTime,
+        endTime: endTime,
+        text: text,
+        date: this.$route.params.day,
+      };
+
+      this.$store.dispatch("saveInfo", info);
+    },
+    name: "Edit",
+  },
+});
+</script>

@@ -20,6 +20,8 @@
         </b-col>
       </b-row>
 
+      <p v-if="quote">"{{ quote }}"</p>
+
       <b-row>
         <b-col class="home-col img-container">
           <div class="a-link-wrapper">
@@ -34,8 +36,24 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+// @ is an alias to /src
+// import BasicFetch from "@/components/BasicFetch.vue"
+// import VueXStore from "@/components/VuexStore.vue"
+
 export default {
-  name: 'Home'
+  name: "Home",
+  components: {
+    //VueXStore
+  },
+  created() {
+    this.$store.dispatch("fetchQuote");
+  },
+  computed: {
+    ...mapState({
+      quote: (state) => state.quote,
+    }),
+  },
 };
 </script>
 
@@ -50,6 +68,11 @@ h1 {
 
 h3 {
   padding-left: 20px;
+}
+
+p {
+  text-align: center;
+  font-style: italic;
 }
 
 /* ==================
@@ -69,7 +92,7 @@ li {
   line-height: 30px;
 }
 li::before {
-  content: ' ';
+  content: " ";
   border: 4px solid #e59876;
   border-radius: 100%;
   position: absolute;

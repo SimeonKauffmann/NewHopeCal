@@ -7,16 +7,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    today: parseInt(moment().format("YYYYMMDD")),
-    information: [],
     quote: "",
-    events: JSON.parse(localStorage.getItem("events") || "[]"),
     year: null,
     publicHoliday: [],
     selectedDay: null,
+
+    today: parseInt(moment().format("YYYYMMDD")),
+    events: JSON.parse(localStorage.getItem("events") || "[]"),
   },
+
   mutations: {
-    // Importera från fetch data till state objekt
     importHoliday(state, publicHoliday) {
       state.publicHoliday = publicHoliday;
     },
@@ -25,7 +25,10 @@ export default new Vuex.Store({
       this.state.year = year;
     },
 
-    setQuote(state, quote) {
+    setQuote(state, quoteList) {
+      const number = Math.floor(Math.random() * (quoteList.length - 0));
+      const quote = quoteList[number].text;
+
       state.quote = quote;
     },
 
@@ -39,24 +42,24 @@ export default new Vuex.Store({
       });
     },
   },
+
   actions: {
-    getHoliday({ commit }) {
-      axios.get("/api/v2/publicholidays/2021/SE").then((response) => {
-        // commit till motutions funktion med innehåll data.
-        commit("importHoliday", response.data);
-      });
-    },
-    fetchQuote({ commit }) {
-      axios.get("https://type.fit/api/quotes").then(({ data }) => {
-        const number = Math.floor(Math.random() * (data.length - 0));
-        const quote = data[number].text;
-        commit("setQuote", quote);
-      });
+    async fetchAll({ commit }) {
+      const [holidays, quotes] = await Promise.all([
+        axios.get(
+          "/calanderAPI/v2/publicholidays/" + moment().format("YYYY") + "/SE"
+        ),
+        axios.get("https://type.fit/api/quotes"),
+      ]);
+
+      commit("importHoliday", holidays.data);
+      commit("setQuote", quotes.data);
     },
 
     saveInfo(context, info) {
       context.commit("setInfo", info);
     },
+
     deleteEvent(context, id) {
       context.commit("deleteEvent", id);
     },

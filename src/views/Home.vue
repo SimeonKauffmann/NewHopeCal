@@ -48,7 +48,7 @@ export default {
     //VueXStore
   },
   created() {
-    this.$store.dispatch("fetchQuote");
+    this.$store.dispatch("fetchAll");
   },
   computed: {
     ...mapState({

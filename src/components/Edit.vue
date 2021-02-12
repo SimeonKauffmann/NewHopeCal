@@ -7,7 +7,7 @@
     ></b-icon-plus-circle>
     <b-modal
       v-model="modalShow"
-      @ok="createEvent(title, startTime, endTime, text, id)"
+      @ok="createEvent(title, startTime, endTime, text)"
     >
       <h1>New Event</h1>
       <input
@@ -49,15 +49,14 @@ export default Vue.extend({
     onClick() {
       this.modalShow = true;
     },
-    createEvent(title, startTime, endTime, text, id) {
-      this.id++;
+    createEvent(title, startTime, endTime, text) {
       let info = {
         title: title,
         startTime: startTime,
         endTime: endTime,
         text: text,
         date: this.$route.params.day,
-        id: id,
+        id: this.date + this.text + this.title + this.startTime,
       };
 
       this.$store.dispatch("saveInfo", info);

@@ -40,6 +40,7 @@ export default new Vuex.Store({
       state.events = state.events.filter(function(e) {
         return e.id != id;
       });
+      localStorage.setItem("events", JSON.stringify(state.events));
     },
   },
 
@@ -62,6 +63,7 @@ export default new Vuex.Store({
 
     deleteEvent(context, id) {
       context.commit("deleteEvent", id);
+      console.log(id);
     },
   },
   modules: {},

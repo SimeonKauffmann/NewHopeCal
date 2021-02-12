@@ -7,19 +7,24 @@
       v-b-toggle.navbar
       id="hamburger"
     >
-      <rect width="100" height="7"></rect>
-      <rect y="30" width="100" height="7"></rect>
-      <rect y="60" width="100" height="7"></rect>
+      <rect width="100" height="5"></rect>
+      <rect y="30" width="100" height="5"></rect>
+      <rect y="60" width="100" height="5"></rect>
     </svg>
 
-    <b-sidebar class="w-25" id="navbar" title="Sidebar" shadow>
+    <b-sidebar
+      class="w-25"
+      id="navbar"
+      title="New Hope"
+      shadow
+      backdrop
+      backdrop-variant="blue"
+    >
       <ul class="nav-list">
         <li><router-link to="/" class="nav-link">Home</router-link></li>
-        <!--li><router-link>Day</router-link></li-->
         <li><router-link to="/week" class="nav-link">Week</router-link></li>
         <li><router-link to="/month" class="nav-link">Month</router-link></li>
         <li><router-link to="/year" class="nav-link">Year</router-link></li>
-        <!--li><router-link>Year</router-link></li-->
       </ul>
     </b-sidebar>
   </div>
@@ -33,8 +38,11 @@ export default {
 
 <style lang="scss">
 #hamburger {
-  float: right;
   margin-right: 30px;
+}
+
+#navbar {
+  width: 50%;
 }
 .nav-list {
   list-style: none;
@@ -55,9 +63,52 @@ export default {
       height: 2px;
       bottom: 0;
       left: 10%;
-      background: black;
+      background: rgba(0, 0, 0, 0.6);
       position: absolute;
     }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .nav-link::before {
+    transform-origin: center;
+    animation: 1.2s ease-out 100ms 1 linesMobile;
+  }
+  @keyframes linesMobile {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    top: 22px;
+    left: 10%;
+    background: rgba(0, 0, 0, 0.6);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 400ms 250ms ease-in;
+  }
+  .nav-link::before {
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 400ms 250ms ease-in;
+    animation: none;
+  }
+  .nav-link:hover::before,
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }
 </style>

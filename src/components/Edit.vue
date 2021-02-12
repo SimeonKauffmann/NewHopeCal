@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import Vue from "vue";
 export default Vue.extend({
   data() {
@@ -54,11 +54,13 @@ export default Vue.extend({
         endTime: endTime,
         text: text,
         date: this.$route.params.day,
+        color: "red",
       };
 
       this.$store.dispatch("saveInfo", info);
     },
-    name: "Edit",
+    
   },
+  name: "Edit",
 });
 </script>

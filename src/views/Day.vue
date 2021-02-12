@@ -1,17 +1,23 @@
 <template>
-  <div class="Edit">
-    <div id="gridHolder">
-      <div class="container">
-        <div v-for="event in getTodaysEvents()" :key="event.startTime">
-          <div id="note">
-            <p id="title">{{ event.title }}</p>
-            <span style="margin-right: 2rem"
-              >Start Time: {{ event.startTime }}</span
-            >
-            <span>End Time{{ event.endTime }}</span>
-            <dl style="margin-top: 2rem">
-              {{ event.text }}
-            </dl>
+  <div>
+    <div id="day-view">
+      <div id="gridHolder">
+        <div class="container">
+          <div
+            v-for="event in getTodaysEvents()"
+            :key="`${event.startTime}${event.endTime}`"
+            :style="event.styles"
+          >
+            <div class="note">
+              <h2 class="title">{{ event.title }}</h2>
+              <span style="margin-right: 2rem"
+                >Start Time: {{ event.startTime }}</span
+              >
+              <span>End Time: {{ event.endTime }}</span>
+              <dl style="margin-top: 2rem">
+                {{ event.text }}
+              </dl>
+            </div>
           </div>
         </div>
       </div>
@@ -34,19 +40,38 @@ export default {
         }
       });
 
+      for (let x = 0; x < todayEvents.length; x++) {
+        let startNumber = parseInt(todayEvents[x].startTime.slice(0, 2));
+
+        todayEvents[x].startNumber = startNumber;
+
+        let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2));
+
+        todayEvents[x].styles = {
+          backgroundColor: todayEvents[x].color,
+          height: `${endNumber - startNumber}rem`,
+          marginTop: `${startNumber}rem`,
+        };
+      }
+
+      todayEvents.sort(function (a, b) {
+        return a.startNumber - b.startNumber;
+      });
+
+      console.log(todayEvents);
       return todayEvents;
     },
-    component: { Edit },
   },
+  components: { Edit },
 };
 </script>
 
 
 <style scoped>
-#title {
+/* .title {
   font-size: 1.5rem;
-}
-#note {
+} */
+.note {
   background-color: rgba(229, 152, 118, 1);
   padding: 1rem;
   border-radius: 2%;

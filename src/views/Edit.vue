@@ -5,11 +5,11 @@
         <div v-for="event in getTodaysEvents()" :key="event.startTime">
           <div id="note">
             <p id="title">{{ event.title }}</p>
-            <span style="margin-right:2rem"
+            <span style="margin-right: 2rem"
               >Start Time: {{ event.startTime }}</span
             >
             <span>End Time{{ event.endTime }}</span>
-            <dl style="margin-top:2rem">
+            <dl style="margin-top: 2rem">
               {{ event.text }}
             </dl>
           </div>
@@ -37,7 +37,7 @@
         Starts:
         <input v-model="startTime" placeholder="Starts time.." />
       </label>
-      <label> Ends: <input v-model="endTime" placeholder="End time.."/></label>
+      <label> Ends: <input v-model="endTime" placeholder="End time.." /></label>
       <div>
         <label>
           <textarea v-model="text"></textarea>
@@ -66,11 +66,11 @@ export default {
     },
     createEvent(title, startTime, endTime, text) {
       var info = {
-        date: this.$route.params.day,
         title: title,
         startTime: startTime,
         endTime: endTime,
         text: text,
+        date: this.$route.params.day,
       };
 
       this.$store.dispatch("saveInfo", info);

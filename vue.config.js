@@ -14,20 +14,27 @@ module.exports = {
                         networkTimeoutSeconds: 5
                     },
                     urlPattern: "https://date.nager.at/api/v2/publicholidays/2021/SE"
+                },
+                {   
+                    handler: "FetchQuotes",
+                    options: {
+                        networkTimeoutSeconds: 5
+                    },
+                    urlPattern: "https://type.fit/api/quotes"
                 }
             ]
         }
     },
     devServer: {
         proxy: {
-            '/api': {
+            '/calanderAPI': {
                 changeOrigin: true,
                 // logLevel: "debug", < Check if this code logged in like link.
-                pathRewrite: { '^/api': '' }, //<<<THIS GOTDAMNIT FIX EVERYTHING
+                pathRewrite: { '^/calanderAPI': '' }, //<<<THIS GOTDAMNIT FIX EVERYTHING
                 target: 'https://date.nager.at/api'
                 // target: "https://avancera.app/cities/" < Test Run fetch if the link get error
-            }
-            
+                // https://type.fit/api/quotes
+            },
         }
     }
 }

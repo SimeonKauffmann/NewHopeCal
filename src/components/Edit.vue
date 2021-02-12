@@ -41,6 +41,7 @@ export default Vue.extend({
       endTime: null,
       text: null,
       modalShow: false,
+      id: null,
     };
   },
   methods: {
@@ -48,13 +49,14 @@ export default Vue.extend({
       this.modalShow = true;
     },
     createEvent(title, startTime, endTime, text) {
-      var info = {
+      let info = {
         title: title,
         startTime: startTime,
         endTime: endTime,
         text: text,
         date: this.$route.params.day,
         color: "red",
+        id: this.date + this.text + this.title + this.startTime,
       };
 
       this.$store.dispatch("saveInfo", info);

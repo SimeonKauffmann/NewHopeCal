@@ -37,17 +37,18 @@
 
 <script>
 import { mapState } from "vuex";
-// @ is an alias to /src
-// import BasicFetch from "@/components/BasicFetch.vue"
-// import VueXStore from "@/components/VuexStore.vue"
-
 export default {
   name: "Home",
+
+  // @ is an alias to /src
+  // import BasicFetch from "@/components/BasicFetch.vue"
+  // import VueXStore from "@/components/VuexStore.vue"
+
   components: {
     //VueXStore
   },
   created() {
-    this.$store.dispatch("fetchQuote");
+    this.$store.dispatch("fetchAll");
   },
   computed: {
     ...mapState({

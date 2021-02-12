@@ -38,6 +38,7 @@ export default {
     onContext(ctx) {
       this.actualYear = ctx.activeYMD;
       this.context = ctx;
+      this.$store.state.selectedDay = ctx;
     },
     onClick(ymd) {
       router.push({ path: `/day/${ymd}` });

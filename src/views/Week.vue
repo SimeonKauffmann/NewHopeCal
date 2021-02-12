@@ -46,6 +46,7 @@ export default {
   computed: {
     days() {
       const calander = this.$store.state.publicHoliday;
+
       const days = [];
       for (let x = this.startDate; x < this.startDate + 7; x++) {
         // let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
@@ -100,9 +101,8 @@ export default {
     },
   },
 
-  // Added so store from function work -Patrik
   mounted(){
-    this.$store.dispatch("getHoliday")
+    this.$store.dispatch("fetchAll")
   }
 };
 </script>

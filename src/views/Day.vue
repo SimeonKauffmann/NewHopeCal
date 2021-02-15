@@ -4,12 +4,6 @@
     <div id="gridHolder">
       <b-card-group deck class="container" style="margin-top:1rem">
         <b-card v-for="event in getTodaysEvents()" :key="event.id">
-          <b-icon-x
-            id="close"
-            style="float:right"
-            class="h1 mb-2"
-            @click="closeAction(event.id)"
-          ></b-icon-x>
           <div id="note">
             <p id="title">{{ event.title }}</p>
             <span style="margin-right: 2rem"
@@ -19,14 +13,35 @@
             <dl style="margin-top: 2rem">
               {{ event.text }}
             </dl>
-            <b-button href="#" variant="info" style="float:right"
+
+            <b-button
+              id="edit"
+              href="#"
+              variant="info"
+              @click="editEvent(event)"
               >Edit</b-button
+            >
+            <span id="remove" class="h1 mb-2" @click="removeAction(event.id)"
+              >Remove</span
             >
           </div>
         </b-card>
       </b-card-group>
     </div>
-    <span id="editHolder"> <Event /></span>
+    <span id="editHolder">
+      <b-icon-plus-circle
+        id="plus"
+        class="h1 mb-2"
+        @click="createEvent"
+      ></b-icon-plus-circle>
+    </span>
+    <Event
+      :show="modalShow"
+      @close="onClose"
+      @ok="onOk"
+      @cancel="onCancel"
+      :event="currentEvent"
+    />
   </div>
 </template>
 
@@ -35,8 +50,35 @@ import Event from "@/components/Event.vue";
 
 export default {
   name: "Day",
+  data() {
+    return {
+      modalShow: false,
+      editShow: false,
+      currentEvent: null,
+    };
+  },
 
   methods: {
+    editEvent(event) {
+      this.currentEvent = event;
+      this.modalShow = true;
+    },
+    onCancel() {
+      this.currentEvent = null;
+      this.modalShow = false;
+    },
+    onOk() {
+      this.currentEvent = null;
+      this.modalShow = false;
+    },
+
+    createEvent() {
+      this.modalShow = true;
+    },
+    onClose() {
+      this.currentEvent = null;
+      this.modalShow = false;
+    },
     getTodaysEvents() {
       let todayEvents = [];
       this.$store.state.events.forEach((element) => {
@@ -47,7 +89,7 @@ export default {
 
       return todayEvents;
     },
-    closeAction(id) {
+    removeAction(id) {
       this.$store.dispatch("deleteEvent", id);
     },
   },
@@ -56,7 +98,12 @@ export default {
 </script>
 
 <style scoped>
-#close {
+#edit {
+  float: right;
+}
+#remove {
+  font-size: 1rem;
+  color: aliceblue;
   cursor: pointer;
 }
 #title {
@@ -64,7 +111,7 @@ export default {
 }
 #note {
   background-color: rgba(229, 152, 118, 1);
-  padding: 3rem;
+  padding: 2rem;
   border-radius: 2%;
 }
 

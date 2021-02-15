@@ -1,27 +1,5 @@
 <template>
-  <div class="Edit">
-    <div id="gridHolder">
-      <div class="container">
-        <div v-for="event in getTodaysEvents()" :key="event.startTime">
-          <div id="note">
-            <p id="title">{{ event.title }}</p>
-            <span style="margin-right: 2rem"
-              >Start Time: {{ event.startTime }}</span
-            >
-            <span>End Time{{ event.endTime }}</span>
-            <dl style="margin-top: 2rem">
-              {{ event.text }}
-            </dl>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <b-icon-plus-circle
-      id="plus"
-      class="h1 mb-2"
-      @click="onClick"
-    ></b-icon-plus-circle>
+  <div class="Event">
     <b-modal
       v-model="modalShow"
       @ok="createEvent(title, startTime, endTime, text)"
@@ -49,7 +27,7 @@
 
 <script>
 export default {
-  name: "Edit",
+  name: "Event",
   data() {
     return {
       date: null,

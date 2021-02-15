@@ -26,12 +26,12 @@
         </b-card>
       </b-card-group>
     </div>
-    <span id="editHolder"> <Edit /></span>
+    <span id="editHolder"> <Event /></span>
   </div>
 </template>
 
 <script>
-import Edit from "@/components/Edit.vue";
+import Event from "@/components/Edit.vue";
 
 export default {
   name: "Day",
@@ -51,7 +51,7 @@ export default {
       this.$store.dispatch("deleteEvent", id);
     },
   },
-  components: { Edit },
+  components: { Event },
 };
 </script>
 

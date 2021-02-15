@@ -7,14 +7,14 @@
           v-for="event in getTodaysEvents()"
           :key="event.id"
           :style="event.styles"
-        >
+          >{{ event.title }}
           <b-icon-x
             id="close"
             style="float: right"
             class="h1 mb-2"
             @click="closeAction(event.id)"
           ></b-icon-x>
-          <div id="note">
+          <!-- <div id="note">
             <p id="title">{{ event.title }}</p>
             <span style="margin-right: 2rem"
               >Start Time: {{ event.startTime }}</span
@@ -22,11 +22,10 @@
             <span>End Time{{ event.endTime }}</span>
             <dl style="margin-top: 2rem">
               {{ event.text }}
-            </dl>
-            <b-button href="#" variant="info" style="float: right"
-              >Edit</b-button
-            >
-          </div>
+            </dl> -->
+          <b-button href="#" variant="info" style="float: right">Edit</b-button>
+          <!-- 
+          </div> -->
         </b-card>
       </b-card-group>
     </div>
@@ -58,8 +57,11 @@ export default {
 
         todayEvents[x].styles = {
           backgroundColor: todayEvents[x].color,
-          height: `${endNumber - startNumber}rem`,
-          marginTop: `${startNumber}rem`,
+          height: `${(endNumber - startNumber) * 2}rem`,
+          marginTop: `${startNumber * 2}rem`,
+          position: "absolute",
+          width: "60%",
+          right: "0",
         };
       }
 
@@ -85,7 +87,7 @@ export default {
 #title {
   font-size: 1.5rem;
 }
-*/ .note {
+.note {
   background-color: rgba(229, 152, 118, 1);
   padding: 3rem;
   border-radius: 2%;

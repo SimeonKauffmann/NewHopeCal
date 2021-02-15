@@ -87,6 +87,27 @@ export default {
         }
       });
 
+      for (let x = 0; x < todayEvents.length; x++) {
+        let startNumber = parseInt(todayEvents[x].startTime.slice(0, 2));
+
+        todayEvents[x].startNumber = startNumber;
+
+        let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2));
+
+        todayEvents[x].styles = {
+          backgroundColor: todayEvents[x].color,
+          height: `${(endNumber - startNumber) * 2}rem`,
+          marginTop: `${startNumber * 2}rem`,
+          position: "absolute",
+          width: "60%",
+        };
+      }
+
+      todayEvents.sort(function(a, b) {
+        return a.startNumber - b.startNumber;
+      });
+
+      console.log(todayEvents);
       return todayEvents;
     },
     removeAction(id) {

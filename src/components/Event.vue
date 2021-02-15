@@ -12,15 +12,21 @@
         v-model="currentEvent.title"
         type="text"
         placeholder="Event Name.."
+        style="margin-bottom:1rem"
       />
-      <label>
+      <br />
+      <label style="margin-right:1rem">
         Starts:
         <input v-model="currentEvent.startTime" type="time" />
       </label>
       <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
       <div>
         <label>
-          <textarea v-model="currentEvent.text"></textarea>
+          <textarea
+            v-model="currentEvent.text"
+            style="margin-top:0.5rem"
+            placeholder="Write something.."
+          ></textarea>
         </label>
       </div>
     </b-modal>

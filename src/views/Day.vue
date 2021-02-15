@@ -29,7 +29,7 @@
         </b-card>
       </b-card-group>
     </div>
-    <span id="editHolder"> <Edit /></span>
+    <span id="editHolder"> <Event /></span>
   </div>
 </template>
 
@@ -61,7 +61,6 @@ export default {
           marginTop: `${startNumber * 2}rem`,
           position: "absolute",
           width: "60%",
-          right: "0",
         };
       }
 

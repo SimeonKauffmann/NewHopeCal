@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import Event from "@/components/Edit.vue";
+import Event from "@/components/Event.vue";
 
 export default {
   name: "Day",

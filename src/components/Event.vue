@@ -33,7 +33,7 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  name: "Edit",
+  name: "Event",
   data() {
     return {
       date: null,

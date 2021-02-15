@@ -75,7 +75,7 @@ export default {
       this.$store.dispatch("deleteEvent", id);
     },
   },
-  components: { Edit },
+  components: { Event },
 };
 </script>
 

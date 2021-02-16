@@ -11,8 +11,8 @@ export default new Vuex.Store({
     year: null,
     publicHoliday: [],
     selectedDay: null,
-    today: parseInt(moment().format("YYYYMMDD")),
-    events: JSON.parse(localStorage.getItem("events") || "[]"),
+    today: parseInt(moment().format('YYYYMMDD')),
+    events: JSON.parse(localStorage.getItem('events') || '[]')
   },
 
   mutations: {
@@ -65,14 +65,8 @@ export default new Vuex.Store({
     },
 
     deleteEvent(context, id) {
-<<<<<<< HEAD
       context.commit('deleteEvent', id);
-      console.log(id);
     }
-=======
-      context.commit("deleteEvent", id);
-    },
->>>>>>> 54b0d90c5533a03d6eb523efbb47569182fb0f45
   },
   modules: {}
 });

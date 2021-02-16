@@ -81,8 +81,8 @@ export default Vue.extend({
         return {
           date: this.$route.params.day,
           title: null,
-          startTime: null,
-          endTime: null,
+          startTime: "09:00",
+          endTime: "10:00",
           text: null,
           id: null,
         };

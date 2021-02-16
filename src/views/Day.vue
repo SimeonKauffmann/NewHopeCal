@@ -138,6 +138,8 @@ export default {
   background: #fff;
   border: 2px solid black;
   margin-bottom: 20px;
+  max-height: 150px;
+  overflow: scroll;
   p {
     padding: 2px 8px;
   }

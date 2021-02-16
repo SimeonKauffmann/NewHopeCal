@@ -2,27 +2,36 @@
   <div class="day">
     <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
     <div id="gridHolder">
-      <b-card-group deck class="container" style="margin-top:1rem">
+      <b-card-group deck class="container">
         <b-card v-for="event in getTodaysEvents()" :key="event.id">
           <div id="note">
-            <p id="title">{{ event.title }}</p>
-            <span style="margin-right: 2rem"
-              >Start Time: {{ event.startTime }}</span
-            >
-            <span>End Time{{ event.endTime }}</span>
-            <dl style="margin-top: 2rem">
-              {{ event.text }}
-            </dl>
+            <h3 id="title">{{ event.title }}</h3>
+            <ul>
+              <li>
+                Start:
+                <span class="numbers-small">{{ event.startTime }}</span>
+              </li>
+              <li>
+                End: <span class="numbers-small">{{ event.endTime }}</span>
+              </li>
+            </ul>
+            <div class="text-wrapper">
+              <p>
+                {{ event.text }}
+              </p>
+            </div>
 
             <b-button
               id="edit"
               href="#"
-              variant="info"
+              size="lg"
+              variant="secondary"
               @click="editEvent(event)"
               >Edit</b-button
             >
             <b-button
               id="remove"
+              variant="red"
               class="h1 mb-2"
               @click="removeAction(event.id)"
               >Remove</b-button
@@ -121,7 +130,33 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.container {
+  margin-top: 10px;
+}
+.text-wrapper {
+  background: #fff;
+  border: 2px solid black;
+  margin-bottom: 20px;
+  p {
+    padding: 2px 8px;
+  }
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+  li {
+    position: relative;
+    margin-bottom: 4px;
+  }
+  li::before {
+    content: url('../assets/clock.svg');
+    top: 6px;
+    left: -20px;
+    position: absolute;
+  }
+}
 #edit {
   float: right;
 }
@@ -130,9 +165,7 @@ export default {
   color: aliceblue;
   cursor: pointer;
 }
-#title {
-  font-size: 1.5rem;
-}
+
 #note {
   background-color: rgba(229, 152, 118, 1);
   padding: 2rem;
@@ -141,6 +174,7 @@ export default {
 
 #plus {
   margin-left: 22rem;
+  cursor: pointer;
 }
 #gridHolder {
   border: solid;

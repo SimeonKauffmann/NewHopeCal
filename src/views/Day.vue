@@ -1,6 +1,6 @@
 <template>
   <div class="day">
-    <p id="date">{{ $store.state.selectedDay.selectedFormatted }}</p>
+    <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
     <div id="gridHolder">
       <b-card-group deck class="container" style="margin-top:1rem">
         <b-card v-for="event in getTodaysEvents()" :key="event.id">
@@ -21,8 +21,11 @@
               @click="editEvent(event)"
               >Edit</b-button
             >
-            <span id="remove" class="h1 mb-2" @click="removeAction(event.id)"
-              >Remove</span
+            <b-button
+              id="remove"
+              class="h1 mb-2"
+              @click="removeAction(event.id)"
+              >Remove</b-button
             >
           </div>
         </b-card>
@@ -46,15 +49,15 @@
 </template>
 
 <script>
-import Event from "@/components/Event.vue";
+import Event from '@/components/Event.vue';
 
 export default {
-  name: "Day",
+  name: 'Day',
   data() {
     return {
       modalShow: false,
       editShow: false,
-      currentEvent: null,
+      currentEvent: null
     };
   },
 
@@ -98,8 +101,8 @@ export default {
           backgroundColor: todayEvents[x].color,
           height: `${(endNumber - startNumber) * 2}rem`,
           marginTop: `${startNumber * 2}rem`,
-          position: "absolute",
-          width: "60%",
+          position: 'absolute',
+          width: '60%'
         };
       }
 
@@ -111,10 +114,10 @@ export default {
       return todayEvents;
     },
     removeAction(id) {
-      this.$store.dispatch("deleteEvent", id);
-    },
+      this.$store.dispatch('deleteEvent', id);
+    }
   },
-  components: { Event },
+  components: { Event }
 };
 </script>
 
@@ -144,9 +147,7 @@ export default {
   width: 80%;
   height: 70vh;
   background-color: white;
-  margin: auto;
-  margin-top: 7rem;
-  margin-bottom: 3rem;
+  margin: 40px auto;
 }
 
 #newEventInput {
@@ -158,8 +159,7 @@ export default {
   margin-right: 1rem;
 }
 #date {
-  font-size: 2rem;
-  padding-left: 2rem;
-  padding-top: 2rem;
+  margin: 15px 15px;
+  width: 80%;
 }
 </style>

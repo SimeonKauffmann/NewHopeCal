@@ -6,9 +6,37 @@ $theme-colors: (
   'blue': rgba(0, 0, 0, 0.5),
   'light': #d3d1c2
 );
-
 $input-bg: rgba(96, 139, 150, 1);
 $body-bg: rgba(96, 139, 150, 1);
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
+
+.calendar-cell,
+.calendar-cell-marked {
+  transition: transform 250ms ease-in-out;
+  span:hover,
+  .btn:hover,
+  .btn-outline-secondary:hover {
+    background: transparent !important;
+    color: black !important;
+  }
+}
+
+.calendar-cell:active,
+.calendar-cell-marked:active {
+  transform: scale(0.5);
+  background: rgba(0, 0, 0, 0.8) !important;
+  .text-dark,
+  span,
+  .btn-outline-secondary {
+    color: #fff !important;
+  }
+}
+.calendar-cell:hover,
+.calendar-cell-marked:hover {
+  transform: scale(1.1);
+}
+.rounded-circle {
+  border-radius: 10px !important;
+}

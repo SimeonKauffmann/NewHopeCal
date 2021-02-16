@@ -1,5 +1,5 @@
 <template>
-  <b-container class="calendar-container">
+  <b-container>
     <b-calendar
       class="calendar-main"
       block
@@ -50,18 +50,13 @@ export default {
 
       return days.includes(ymd) ? 'calendar-cell-marked' : 'calendar-cell';
     }
-  },
-  components: {}
+  }
 };
 </script>
 
 <style>
 .container {
   padding: 0;
-}
-.calendar-container {
-  background: black;
-  height: 50vh;
 }
 .calendar-main div {
   border: none;

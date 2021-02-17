@@ -6,8 +6,20 @@
           <h1>New Hope</h1>
         </b-col>
       </b-row>
-
-      <div class="box1">
+      <div
+        class="box1"
+        v-for="event in events"
+        :key="event.id"
+        @click="openDayView(event.date)"
+      >
+        <p>
+          {{ event.title }}
+          <span style="float: right"
+            >{{ event.startTime }} {{ event.endTime }}</span
+          >
+        </p>
+      </div>
+      <!-- <div class="box1">
         <p>Meeting with ...</p>
       </div>
       <div class="box2">
@@ -15,7 +27,7 @@
       </div>
       <div class="box3">
         <p>Lunch with ...</p>
-      </div>
+      </div> -->
 
       <Popup class="quote" v-if="popupTriggers">
         <h2>Quote of the day</h2>
@@ -28,10 +40,13 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup.vue';
-import { mapState } from 'vuex';
+import router from "../router";
+import moment from "moment";
+import Popup from "@/components/Popup.vue";
+import { mapState } from "vuex";
+
 export default {
-  name: 'Home',
+  name: "Home",
 
   // @ is an alias to /src
   // import BasicFetch from "@/components/BasicFetch.vue"
@@ -39,7 +54,7 @@ export default {
 
   data() {
     return {
-      popupTriggers: false
+      popupTriggers: false,
     };
   },
 
@@ -49,10 +64,15 @@ export default {
         this.popupTriggers = true;
       }, 500);
     },
-
+    openDayView(date) {
+      router.push({ path: `/day/${date}` });
+      this.$store.commit("setSelectedDay", {
+        selectedFormatted: moment(date).format("dddd, MMMM Do, YYYY"),
+      });
+    },
     closeButton() {
       this.popupTriggers = false;
-    }
+    },
   },
 
   mounted() {
@@ -60,19 +80,35 @@ export default {
   },
 
   components: {
-    Popup
+    Popup,
     //VueXStore
   },
 
   created() {
-    this.$store.dispatch('fetchAll');
+    this.$store.dispatch("fetchAll");
   },
 
   computed: {
     ...mapState({
-      quote: (state) => state.quote
-    })
-  }
+      quote: (state) => state.quote,
+    }),
+    events() {
+      let todayEvents = [];
+      this.$store.state.events.forEach((element) => {
+        if (element.date === this.$store.state.today) {
+          let startNumber = parseInt(element.startTime.slice(0, 2));
+          element.startNumber = startNumber;
+          todayEvents.push(element);
+        }
+      });
+
+      todayEvents.sort(function (a, b) {
+        return a.startNumber - b.startNumber;
+      });
+
+      return todayEvents;
+    },
+  },
 };
 </script>
 
@@ -124,7 +160,7 @@ div {
   background: #849283;
   border: 1px solid white;
   border-radius: 40px;
-  margin: auto;
+  margin: 2vh auto;
 }
 
 .box2 {
@@ -133,7 +169,7 @@ div {
   background: #828282;
   border: 1px solid white;
   border-radius: 40px;
-  margin: auto;
+  margin: 2vh auto;
 }
 
 .box3 {
@@ -142,13 +178,13 @@ div {
   background: #e59876;
   border: 1px solid white;
   border-radius: 40px;
-  margin: auto;
+  margin: 2vh auto;
 }
 
 .quote {
   position: absolute;
-  top: 5%;
-  left: 35%;
+  top: 20vh;
+  left: 10vw;
 
   button {
     position: absolute;

@@ -12,10 +12,10 @@ export default new Vuex.Store({
     year: null,
     publicHoliday: [],
     selectedDay: null,
-    today: parseInt(moment().format('YYYYMMDD')),
+    today: moment().format('YYYY[-]MM[-]DD'),
     events: JSON.parse(localStorage.getItem('events') || '[]')
   },
- 
+
 
   mutations: {
     importHoliday(state, publicHoliday) {
@@ -23,7 +23,12 @@ export default new Vuex.Store({
     },
 
     setYear(state, year) {
-      this.state.year = year;
+      state.year = year;
+    },
+
+
+    setSelectedDay(state, ctx) {
+      state.selectedDay = ctx;
     },
 
     setQuote(state, quoteList) {
@@ -35,14 +40,14 @@ export default new Vuex.Store({
 
     setInfo(state, info) {
       console.log(info);
-      state.events = state.events.filter(function(e) {
+      state.events = state.events.filter(function (e) {
         return e.id != info.id;
       });
       state.events.push(info);
       localStorage.setItem('events', JSON.stringify(state.events));
     },
     deleteEvent(state, id) {
-      state.events = state.events.filter(function(e) {
+      state.events = state.events.filter(function (e) {
         return e.id != id;
       });
       localStorage.setItem('events', JSON.stringify(state.events));

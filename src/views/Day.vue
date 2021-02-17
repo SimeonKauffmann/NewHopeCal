@@ -123,11 +123,10 @@ export default {
         };
       }
 
-      todayEvents.sort(function(a, b) {
+      todayEvents.sort(function (a, b) {
         return a.startNumber - b.startNumber;
       });
 
-      console.log(todayEvents);
       return todayEvents;
     },
     removeAction(id) {

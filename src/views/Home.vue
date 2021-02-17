@@ -6,7 +6,12 @@
           <h1>New Hope</h1>
         </b-col>
       </b-row>
-      <div class="box1" v-for="event in events" :key="event.id">
+      <div
+        class="box1"
+        v-for="event in events"
+        :key="event.id"
+        @click="openDayView(event.date)"
+      >
         <p>
           {{ event.title }}
           <span style="float: right"
@@ -35,8 +40,11 @@
 </template>
 
 <script>
+import router from "../router";
+import moment from "moment";
 import Popup from "@/components/Popup.vue";
 import { mapState } from "vuex";
+
 export default {
   name: "Home",
 
@@ -46,11 +54,7 @@ export default {
 
   data() {
     return {
-<<<<<<< HEAD
       popupTriggers: false,
-=======
-      popupTriggers: false
->>>>>>> 4e70b69006c7e55531ea62434356405313c52757
     };
   },
 
@@ -60,14 +64,15 @@ export default {
         this.popupTriggers = true;
       }, 500);
     },
-
+    openDayView(date) {
+      router.push({ path: `/day/${date}` });
+      this.$store.commit("setSelectedDay", {
+        selectedFormatted: moment(date).format("dddd, MMMM Do, YYYY"),
+      });
+    },
     closeButton() {
       this.popupTriggers = false;
-<<<<<<< HEAD
     },
-=======
-    }
->>>>>>> 4e70b69006c7e55531ea62434356405313c52757
   },
 
   mounted() {
@@ -91,8 +96,14 @@ export default {
       let todayEvents = [];
       this.$store.state.events.forEach((element) => {
         if (element.date === this.$store.state.today) {
+          let startNumber = parseInt(element.startTime.slice(0, 2));
+          element.startNumber = startNumber;
           todayEvents.push(element);
         }
+      });
+
+      todayEvents.sort(function (a, b) {
+        return a.startNumber - b.startNumber;
       });
 
       return todayEvents;
@@ -149,7 +160,7 @@ div {
   background: #849283;
   border: 1px solid white;
   border-radius: 40px;
-  margin: auto;
+  margin: 2vh auto;
 }
 
 .box2 {
@@ -158,7 +169,7 @@ div {
   background: #828282;
   border: 1px solid white;
   border-radius: 40px;
-  margin: auto;
+  margin: 2vh auto;
 }
 
 .box3 {
@@ -167,18 +178,14 @@ div {
   background: #e59876;
   border: 1px solid white;
   border-radius: 40px;
-  margin: auto;
+  margin: 2vh auto;
 }
 
 .quote {
   position: absolute;
-<<<<<<< HEAD
-  top: 5px;
-=======
-  top: 5%;
-  left: 35%;
+  top: 20vh;
+  left: 10vw;
 
->>>>>>> 4e70b69006c7e55531ea62434356405313c52757
   button {
     position: absolute;
     justify-content: center;

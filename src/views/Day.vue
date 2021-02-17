@@ -76,11 +76,9 @@ export default {
       this.modalShow = true;
     },
     onCancel() {
-      this.currentEvent = null;
       this.modalShow = false;
     },
     onOk() {
-      this.currentEvent = null;
       this.modalShow = false;
     },
 
@@ -96,7 +94,6 @@ export default {
       this.modalShow = true;
     },
     onClose() {
-      this.currentEvent = null;
       this.modalShow = false;
     },
     getTodaysEvents() {

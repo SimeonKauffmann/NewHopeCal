@@ -9,7 +9,7 @@
       <h1>New Event</h1>
       <input
         id="newEventInput"
-        v-model="event.title"
+        v-model="currentEvent.title"
         type="text"
         placeholder="Event Name.."
         style="margin-bottom:1rem"
@@ -17,13 +17,13 @@
       <br />
       <label style="margin-right:1rem">
         Starts:
-        <input v-model="event.startTime" type="time" />
+        <input v-model="currentEvent.startTime" type="time" />
       </label>
-      <label> Ends: <input v-model="event.endTime" type="time"/></label>
+      <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
       <div>
         <label>
           <textarea
-            v-model="event.text"
+            v-model="currentEvent.text"
             style="margin-top:0.5rem"
             placeholder="Write something.."
           ></textarea>
@@ -45,17 +45,15 @@ export default Vue.extend({
 
   methods: {
     saveEvent() {
-      if (this.event.id != null) {
-        this.$store.dispatch("saveInfo", this.event);
-      } else {
-        this.event.id =
-          this.event.date +
-          this.event.text +
-          this.event.title +
-          this.event.startTime;
-        this.$store.dispatch("saveInfo", this.event);
+      if (this.currentEvent.id === null) {
+        this.currentEvent.id =
+          this.currentEvent.date +
+          this.currentEvent.text +
+          this.currentEvent.title +
+          this.currentEvent.startTime;
       }
 
+      this.$store.dispatch("saveInfo", this.currentEvent);
       this.$emit("ok");
     },
     onClose() {
@@ -63,6 +61,20 @@ export default Vue.extend({
     },
     onCancel() {
       this.$emit("cancel");
+    },
+  },
+  computed: {
+    currentEvent() {
+      const newEvent = {
+        date: this.$route.params.day,
+        title: null,
+        startTime: "09:00",
+        endTime: "10:00",
+        text: null,
+        id: null,
+      };
+
+      return this.event == null ? newEvent : Object.assign({}, this.event);
     },
   },
 });

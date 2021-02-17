@@ -37,22 +37,23 @@ export default {
   // import BasicFetch from "@/components/BasicFetch.vue"
   // import VueXStore from "@/components/VuexStore.vue"
 
+  data() {
+    return {
+      popupTriggers: false
+    };
+  },
 
-data (){
-  return {
-    popupTriggers : false
-  }
-},
+  methods: {
+    time() {
+      setTimeout(() => {
+        this.popupTriggers = true;
+      }, 500);
+    },
 
-methods:{ time (){
-setTimeout(() => {
-  this.popupTriggers = true;
-}, 500)},
-
-closeButton (){
-  this.popupTriggers = false
-}
-},
+    closeButton() {
+      this.popupTriggers = false;
+    }
+  },
 
   mounted() {
     this.time();
@@ -73,7 +74,6 @@ closeButton (){
     })
   }
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -145,25 +145,25 @@ div {
   margin: auto;
 }
 
-.quote{
-position: absolute;
-top: 5%;
-left:35%;
-
-  button{
+.quote {
   position: absolute;
-  justify-content: center;
-  background-color:white;
-  border: 1px solid black;
-  border-radius: 40px;
-  color: black;
-  padding: 15px 32px;
-  margin: 0px;
-  top: 70%;
-  left: 70%;
-  text-align: center;
-  font-size: 16px;
-}
+  top: 5%;
+  left: 35%;
+
+  button {
+    position: absolute;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 40px;
+    color: black;
+    padding: 15px 32px;
+    margin: 0px;
+    top: 70%;
+    left: 70%;
+    text-align: center;
+    font-size: 16px;
+  }
 
   p {
     font-style: italic;

@@ -11,34 +11,31 @@
         <p>Meeting with ...</p>
       </div>
       <div class="box2">
-      <p>Today is ... birthday</p>
+        <p>Today is ... birthday</p>
       </div>
       <div class="box3">
         <p>Lunch with ...</p>
       </div>
- 
 
- <Popup class="quote" v-if="popupTriggers">
+      <Popup class="quote" v-if="popupTriggers">
+        <h2>Quote of the day</h2>
+        <p v-if="quote">"{{ quote }}"</p>
 
-   <h2>Quote of the day</h2>
-   <p v-if="quote">"{{ quote }}"</p>
-
-   <button @click="closeButton">Close</button>
- </Popup>
+        <button @click="closeButton">Close</button>
+      </Popup>
     </b-container>
   </div>
 </template>
 
 <script>
 import Popup from '@/components/Popup.vue';
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 export default {
-  name: "Home",
+  name: 'Home',
 
   // @ is an alias to /src
   // import BasicFetch from "@/components/BasicFetch.vue"
   // import VueXStore from "@/components/VuexStore.vue"
-
 
 
 data (){
@@ -57,26 +54,26 @@ closeButton (){
 }
 },
 
-mounted(){
-  this.time() 
-},
- 
+  mounted() {
+    this.time();
+  },
 
   components: {
-    Popup 
+    Popup
     //VueXStore
   },
 
   created() {
-    this.$store.dispatch("fetchAll");
+    this.$store.dispatch('fetchAll');
   },
 
   computed: {
     ...mapState({
-      quote: (state) => state.quote,
-    }),
-  },
+      quote: (state) => state.quote
+    })
+  }
 };
+
 </script>
 
 <style scoped lang="scss">
@@ -88,7 +85,7 @@ h1 {
   padding: 50px 0px;
 }
 
-h2{
+h2 {
   padding: 50px;
   text-align: center;
 }
@@ -101,7 +98,6 @@ p {
   text-align: left;
   margin: 15px;
 }
-
 
 /* =================
        Layout
@@ -118,11 +114,11 @@ img {
   height: 100%;
 }
 
-div{
- border-spacing: 10px;
+div {
+  border-spacing: 10px;
 }
 
-.box1{
+.box1 {
   width: 400px;
   padding: 10px;
   background: #849283;
@@ -131,7 +127,7 @@ div{
   margin: auto;
 }
 
-.box2{
+.box2 {
   width: 400px;
   padding: 10px;
   background: #828282;
@@ -140,10 +136,10 @@ div{
   margin: auto;
 }
 
-.box3{
+.box3 {
   width: 400px;
   padding: 10px;
-  background: #E59876;
+  background: #e59876;
   border: 1px solid white;
   border-radius: 40px;
   margin: auto;
@@ -169,11 +165,9 @@ left:35%;
   font-size: 16px;
 }
 
-  p{
+  p {
     font-style: italic;
     text-align: center;
   }
 }
-
-
 </style>

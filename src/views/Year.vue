@@ -3,7 +3,7 @@
     <b-container>
       <b-row no-gutters>
         <b-col class="year-col year-col-title">
-          <h1>{{ year }}</h1>
+          <h1 class="numbers-large">{{ year }}</h1>
         </b-col>
         <b-col class="year-col year-col-svg">
           <div class="svg-left">
@@ -247,7 +247,7 @@ export default {
   height: 120px;
   width: 110px;
   border-radius: 25px;
-  box-shadow: 7px 7px rgba(88, 87, 75, 0.5);
+  box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
 }
 .btn {
   transform: scale(1);
@@ -256,6 +256,7 @@ export default {
 }
 .btn:hover {
   transform: scale(1.1);
+  box-shadow: none;
 }
 .btn-light:hover,
 .btn:active {

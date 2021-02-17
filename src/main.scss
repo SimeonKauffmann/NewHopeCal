@@ -1,14 +1,57 @@
 $theme-colors: (
-  "primary": rgba(96, 139, 150, 1),
-  "danger": rgba(229, 152, 118, 1),
-  "secondry": rgba(211, 209, 194, 1),
-  "info": rgba(132, 146, 131, 1),
-  "blue": rgba(0, 0, 0, 0.5),
-  "light": #d3d1c2,
+  'primary': rgba(96, 139, 150, 1),
+  'danger': rgba(229, 152, 118, 1),
+  'secondry': rgba(211, 209, 194, 1),
+  'info': rgba(132, 146, 131, 1),
+  'blue': rgba(0, 0, 0, 0.5),
+  'light': #d3d1c2,
+  'red': red
 );
-
 $input-bg: rgba(96, 139, 150, 1);
 $body-bg: rgba(96, 139, 150, 1);
 
-@import "~bootstrap";
-@import "~bootstrap-vue";
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+.calendar-cell,
+.calendar-cell-marked {
+  transition: transform 250ms ease-in-out;
+  .text-dark,
+  span,
+  .btn-outline-secondary {
+    font-family: 'Ubuntu', sans-serif;
+  }
+  span:hover,
+  .btn:hover,
+  .btn-outline-secondary:hover {
+    background: transparent !important;
+    color: black !important;
+  }
+}
+
+.calendar-cell:active,
+.calendar-cell-marked:active {
+  transform: scale(0.5);
+  background: rgba(0, 0, 0, 0.8) !important;
+  .text-dark,
+  span,
+  .btn-outline-secondary {
+    color: #fff !important;
+  }
+}
+.calendar-cell:hover,
+.calendar-cell-marked:hover {
+  transform: scale(1.1);
+}
+.rounded-circle {
+  border-radius: 10px !important;
+}
+
+.numbers-small {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
+}
+.numbers-large {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 900;
+}

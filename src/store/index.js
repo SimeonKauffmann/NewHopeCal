@@ -1,20 +1,19 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import moment from "moment";
-import axios from "axios";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import moment from 'moment';
+import axios from 'axios';
 
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    quote: "",
+    quote: '',
     year: null,
     publicHoliday: [],
     selectedDay: null,
-
-    today: parseInt(moment().format("YYYYMMDD")),
-    events: JSON.parse(localStorage.getItem("events") || "[]"),
+    today: parseInt(moment().format('YYYYMMDD')),
+    events: JSON.parse(localStorage.getItem('events') || '[]')
   },
  
 
@@ -35,38 +34,41 @@ export default new Vuex.Store({
     },
 
     setInfo(state, info) {
+      console.log(info);
+      state.events = state.events.filter(function(e) {
+        return e.id != info.id;
+      });
       state.events.push(info);
-      localStorage.setItem("events", JSON.stringify(state.events));
+      localStorage.setItem('events', JSON.stringify(state.events));
     },
     deleteEvent(state, id) {
       state.events = state.events.filter(function(e) {
         return e.id != id;
       });
-      localStorage.setItem("events", JSON.stringify(state.events));
-    },
+      localStorage.setItem('events', JSON.stringify(state.events));
+    }
   },
 
   actions: {
     async fetchAll({ commit }) {
       const [holidays, quotes] = await Promise.all([
         axios.get(
-          "/calanderAPI/v2/publicholidays/" + moment().format("YYYY") + "/SE"
+          '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         ),
-        axios.get("https://type.fit/api/quotes"),
+        axios.get('https://type.fit/api/quotes')
       ]);
 
-      commit("importHoliday", holidays.data);
-      commit("setQuote", quotes.data);
+      commit('importHoliday', holidays.data);
+      commit('setQuote', quotes.data);
     },
 
     saveInfo(context, info) {
-      context.commit("setInfo", info);
+      context.commit('setInfo', info);
     },
 
     deleteEvent(context, id) {
-      context.commit("deleteEvent", id);
-      console.log(id);
-    },
+      context.commit('deleteEvent', id);
+    }
   },
-  modules: {},
+  modules: {}
 });

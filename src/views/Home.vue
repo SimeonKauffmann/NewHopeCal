@@ -46,7 +46,11 @@ export default {
 
   data() {
     return {
+<<<<<<< HEAD
       popupTriggers: false,
+=======
+      popupTriggers: false
+>>>>>>> 4e70b69006c7e55531ea62434356405313c52757
     };
   },
 
@@ -59,7 +63,11 @@ export default {
 
     closeButton() {
       this.popupTriggers = false;
+<<<<<<< HEAD
     },
+=======
+    }
+>>>>>>> 4e70b69006c7e55531ea62434356405313c52757
   },
 
   mounted() {
@@ -164,7 +172,13 @@ div {
 
 .quote {
   position: absolute;
+<<<<<<< HEAD
   top: 5px;
+=======
+  top: 5%;
+  left: 35%;
+
+>>>>>>> 4e70b69006c7e55531ea62434356405313c52757
   button {
     position: absolute;
     justify-content: center;

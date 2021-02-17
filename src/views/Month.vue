@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="calendar-container">
-      <Calender />
+      <Calender class="fade-calendar" />
     </div>
   </div>
 </template>
@@ -25,5 +25,18 @@ export default {
 .calendar-container {
   margin-top: 100px;
   z-index: 50;
+}
+.fade-calendar {
+  animation: 1s ease-in 0s 1 fadeIn;
+}
+@keyframes fadeIn {
+  from {
+    transform: perspective(500px) translateZ(50px);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 </style>

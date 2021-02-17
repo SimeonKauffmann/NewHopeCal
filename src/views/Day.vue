@@ -29,12 +29,12 @@
               @click="editEvent(event)"
               >Edit</b-button
             >
-            <b-button
+            <span
               id="remove"
-              variant="red"
+              variant="white"
               class="h1 mb-2"
               @click="removeAction(event.id)"
-              >Remove</b-button
+              >Remove</span
             >
           </div>
         </b-card>
@@ -58,15 +58,15 @@
 </template>
 
 <script>
-import Event from '@/components/Event.vue';
+import Event from "@/components/Event.vue";
 
 export default {
-  name: 'Day',
+  name: "Day",
   data() {
     return {
       modalShow: false,
       editShow: false,
-      currentEvent: null
+      currentEvent: null,
     };
   },
 
@@ -110,8 +110,8 @@ export default {
           backgroundColor: todayEvents[x].color,
           height: `${(endNumber - startNumber) * 2}rem`,
           marginTop: `${startNumber * 2}rem`,
-          position: 'absolute',
-          width: '60%'
+          position: "absolute",
+          width: "60%",
         };
       }
 
@@ -123,10 +123,10 @@ export default {
       return todayEvents;
     },
     removeAction(id) {
-      this.$store.dispatch('deleteEvent', id);
-    }
+      this.$store.dispatch("deleteEvent", id);
+    },
   },
-  components: { Event }
+  components: { Event },
 };
 </script>
 
@@ -153,7 +153,7 @@ ul {
     margin-bottom: 4px;
   }
   li::before {
-    content: url('../assets/clock.svg');
+    content: url("../assets/clock.svg");
     top: 6px;
     left: -20px;
     position: absolute;

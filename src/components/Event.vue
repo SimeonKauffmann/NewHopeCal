@@ -57,7 +57,7 @@ export default Vue.extend({
       }
 
       this.$emit("ok");
-      console.log(currentEvent);
+      currentEvent = null;
     },
     onClose() {
       this.$emit("close");

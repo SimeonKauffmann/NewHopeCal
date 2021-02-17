@@ -19,25 +19,26 @@
 </template>
 
 <script>
-import router from '../router';
+import router from "../router";
 
 export default {
-  name: 'Calender',
+  name: "Calender",
 
   data() {
     return {
       startDate: null,
       slutDate: null,
-      value: '',
+      value: "",
       context: null,
-      getYear: this.$store.state.year
+      getYear: this.$store.state.year,
     };
   },
 
   methods: {
     onContext(ctx) {
+      console.log(ctx);
       this.context = ctx;
-      this.$store.state.selectedDay = ctx;
+      this.$store.commit("setSelectedDay", ctx);
     },
     onClick(ymd) {
       router.push({ path: `/day/${ymd}` });
@@ -48,9 +49,9 @@ export default {
         days.push(element.date);
       });
 
-      return days.includes(ymd) ? 'calendar-cell-marked' : 'calendar-cell';
-    }
-  }
+      return days.includes(ymd) ? "calendar-cell-marked" : "calendar-cell";
+    },
+  },
 };
 </script>
 

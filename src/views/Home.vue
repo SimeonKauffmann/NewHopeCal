@@ -6,8 +6,15 @@
           <h1>New Hope</h1>
         </b-col>
       </b-row>
-
-      <div class="box1">
+      <div class="box1" v-for="event in events" :key="event.id">
+        <p>
+          {{ event.title }}
+          <span style="float: right"
+            >{{ event.startTime }} {{ event.endTime }}</span
+          >
+        </p>
+      </div>
+      <!-- <div class="box1">
         <p>Meeting with ...</p>
       </div>
       <div class="box2">
@@ -15,7 +22,7 @@
       </div>
       <div class="box3">
         <p>Lunch with ...</p>
-      </div>
+      </div> -->
 
       <Popup class="quote" v-if="popupTriggers">
         <h2>Quote of the day</h2>
@@ -28,52 +35,62 @@
 </template>
 
 <script>
-import Popup from '@/components/Popup.vue';
-import { mapState } from 'vuex';
+import Popup from "@/components/Popup.vue";
+import { mapState } from "vuex";
 export default {
-  name: 'Home',
+  name: "Home",
 
   // @ is an alias to /src
   // import BasicFetch from "@/components/BasicFetch.vue"
   // import VueXStore from "@/components/VuexStore.vue"
 
+  data() {
+    return {
+      popupTriggers: false,
+    };
+  },
 
-data (){
-  return {
-    popupTriggers : false
-  }
-},
+  methods: {
+    time() {
+      setTimeout(() => {
+        this.popupTriggers = true;
+      }, 500);
+    },
 
-methods:{ time (){
-setTimeout(() => {
-  this.popupTriggers = true;
-}, 500)},
-
-closeButton (){
-  this.popupTriggers = false
-}
-},
+    closeButton() {
+      this.popupTriggers = false;
+    },
+  },
 
   mounted() {
     this.time();
   },
 
   components: {
-    Popup
+    Popup,
     //VueXStore
   },
 
   created() {
-    this.$store.dispatch('fetchAll');
+    this.$store.dispatch("fetchAll");
   },
 
   computed: {
     ...mapState({
-      quote: (state) => state.quote
-    })
-  }
-};
+      quote: (state) => state.quote,
+    }),
+    events() {
+      let todayEvents = [];
+      this.$store.state.events.forEach((element) => {
+        if (element.date === this.$store.state.today) {
+          todayEvents.push(element);
+        }
+      });
 
+      return todayEvents;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -145,25 +162,23 @@ div {
   margin: auto;
 }
 
-.quote{
-position: absolute;
-top: 5%;
-left:35%;
-
-  button{
+.quote {
   position: absolute;
-  justify-content: center;
-  background-color:white;
-  border: 1px solid black;
-  border-radius: 40px;
-  color: black;
-  padding: 15px 32px;
-  margin: 0px;
-  top: 70%;
-  left: 70%;
-  text-align: center;
-  font-size: 16px;
-}
+  top: 5px;
+  button {
+    position: absolute;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 40px;
+    color: black;
+    padding: 15px 32px;
+    margin: 0px;
+    top: 70%;
+    left: 70%;
+    text-align: center;
+    font-size: 16px;
+  }
 
   p {
     font-style: italic;

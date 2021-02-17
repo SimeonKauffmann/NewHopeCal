@@ -5,7 +5,7 @@
         <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
       </div>
       <div class="col-3">
-        <b-button @click="backToday">Today</b-button>
+        <b-button @click="backToday" style="margin-top: 25px">Today</b-button>
       </div>
       <div class="col-3"></div>
     </div>
@@ -27,8 +27,8 @@
       >
         <div class="text">
           <p>{{ day.dayName }}</p>
+          <div class="event-marker" v-if="day.event">Events</div>
         </div>
-        <div class="event-marker" v-if="day.event"></div>
       </div>
     </div>
     <div class="arrows">
@@ -46,9 +46,7 @@
 import router from "../router";
 import moment from "moment";
 
-
 export default {
-
   computed: {
     days() {
       const calander = this.$store.state.publicHoliday;
@@ -59,15 +57,14 @@ export default {
         let date = moment().add(x, "days").format("YYYY[-]MM[-]DD");
 
         // Added to check Date if holiday confirmed -Patrik
-        let checkDate = moment().add(x, "days").format("YYYY-MM-DD")
-        let specialDay = ""
-        for (let i = 0; i < calander.length; i++){
-          if (calander[i].date === checkDate){
-            specialDay = calander[i].localName
-            i = calander.length
-          }
-          else{
-            i++
+        let checkDate = moment().add(x, "days").format("YYYY-MM-DD");
+        let specialDay = "";
+        for (let i = 0; i < calander.length; i++) {
+          if (calander[i].date === checkDate) {
+            specialDay = calander[i].localName;
+            i = calander.length;
+          } else {
+            i++;
           }
         }
 
@@ -78,7 +75,8 @@ export default {
           : false;
 
         let dayObject = {
-          dayName: moment().add(x, "days").format("dddd Do MMMM") + " " + specialDay,
+          dayName:
+            moment().add(x, "days").format("dddd Do MMMM") + " " + specialDay,
           date: date,
           event: event,
           week: moment().add(x, "days").format("w"),
@@ -107,12 +105,15 @@ export default {
     },
     openDayView(date) {
       router.push({ path: `/day/${date}` });
+      this.$store.commit("setSelectedDay", {
+        selectedFormatted: moment(date).format("dddd, MMMM Do, YYYY"),
+      });
     },
   },
 
-  mounted(){
-    this.$store.dispatch("fetchAll")
-  }
+  mounted() {
+    this.$store.dispatch("fetchAll");
+  },
 };
 </script>
 
@@ -148,10 +149,11 @@ export default {
       margin: 5px;
     }
     .event-marker {
-      width: 30px;
+      width: 130px;
       height: 30px;
-      background-color: red;
-      border-radius: 50%;
+      background-color: #e59876;
+      border-radius: 30px;
+      text-align: center;
       float: right;
     }
   }

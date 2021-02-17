@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import moment from "moment";
 import axios from "axios";
 
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     today: parseInt(moment().format("YYYYMMDD")),
     events: JSON.parse(localStorage.getItem("events") || "[]"),
   },
+ 
 
   mutations: {
     importHoliday(state, publicHoliday) {

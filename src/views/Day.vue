@@ -181,7 +181,7 @@ ul {
 #gridHolder {
   border: solid;
   width: 80%;
-  height: 70vh;
+  min-height: 70vh;
   background-color: white;
   margin: 40px auto;
 }

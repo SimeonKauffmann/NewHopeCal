@@ -296,19 +296,10 @@ export default {
 @keyframes fadeIn {
   from {
     opacity: 0;
-
-    // display: none;
   }
-  // 60% {
-  //   display: block;
-  //   opacity: 0;
-  // }
-  // 30% {
-  //   transform: scale(0.9);
-  // }
+
   to {
     opacity: 1;
-    // transform: scale(1);
   }
 }
 </style>

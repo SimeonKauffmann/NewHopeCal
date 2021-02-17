@@ -13,13 +13,21 @@ $body-bg: rgba(96, 139, 150, 1);
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
+.b-calendar-grid-caption {
+  animation: 1s ease-in 0.6s 1 fadeIn-global-header;
+}
+.b-calendar-nav {
+  animation: 2s ease-in 0s 1 fadeIn-global-nav;
+}
 .calendar-cell,
 .calendar-cell-marked {
+  animation: 0.5s ease-in 0s 1 fadeIn-global;
   transition: transform 250ms ease-in-out;
   .text-dark,
   span,
   .btn-outline-secondary {
     font-family: 'Ubuntu', sans-serif;
+    animation: 0.5s ease-in 0s 1 fadeIn-global-numbers;
   }
   span:hover,
   .btn:hover,
@@ -45,6 +53,46 @@ $body-bg: rgba(96, 139, 150, 1);
 }
 .rounded-circle {
   border-radius: 10px !important;
+}
+@keyframes fadeIn-global-nav {
+  from {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn-global-header {
+  from {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.1);
+    color: black;
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes fadeIn-global-numbers {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn-global {
+  from {
+    background: transparent;
+    transform: scale(0.7);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .numbers-small {

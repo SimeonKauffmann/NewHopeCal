@@ -41,7 +41,7 @@ h3 {
 
 .navbar-mobile {
   z-index: 3;
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 25px;
 }

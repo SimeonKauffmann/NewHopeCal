@@ -50,7 +50,7 @@ data (){
 methods:{ time (){
 setTimeout(() => {
   this.popupTriggers = true;
-}, 1000)},
+}, 500)},
 
 closeButton (){
   this.popupTriggers = false
@@ -150,6 +150,9 @@ div{
 }
 
 .quote{
+position: absolute;
+top: 5%;
+left:35%;
 
   button{
   position: absolute;
@@ -160,8 +163,8 @@ div{
   color: black;
   padding: 15px 32px;
   margin: 0px;
-  top: 50%;
-  left: 50%;
+  top: 70%;
+  left: 70%;
   text-align: center;
   font-size: 16px;
 }

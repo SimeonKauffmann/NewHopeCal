@@ -18,12 +18,12 @@ export default {
 .popups{
   display: relative;
   width: 50vh;
-  height: 50vh;
+  height: 40vh;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
   border-radius: 40px;
-  background-color: rgba(255, 255, 255, 0.475)
+  background-color: rgba(255, 255, 255, 0.982)
 
 
 }

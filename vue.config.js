@@ -9,14 +9,14 @@ module.exports = {
         workboxOptions: {
             runtimeCaching: [
                 {
-                    handler: "HolidayFetch",
+                    handler: "NetworkFirst",
                     options: {
                         networkTimeoutSeconds: 5
                     },
                     urlPattern: "https://date.nager.at/api/v2/publicholidays/2021/SE"
                 },
                 {   
-                    handler: "FetchQuotes",
+                    handler: "NetworkFirst",
                     options: {
                         networkTimeoutSeconds: 5
                     },

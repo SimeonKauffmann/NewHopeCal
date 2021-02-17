@@ -85,6 +85,14 @@ export default {
     },
 
     createEvent() {
+      this.currentEvent = {
+        date: this.$route.params.day,
+        title: null,
+        startTime: "09:00",
+        endTime: "10:00",
+        text: null,
+        id: null,
+      };
       this.modalShow = true;
     },
     onClose() {

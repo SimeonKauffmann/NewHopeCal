@@ -2,14 +2,14 @@
   <div>
     <b-modal
       :visible="show"
-      @ok="saveEvent(currentEvent)"
+      @ok="saveEvent"
       @close="onClose"
       @cancel="onCancel"
     >
       <h1>New Event</h1>
       <input
         id="newEventInput"
-        v-model="currentEvent.title"
+        v-model="event.title"
         type="text"
         placeholder="Event Name.."
         style="margin-bottom:1rem"
@@ -17,13 +17,13 @@
       <br />
       <label style="margin-right:1rem">
         Starts:
-        <input v-model="currentEvent.startTime" type="time" />
+        <input v-model="event.startTime" type="time" />
       </label>
-      <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
+      <label> Ends: <input v-model="event.endTime" type="time"/></label>
       <div>
         <label>
           <textarea
-            v-model="currentEvent.text"
+            v-model="event.text"
             style="margin-top:0.5rem"
             placeholder="Write something.."
           ></textarea>
@@ -44,49 +44,25 @@ export default Vue.extend({
   },
 
   methods: {
-    saveEvent(currentEvent) {
-      if (currentEvent.id != null) {
-        this.$store.dispatch("saveInfo", currentEvent);
+    saveEvent() {
+      if (this.event.id != null) {
+        this.$store.dispatch("saveInfo", this.event);
       } else {
-        currentEvent.id =
-          currentEvent.date +
-          currentEvent.text +
-          currentEvent.title +
-          currentEvent.startTime;
-        this.$store.dispatch("saveInfo", currentEvent);
+        this.event.id =
+          this.event.date +
+          this.event.text +
+          this.event.title +
+          this.event.startTime;
+        this.$store.dispatch("saveInfo", this.event);
       }
 
       this.$emit("ok");
-      currentEvent = null;
     },
     onClose() {
       this.$emit("close");
     },
     onCancel() {
       this.$emit("cancel");
-    },
-  },
-  computed: {
-    currentEvent() {
-      if (this.event != null) {
-        return {
-          date: this.$route.params.day,
-          title: this.event.title,
-          startTime: this.event.startTime,
-          endTime: this.event.endTime,
-          text: this.event.text,
-          id: this.event.id,
-        };
-      } else {
-        return {
-          date: this.$route.params.day,
-          title: null,
-          startTime: "09:00",
-          endTime: "10:00",
-          text: null,
-          id: null,
-        };
-      }
     },
   },
 });

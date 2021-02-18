@@ -13,22 +13,47 @@ $body-bg: rgba(96, 139, 150, 1);
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
-.b-calendar-grid-caption {
-  animation: 1s ease-in 0.6s 1 fadeIn-global-header;
+// Font numbers
+.numbers-small {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
 }
+.numbers-large {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 900;
+}
+
+//  ============
+// Calender Animations
+//  ============
+
+// Nav *1
 .b-calendar-nav {
   animation: 2s ease-in 0s 1 fadeIn-global-nav;
 }
+
+// Header *2
+.b-calendar-grid-caption {
+  animation: 1s ease-in 0.6s 1 fadeIn-global-header;
+}
+
+// cell = dates
 .calendar-cell,
 .calendar-cell-marked {
+  // *3
   animation: 0.5s ease-in 0s 1 fadeIn-global;
   transition: transform 250ms ease-in-out;
+
+  // text in cell styling and animation
   .text-dark,
   span,
   .btn-outline-secondary {
     font-family: 'Ubuntu', sans-serif;
+    // *4
     animation: 0.5s ease-in 0s 1 fadeIn-global-numbers;
   }
+
+  // animation on cell hover
   span:hover,
   .btn:hover,
   .btn-outline-secondary:hover {
@@ -37,16 +62,20 @@ $body-bg: rgba(96, 139, 150, 1);
   }
 }
 
+// when clicked
 .calendar-cell:active,
 .calendar-cell-marked:active {
   transform: scale(0.5);
   background: rgba(0, 0, 0, 0.8) !important;
+
+  // text in cell styling and animation
   .text-dark,
   span,
   .btn-outline-secondary {
     color: #fff !important;
   }
 }
+
 .calendar-cell:hover,
 .calendar-cell-marked:hover {
   transform: scale(1.1);
@@ -54,6 +83,8 @@ $body-bg: rgba(96, 139, 150, 1);
 .rounded-circle {
   border-radius: 10px !important;
 }
+
+// *1
 @keyframes fadeIn-global-nav {
   from {
     opacity: 0;
@@ -65,6 +96,7 @@ $body-bg: rgba(96, 139, 150, 1);
     opacity: 1;
   }
 }
+// *2
 @keyframes fadeIn-global-header {
   from {
     transform: scale(1);
@@ -77,14 +109,7 @@ $body-bg: rgba(96, 139, 150, 1);
     transform: scale(1);
   }
 }
-@keyframes fadeIn-global-numbers {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+// *3
 @keyframes fadeIn-global {
   from {
     background: transparent;
@@ -94,12 +119,12 @@ $body-bg: rgba(96, 139, 150, 1);
     transform: scale(1);
   }
 }
-
-.numbers-small {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 18px;
-}
-.numbers-large {
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 900;
+// *4
+@keyframes fadeIn-global-numbers {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

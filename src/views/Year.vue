@@ -6,6 +6,7 @@
           <h1 class="numbers-large">{{ year }}</h1>
         </b-col>
         <b-col class="year-col year-col-svg">
+          <!-- Arrow left -->
           <div class="svg-left">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -22,6 +23,8 @@
               />
             </svg>
           </div>
+
+          <!-- Arrow right -->
           <div class="svg-right">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -39,9 +42,12 @@
             </svg>
           </div>
         </b-col>
+
+        <!-- Empty row for seperation -->
         <b-col></b-col>
       </b-row>
 
+      <!-- Month buttons -->
       <b-row no-gutters>
         <b-col class="year-col">
           <b-row no-gutters>
@@ -177,6 +183,7 @@
           </b-row>
         </b-col>
       </b-row>
+      <!-- End of Month buttons -->
     </b-container>
   </div>
 </template>
@@ -195,6 +202,8 @@ export default {
     increaseYear() {
       return this.year++;
     },
+
+    // When you press a month it sumbits and sends the right year and month to Month.Vue
     submitYear(month) {
       this.$store.commit('setYear', `${this.year}-${month}-01`);
       setTimeout(() => {
@@ -249,6 +258,12 @@ export default {
   border-radius: 25px;
   box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
 }
+
+/*===========
+  Animations
+============*/
+
+// Hover animation buttons
 .btn {
   transform: scale(1);
   transform-origin: center;
@@ -264,9 +279,7 @@ export default {
   border: none;
 }
 
-/*===========
-  Animations
-============*/
+// on render animations for buttons
 .January {
   animation: 0.5s ease-in 0s 1 fadeIn;
 }

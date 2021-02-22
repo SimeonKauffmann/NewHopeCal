@@ -7,18 +7,18 @@
 </template>
 
 <script>
-import Calender from '@/components/Calender.vue';
+import Calender from "@/components/Calender.vue";
 export default {
-  name: 'Month',
+  name: "Month",
   components: {
-    Calender
+    Calender,
   },
   beforeRouteLeave(to, from, next) {
     if (this.$store.state.year != null) {
-      this.$store.commit('setYear', null);
+      this.$store.commit("setYear", null);
     }
     next();
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

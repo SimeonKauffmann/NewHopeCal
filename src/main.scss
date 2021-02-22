@@ -15,11 +15,11 @@ $body-bg: rgba(96, 139, 150, 1);
 
 // Font numbers
 .numbers-small {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-size: 18px;
 }
 .numbers-large {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-weight: 900;
 }
 
@@ -48,7 +48,7 @@ $body-bg: rgba(96, 139, 150, 1);
   .text-dark,
   span,
   .btn-outline-secondary {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Ubuntu", sans-serif;
     // *4
     animation: 0.5s ease-in 0s 1 fadeIn-global-numbers;
   }
@@ -119,16 +119,6 @@ $body-bg: rgba(96, 139, 150, 1);
     transform: scale(1);
   }
 }
-<<<<<<< HEAD
-
-.numbers-small {
-  font-family: "Ubuntu", sans-serif;
-  font-size: 18px;
-}
-.numbers-large {
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 900;
-=======
 // *4
 @keyframes fadeIn-global-numbers {
   from {
@@ -137,5 +127,4 @@ $body-bg: rgba(96, 139, 150, 1);
   to {
     opacity: 1;
   }
->>>>>>> 00b304192ce3cf7b84565af713f7600a32654f95
 }

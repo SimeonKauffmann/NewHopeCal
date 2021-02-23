@@ -61,6 +61,7 @@
                 January
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons February">
               <b-button
                 size="lg"
@@ -71,6 +72,7 @@
                 February
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons March">
               <b-button
                 size="lg"
@@ -94,6 +96,7 @@
                 April
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons May">
               <b-button
                 size="lg"
@@ -104,6 +107,7 @@
                 May
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons June">
               <b-button
                 size="lg"
@@ -127,6 +131,7 @@
                 July
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons August">
               <b-button
                 size="lg"
@@ -137,6 +142,7 @@
                 August
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons September">
               <b-button
                 size="lg"
@@ -160,6 +166,7 @@
                 October
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons November">
               <b-button
                 size="lg"
@@ -170,6 +177,7 @@
                 November
               </b-button>
             </b-col>
+
             <b-col class="year-col year-col-buttons December">
               <b-button
                 size="lg"

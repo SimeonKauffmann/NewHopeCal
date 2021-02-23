@@ -19,8 +19,12 @@
         />
       </svg>
       <div class="button">
-        <b-button @click="backToday" variant="danger" class="today"
-          >back to Today</b-button
+        <b-button
+          v-if="days[0].week != today"
+          @click="backToday"
+          variant="light"
+          class="today"
+          >Today</b-button
         >
       </div>
       <svg
@@ -66,15 +70,10 @@ export default {
 
       const days = [];
       for (let x = this.startDate; x < this.startDate + 7; x++) {
-<<<<<<< HEAD
-        // let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
+        // Startdate used here to compute when the loop starts -Simeon
         let date = moment()
           .add(x, 'days')
           .format('YYYY[-]MM[-]DD');
-=======
-        // Startdate used here to compute when the loop starts -Simeon
-        let date = moment().add(x, "days").format("YYYY[-]MM[-]DD");
->>>>>>> e33831c1f7e58431c0e32d313dd82238739174f7
 
         // Added to check Date if holiday confirmed -Patrik
         let checkDate = moment()
@@ -122,7 +121,8 @@ export default {
   },
   data() {
     return {
-      startDate: 0
+      startDate: 0,
+      today: moment().format('w')
     };
   },
   methods: {
@@ -138,14 +138,9 @@ export default {
     }, // Open the day view -Simeon
     openDayView(date) {
       router.push({ path: `/day/${date}` });
-<<<<<<< HEAD
       this.$store.commit('setSelectedDay', {
-        selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
-=======
-      this.$store.commit("setSelectedDay", {
         // Set the selected day in Vuex -Simeon
-        selectedFormatted: moment(date).format("dddd, MMMM Do, YYYY"),
->>>>>>> e33831c1f7e58431c0e32d313dd82238739174f7
+        selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
       });
     }
   },
@@ -165,8 +160,11 @@ export default {
   .button {
     flex-grow: 3;
     display: flex;
+    max-height: 20px;
     .today {
       margin: auto;
+      border-radius: 10px;
+      box-shadow: 4px 4px 3px rgba(88, 87, 75, 0.5);
     }
   }
 }

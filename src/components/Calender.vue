@@ -19,18 +19,18 @@
 </template>
 
 <script>
-import router from "../router";
+import router from '../router';
 
 export default {
-  name: "Calender",
+  name: 'Calender',
 
   data() {
     return {
       startDate: null,
       slutDate: null,
-      value: "",
+      value: '',
       context: null,
-      getYear: this.$store.state.year,
+      getYear: this.$store.state.year
     };
   },
 
@@ -38,7 +38,7 @@ export default {
     onContext(ctx) {
       console.log(ctx);
       this.context = ctx;
-      this.$store.commit("setSelectedDay", ctx);
+      this.$store.commit('setSelectedDay', ctx);
     },
     onClick(ymd) {
       router.push({ path: `/day/${ymd}` });
@@ -55,17 +55,17 @@ export default {
       });
 
       if (days.includes(ymd)) {
-        return "calendar-cell-marked";
+        return 'calendar-cell-marked';
       } else if (redDays.includes(ymd)) {
-        return "calendar-cell-red";
+        return 'calendar-cell-red';
       } else {
-        return "calendar-cell";
+        return 'calendar-cell';
       }
-    },
+    }
   },
   mounted() {
-    this.$store.dispatch("fetchAll");
-  },
+    this.$store.dispatch('fetchAll');
+  }
 };
 </script>
 

@@ -7,7 +7,7 @@
         </b-col>
       </b-row>
       <div
-        class="box1"
+        class="box3"
         v-for="event in events"
         :key="event.id"
         @click="openDayView(event.date)"
@@ -19,6 +19,7 @@
           >
         </p>
       </div>
+      <h2 v-if="!events">You're free today!</h2>
       <!-- <div class="box1">
         <p>Meeting with ...</p>
       </div>
@@ -41,6 +42,7 @@
 
 <script>
 import router from "../router";
+import Vue from "vue";
 import moment from "moment";
 import Popup from "@/components/Popup.vue";
 import { mapState } from "vuex";
@@ -48,9 +50,21 @@ import { mapState } from "vuex";
 export default {
   name: "Home",
 
-  // @ is an alias to /src
-  // import BasicFetch from "@/components/BasicFetch.vue"
-  // import VueXStore from "@/components/VuexStore.vue"
+  created() {
+    if (!this.$store.state.userName) {
+      while (!this.$store.state.userName) {
+        this.$store.commit("setUserName", prompt("Choose a username"));
+      }
+    } else {
+      Vue.axios
+        .get(`${this.$store.state.serverAddress}${this.$store.state.userName}`)
+        .then((events) => {
+          this.$store.commit("setEvents", events.data);
+        });
+    }
+
+    this.$store.dispatch("fetchAll");
+  },
 
   data() {
     return {
@@ -84,10 +98,6 @@ export default {
     //VueXStore
   },
 
-  created() {
-    this.$store.dispatch("fetchAll");
-  },
-
   computed: {
     ...mapState({
       quote: (state) => state.quote,
@@ -105,6 +115,10 @@ export default {
       todayEvents.sort(function (a, b) {
         return a.startNumber - b.startNumber;
       });
+
+      if (todayEvents.length === 0) {
+        todayEvents = null;
+      }
 
       return todayEvents;
     },

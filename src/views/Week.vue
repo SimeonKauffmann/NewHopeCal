@@ -53,7 +53,7 @@ export default {
 
       const days = [];
       for (let x = this.startDate; x < this.startDate + 7; x++) {
-        // let date = parseInt(moment().add(x, "days").format("YYYYMMDD"));
+        // Startdate used here to compute when the loop starts -Simeon
         let date = moment().add(x, "days").format("YYYY[-]MM[-]DD");
 
         // Added to check Date if holiday confirmed -Patrik
@@ -68,12 +68,14 @@ export default {
           }
         }
 
+        // Find events on days, boolean -Simeon
         let event = this.$store.state.events.find(
           (event) => event.date === date
         )
           ? true
           : false;
 
+        // Creating day object - Simeon
         let dayObject = {
           dayName:
             moment().add(x, "days").format("dddd Do MMMM") + " " + specialDay,
@@ -94,6 +96,7 @@ export default {
     };
   },
   methods: {
+    // Methods to change the startdate. used in the computed property to make a list of days -Simeon
     pastDates() {
       this.startDate -= 7;
     },
@@ -102,10 +105,11 @@ export default {
     },
     backToday() {
       this.startDate = 0;
-    },
+    }, // Open the day view -Simeon
     openDayView(date) {
       router.push({ path: `/day/${date}` });
       this.$store.commit("setSelectedDay", {
+        // Set the selected day in Vuex -Simeon
         selectedFormatted: moment(date).format("dddd, MMMM Do, YYYY"),
       });
     },

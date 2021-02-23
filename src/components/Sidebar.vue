@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Hamburger menu -Simeon -->
     <svg
       viewBox="0 0 100 80"
       width="40"
@@ -32,7 +33,7 @@
 
 <script>
 export default {
-  name: 'Sidebar'
+  name: "Sidebar",
 };
 </script>
 
@@ -58,7 +59,7 @@ export default {
       position: relative;
     }
     .nav-link::before {
-      content: '';
+      content: "";
       width: 80%;
       height: 2px;
       bottom: 0;
@@ -88,7 +89,7 @@ export default {
 
 @media only screen and (min-width: 900px) {
   .nav-link::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 80%;
     height: 2px;

@@ -54,28 +54,48 @@ export default new Vuex.Store({
       state.quote = quote;
     },
 
-    async setInfo(state, info) {
+    getEvents(state) {
+      Vue.axios
+        .get(`${state.serverAddress}${state.userName}`)
+        .then((events) => {
+          this.commit("setEvents", events.data)
+        })
+    },
+
+    updateInfo(state, info) {
+      Vue.axios.put(`${state.serverAddress}${state.userName}/${info.id}`, info)
+        .then(() => this.commit('getEvents'))
+
+      if (info.share) {
+        let names = info.share.split(' ')
+        for (let x = 0; x < names.length; x++) {
+          Vue.axios.post(`${state.serverAddress}${names[x]}`, info)
+        }
+      }
+    },
+
+    setInfo(state, info) {
       // state.events = state.events.filter(function (e) {
       //   return e.id != info.id;
       // });
 
       Vue.axios.post(`${state.serverAddress}${state.userName}`, info)
-      await Vue.axios
-        .get(`${state.serverAddress}${state.userName}`)
-        .then((events) => {
-          this.commit("setEvents", events.data)
-        })
+        .then(() => this.commit('getEvents'))
+
+      if (info.share) {
+        let names = info.share.split(' ')
+        for (let x = 0; x < names.length; x++) {
+          Vue.axios.post(`${state.serverAddress}${names[x]}`, info)
+        }
+      }
+
 
       // localStorage.setItem('events', JSON.stringify(state.events));
     },
     deleteEvent(state, id) {
 
-      Vue.axios.delete(`${this.state.serverAddress}${this.state.userName}/${id}`)
-        .then(Vue.axios
-          .get(`${this.$store.state.serverAddress}${this.state.userName}`)
-          .then((events) => {
-            this.commit("setEvents", events.data)
-          }))
+      Vue.axios.delete(`${state.serverAddress}${state.userName}/${id}`)
+        .then(() => this.commit("getEvents"))
 
       // state.events = state.events.filter(function (e) {
       //   return e.id != id;
@@ -99,7 +119,10 @@ export default new Vuex.Store({
 
     saveInfo(context, info) {
       context.commit('setInfo', info);
+    },
 
+    saveUpdateInfo(context, info) {
+      context.commit('updateInfo', info);
     },
 
     deleteEvent(context, id) {

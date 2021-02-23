@@ -4,6 +4,7 @@ import moment from 'moment';
 import axios from 'axios';
 
 
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,13 +14,28 @@ export default new Vuex.Store({
     publicHoliday: [],
     selectedDay: null,
     today: moment().format('YYYY[-]MM[-]DD'),
-    events: JSON.parse(localStorage.getItem('events') || '[]')
+    // events: JSON.parse(localStorage.getItem('events') || '[]')
+    events: [],
+    userName: localStorage.getItem('userName') || null,
+    serverAddress: "http://azureadsimeonkauffmann-fcccfdf1.localhost.run/events/"
   },
 
 
   mutations: {
     importHoliday(state, publicHoliday) {
       state.publicHoliday = publicHoliday;
+    },
+
+    setUserName(state, userName) {
+      state.userName = userName
+      localStorage.setItem('userName', userName)
+      Vue.axios.get(
+        `${state.serverAddress}newuser/${userName}`
+      );
+    },
+
+    setEvents(state, data) {
+      state.events = data
     },
 
     setYear(state, year) {
@@ -38,19 +54,33 @@ export default new Vuex.Store({
       state.quote = quote;
     },
 
-    setInfo(state, info) {
-      console.log(info);
-      state.events = state.events.filter(function (e) {
-        return e.id != info.id;
-      });
-      state.events.push(info);
-      localStorage.setItem('events', JSON.stringify(state.events));
+    async setInfo(state, info) {
+      // state.events = state.events.filter(function (e) {
+      //   return e.id != info.id;
+      // });
+
+      Vue.axios.post(`${state.serverAddress}${state.userName}`, info)
+      await Vue.axios
+        .get(`${state.serverAddress}${state.userName}`)
+        .then((events) => {
+          this.commit("setEvents", events.data)
+        })
+
+      // localStorage.setItem('events', JSON.stringify(state.events));
     },
     deleteEvent(state, id) {
-      state.events = state.events.filter(function (e) {
-        return e.id != id;
-      });
-      localStorage.setItem('events', JSON.stringify(state.events));
+
+      Vue.axios.delete(`${this.state.serverAddress}${this.state.userName}/${id}`)
+        .then(Vue.axios
+          .get(`${this.$store.state.serverAddress}${this.state.userName}`)
+          .then((events) => {
+            this.commit("setEvents", events.data)
+          }))
+
+      // state.events = state.events.filter(function (e) {
+      //   return e.id != id;
+      // });
+      // localStorage.setItem('events', JSON.stringify(state.events));
     }
   },
 
@@ -69,6 +99,7 @@ export default new Vuex.Store({
 
     saveInfo(context, info) {
       context.commit('setInfo', info);
+
     },
 
     deleteEvent(context, id) {

@@ -47,8 +47,12 @@ $body-bg: rgba(96, 139, 150, 1);
   .text-dark,
   span,
   .btn-outline-secondary {
+<<<<<<< HEAD
     font-family: 'Ubuntu', sans-serif;
     // *4
+=======
+    font-family: "Ubuntu", sans-serif; // *4
+>>>>>>> bc91c44a0f27b77669aef0ae8d8878a712c83de4
     animation: 0.5s ease-in 0s 1 fadeIn-global-numbers;
   }
 
@@ -125,5 +129,36 @@ $body-bg: rgba(96, 139, 150, 1);
   }
   to {
     opacity: 1;
+  }
+}
+@media screen and (min-width: 900px) {
+  .b-calendar .b-calendar-grid-body .col[data-date] .btn {
+    margin: 15px auto;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .b-calendar .b-calendar-grid-body .col[data-date] .btn {
+    font-size: 1rem;
+  }
+  .no-gutters {
+    margin: 2rem;
+  }
+  .text-truncate {
+    font-size: 2rem;
+  }
+  .font-weight-bold {
+    font-weight: 700 !important;
+    font-size: 2rem;
+  }
+  .container {
+    max-width: 150rem;
+  }
+
+  .calendar-main div {
+    margin: 1rem;
+  }
+  .b-calendar .b-calendar-grid .row {
+    margin: 3rem;
   }
 }

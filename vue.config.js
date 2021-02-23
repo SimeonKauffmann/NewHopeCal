@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath: "/newhopecal",
     pwa: {
         manifestOptions: {
             background_color: "White"

@@ -1,43 +1,49 @@
 <template>
   <div>
-    <div id="month" class="row">
-      <div class="col-6">
-        <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
+    <div id="mobileVersion">
+      <div id="month" class="row">
+        <div class="col-6">
+          <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
+        </div>
+        <div class="col-3">
+          <b-button @click="backToday" style="margin-top: 25px">Today</b-button>
+        </div>
+        <div class="col-3"></div>
       </div>
-      <div class="col-3">
-        <b-button @click="backToday" style="margin-top: 25px">Today</b-button>
-      </div>
-      <div class="col-3"></div>
-    </div>
 
-    <div class="arrows">
-      <b-icon
-        icon="arrow-up-short"
-        animation="fade"
-        font-scale="4"
-        @click="pastDates"
-      ></b-icon>
-    </div>
-    <div class="week-container">
-      <div
-        class="days"
-        v-for="day in days"
-        :key="day.date"
-        @click="openDayView(day.date)"
-      >
-        <div class="text">
-          <p>{{ day.dayName }}</p>
-          <div class="event-marker" v-if="day.event">Events</div>
+      <div class="arrows">
+        <b-icon
+          icon="arrow-up-short"
+          animation="fade"
+          font-scale="4"
+          @click="pastDates"
+        ></b-icon>
+      </div>
+      <div class="week-container">
+        <div
+          class="days"
+          v-for="day in days"
+          :key="day.date"
+          @click="openDayView(day.date)"
+        >
+          <div class="text">
+            <p>{{ day.dayName }}</p>
+            <div class="event-marker" v-if="day.event">Events</div>
+          </div>
         </div>
       </div>
+      <div class="arrows">
+        <b-icon
+          icon="arrow-down-short"
+          animation="fade"
+          font-scale="4"
+          @click="futureDates"
+        ></b-icon>
+      </div>
     </div>
-    <div class="arrows">
-      <b-icon
-        icon="arrow-down-short"
-        animation="fade"
-        font-scale="4"
-        @click="futureDates"
-      ></b-icon>
+
+    <div id="desktopVersion">
+      <h2> Hej </h2>
     </div>
   </div>
 </template>
@@ -157,5 +163,13 @@ export default {
       float: right;
     }
   }
+}
+
+
+@media (min-width: 900px) {
+  #mobileVersion{
+    display: none;
+  }
+  
 }
 </style>

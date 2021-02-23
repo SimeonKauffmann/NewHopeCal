@@ -1,8 +1,8 @@
 <template>
   <b-container>
     <b-calendar
-      class="calendar-main"
       block
+      class="calendar-main"
       @selected="onClick"
       v-model="value"
       @context="onContext"

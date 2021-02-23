@@ -1,6 +1,7 @@
 <template>
   <div class="day">
     <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
+    <h2 id="name">{{ redDay }}</h2>
     <div id="gridHolder">
       <b-card-group deck class="container">
         <b-card v-for="event in getTodaysEvents()" :key="event.id">
@@ -67,6 +68,7 @@ export default {
       modalShow: false,
       editShow: false,
       currentEvent: null,
+      redDay: null,
     };
   },
 
@@ -120,7 +122,7 @@ export default {
         };
       }
 
-      todayEvents.sort(function (a, b) {
+      todayEvents.sort(function(a, b) {
         return a.startNumber - b.startNumber;
       });
 
@@ -129,6 +131,14 @@ export default {
     removeAction(id) {
       this.$store.dispatch("deleteEvent", id);
     },
+  },
+  mounted() {
+    this.$store.dispatch("fetchAll");
+    this.$store.state.publicHoliday.forEach((element) => {
+      if (element.date === this.$route.params.day) {
+        this.redDay = element.name;
+      }
+    });
   },
   components: { Event },
 };
@@ -201,5 +211,8 @@ ul {
 #date {
   margin: 15px 15px;
   width: 80%;
+}
+#name {
+  margin: 15px 15px;
 }
 </style>

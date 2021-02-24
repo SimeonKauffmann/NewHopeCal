@@ -52,63 +52,64 @@
 </template>
 
 <script>
-import Vue from "vue";
-export default Vue.extend({
-  name: "Event",
+  import Vue from 'vue'
+  export default Vue.extend({
+    name: 'Event',
 
-  data() {
-    return {
-      selected: "A",
-      options: [
-        { item: "A", name: "None" },
-        { item: "B", name: "Work" },
-        { item: "C", name: "Sport" },
-        { item: "D", name: "Fun" },
-      ],
-    };
-  },
-
-  props: {
-    show: Boolean,
-    event: null,
-  },
-
-  methods: {
-    saveEvent() {
-      if (this.currentEvent.id === null) {
-        this.currentEvent.id =
-          this.currentEvent.date +
-          this.currentEvent.text +
-          this.currentEvent.title +
-          this.currentEvent.startTime;
-        this.$store.dispatch("saveInfo", this.currentEvent);
-      } else {
-        this.$store.dispatch("saveUpdateInfo", this.currentEvent);
+    data() {
+      return {
+        selected: 'A',
+        options: [
+          { item: 'A', name: 'None' },
+          { item: 'B', name: 'Work' },
+          { item: 'C', name: 'Sport' },
+          { item: 'D', name: 'Fun' }
+        ]
       }
+    },
 
-      this.$emit("ok");
+    props: {
+      show: Boolean,
+      event: null
     },
-    onClose() {
-      this.$emit("close");
-    },
-    onCancel() {
-      this.$emit("cancel");
-    },
-  },
-  computed: {
-    currentEvent() {
-      const newEvent = {
-        date: this.$route.params.day,
-        title: null,
-        startTime: "09:00",
-        endTime: "10:00",
-        text: null,
-        id: null,
-        share: null,
-      };
 
-      return this.event == null ? newEvent : Object.assign({}, this.event);
+    methods: {
+      saveEvent() {
+        if (this.currentEvent.id === null) {
+          this.currentEvent.id =
+            this.currentEvent.date +
+            this.currentEvent.text +
+            this.currentEvent.title +
+            this.currentEvent.startTime
+          this.$store.dispatch('saveInfo', this.currentEvent)
+        } else {
+          this.$store.dispatch('saveUpdateInfo', this.currentEvent)
+        }
+
+        this.$emit('ok')
+      },
+      onClose() {
+        this.$emit('close')
+      },
+      onCancel() {
+        this.$emit('cancel')
+      }
     },
-  },
-});
+    computed: {
+      currentEvent() {
+        const newEvent = {
+          date: this.$route.params.day,
+          title: null,
+          startTime: '09:00',
+          endTime: '10:00',
+          text: null,
+          id: null,
+          share: null
+        }
+
+        return this.event == null ? newEvent : Object.assign({}, this.event)
+      }
+    }
+  })
 </script>
+<style></style>

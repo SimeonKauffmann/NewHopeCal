@@ -9,7 +9,7 @@
           :key="event.id"
           :style="gridAreaStart[index] + gridAreaEnd[index]"
         >
-          <div id="note">
+          <div id="note" :class="eventTypeClass(event)">
             <h3 id="title">{{ event.title }}</h3>
             <ul>
               <li>
@@ -79,6 +79,17 @@
     },
 
     methods: {
+      eventTypeClass(event) {
+        if (event.type === 'Work') {
+          return 'workColor'
+        } else if (event.type === 'Sport') {
+          return 'sportColor'
+        } else if (event.type === 'Fun') {
+          return 'funColor'
+        }
+        return 'noneColor'
+      },
+
       editEvent(event) {
         this.currentEvent = event
         this.modalShow = true
@@ -97,7 +108,8 @@
           startTime: '09:00',
           endTime: '10:00',
           text: null,
-          id: null
+          id: null,
+          type: 'None'
         }
         this.modalShow = true
       },
@@ -229,7 +241,6 @@
   }
 
   #note {
-    background-color: rgba(229, 152, 118, 1);
     padding: 2rem;
     border-radius: 2%;
   }
@@ -260,5 +271,17 @@
   }
   #name {
     margin: 15px 15px;
+  }
+  .noneColor {
+    background-color: rgba(229, 152, 118, 1);
+  }
+  .workColor {
+    background-color: rgba(96, 139, 150, 1);
+  }
+  .sportColor {
+    background-color: rgba(132, 146, 131, 1);
+  }
+  .funColor {
+    background-color: rgb(246, 189, 96);
   }
 </style>

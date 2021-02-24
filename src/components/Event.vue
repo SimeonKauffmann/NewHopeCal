@@ -36,16 +36,15 @@
 
       <div>
         <b-form-radio-group
-          v-model="selected"
+          id="event-type"
+          v-model="currentEvent.type"
           :options="options"
           class="mb-3"
           value-field="item"
           text-field="name"
           disabled-field="notEnabled"
         ></b-form-radio-group>
-        <div class="mt-3">
-          Selected: <strong>{{ selected }}</strong>
-        </div>
+        <div class="mt-3"></div>
       </div>
     </b-modal>
   </div>
@@ -58,12 +57,11 @@
 
     data() {
       return {
-        selected: 'A',
         options: [
-          { item: 'A', name: 'None' },
-          { item: 'B', name: 'Work' },
-          { item: 'C', name: 'Sport' },
-          { item: 'D', name: 'Fun' }
+          { item: 'None', name: 'None' },
+          { item: 'Work', name: 'Work' },
+          { item: 'Sport', name: 'Sport' },
+          { item: 'Fun', name: 'Fun' }
         ]
       }
     },
@@ -104,7 +102,8 @@
           endTime: '10:00',
           text: null,
           id: null,
-          share: null
+          share: null,
+          type: 'None'
         }
 
         return this.event == null ? newEvent : Object.assign({}, this.event)
@@ -112,4 +111,18 @@
     }
   })
 </script>
-<style></style>
+<style>
+  #event-type_BV_option_0 + label::before {
+    background-color: rgba(229, 152, 118, 1);
+  }
+  #event-type_BV_option_1 + label::before {
+    background-color: rgba(96, 139, 150, 1);
+  }
+  #event-type_BV_option_2 + label::before {
+    background-color: rgba(132, 146, 131, 1);
+  }
+
+  #event-type_BV_option_3 + label::before {
+    background-color: rgb(246, 189, 96);
+  }
+</style>

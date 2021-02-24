@@ -41,183 +41,175 @@
 </template>
 
 <script>
-import router from "../router";
-import Vue from "vue";
-import moment from "moment";
-import Popup from "@/components/Popup.vue";
-import { mapState } from "vuex";
+  import router from '../router'
+  import moment from 'moment'
+  import Popup from '@/components/Popup.vue'
+  import { mapState } from 'vuex'
 
-export default {
-  name: "Home",
+  export default {
+    name: 'Home',
 
-  created() {
-    if (!this.$store.state.userName) {
-      while (!this.$store.state.userName) {
-        this.$store.commit("setUserName", prompt("Choose a username"));
-      }
-    } else {
-      Vue.axios
-        .get(`${this.$store.state.serverAddress}${this.$store.state.userName}`)
-        .then((events) => {
-          this.$store.commit("setEvents", events.data);
-        });
-    }
-
-    this.$store.dispatch("fetchAll");
-  },
-
-  data() {
-    return {
-      popupTriggers: false,
-    };
-  },
-
-  methods: {
-    time() {
-      setTimeout(() => {
-        this.popupTriggers = true;
-      }, 500);
-    },
-    openDayView(date) {
-      router.push({ path: `/day/${date}` });
-      this.$store.commit("setSelectedDay", {
-        selectedFormatted: moment(date).format("dddd, MMMM Do, YYYY"),
-      });
-    },
-    closeButton() {
-      this.popupTriggers = false;
-    },
-  },
-
-  mounted() {
-    this.time();
-  },
-
-  components: {
-    Popup,
-    //VueXStore
-  },
-
-  computed: {
-    ...mapState({
-      quote: (state) => state.quote,
-    }),
-    events() {
-      let todayEvents = [];
-      this.$store.state.events.forEach((element) => {
-        if (element.date === this.$store.state.today) {
-          let startNumber = parseInt(element.startTime.slice(0, 2));
-          element.startNumber = startNumber;
-          todayEvents.push(element);
+    created() {
+      if (!this.$store.state.userName) {
+        while (!this.$store.state.userName) {
+          this.$store.commit('setUserName', prompt('Choose a username'))
         }
-      });
-
-      todayEvents.sort(function (a, b) {
-        return a.startNumber - b.startNumber;
-      });
-
-      if (todayEvents.length === 0) {
-        todayEvents = null;
       }
-
-      return todayEvents;
+      this.$store.dispatch('fetchAll')
     },
-  },
-};
+
+    data() {
+      return {
+        popupTriggers: false
+      }
+    },
+
+    methods: {
+      time() {
+        setTimeout(() => {
+          this.popupTriggers = true
+        }, 500)
+      },
+      openDayView(date) {
+        router.push({ path: `/day/${date}` })
+        this.$store.commit('setSelectedDay', {
+          selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
+        })
+      },
+      closeButton() {
+        this.popupTriggers = false
+      }
+    },
+
+    mounted() {
+      this.time()
+    },
+
+    components: {
+      Popup
+      //VueXStore
+    },
+
+    computed: {
+      ...mapState({
+        quote: state => state.quote
+      }),
+      events() {
+        let todayEvents = []
+        this.$store.state.events.forEach(element => {
+          if (element.date === this.$store.state.today) {
+            let startNumber = parseInt(element.startTime.slice(0, 2))
+            element.startNumber = startNumber
+            todayEvents.push(element)
+          }
+        })
+
+        todayEvents.sort(function(a, b) {
+          return a.startNumber - b.startNumber
+        })
+
+        if (todayEvents.length === 0) {
+          todayEvents = null
+        }
+
+        return todayEvents
+      }
+    }
+  }
 </script>
 
 <style scoped lang="scss">
-/*===============
+  /*===============
     Typografi
 ============= */
-h1 {
-  text-align: center;
-  padding: 50px 0px;
-}
-
-h2 {
-  padding: 50px;
-  text-align: center;
-}
-
-h3 {
-  padding-left: 20px;
-}
-
-p {
-  text-align: left;
-  margin: 15px;
-}
-
-/* =================
-       Layout
-    ================*/
-.home-col {
-  margin: 15px 0px;
-}
-.img-container {
-  width: 200px;
-  height: 200px;
-}
-img {
-  width: 100%;
-  height: 100%;
-}
-
-div {
-  border-spacing: 10px;
-}
-
-.box1 {
-  width: 400px;
-  padding: 10px;
-  background: #849283;
-  border: 1px solid white;
-  border-radius: 40px;
-  margin: 2vh auto;
-}
-
-.box2 {
-  width: 400px;
-  padding: 10px;
-  background: #828282;
-  border: 1px solid white;
-  border-radius: 40px;
-  margin: 2vh auto;
-}
-
-.box3 {
-  width: 400px;
-  padding: 10px;
-  background: #e59876;
-  border: 1px solid white;
-  border-radius: 40px;
-  margin: 2vh auto;
-}
-
-.quote {
-  position: absolute;
-  top: 20vh;
-  left: 10vw;
-
-  button {
-    position: absolute;
-    justify-content: center;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 40px;
-    color: black;
-    padding: 15px 32px;
-    margin: 0px;
-    top: 70%;
-    left: 70%;
+  h1 {
     text-align: center;
-    font-size: 16px;
+    padding: 50px 0px;
+  }
+
+  h2 {
+    padding: 50px;
+    text-align: center;
+  }
+
+  h3 {
+    padding-left: 20px;
   }
 
   p {
-    font-style: italic;
-    text-align: center;
+    text-align: left;
+    margin: 15px;
   }
-}
+
+  /* =================
+       Layout
+    ================*/
+  .home-col {
+    margin: 15px 0px;
+  }
+  .img-container {
+    width: 200px;
+    height: 200px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  div {
+    border-spacing: 10px;
+  }
+
+  .box1 {
+    width: 400px;
+    padding: 10px;
+    background: #849283;
+    border: 1px solid white;
+    border-radius: 40px;
+    margin: 2vh auto;
+  }
+
+  .box2 {
+    width: 400px;
+    padding: 10px;
+    background: #828282;
+    border: 1px solid white;
+    border-radius: 40px;
+    margin: 2vh auto;
+  }
+
+  .box3 {
+    width: 400px;
+    padding: 10px;
+    background: #e59876;
+    border: 1px solid white;
+    border-radius: 40px;
+    margin: 2vh auto;
+  }
+
+  .quote {
+    position: absolute;
+    top: 20vh;
+    left: 10vw;
+
+    button {
+      position: absolute;
+      justify-content: center;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 40px;
+      color: black;
+      padding: 15px 32px;
+      margin: 0px;
+      top: 70%;
+      left: 70%;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    p {
+      font-style: italic;
+      text-align: center;
+    }
+  }
 </style>

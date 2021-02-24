@@ -1,29 +1,48 @@
 <template>
   <div>
 
-    <!-- Mobile version -->
     <div id="mobileVersion">
-      <div id="month" class="row">
-        <div class="col-6">
-          <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
-        </div>
-
-        <div class="col-3">
-          <b-button @click="backToday" style="margin-top: 25px">Today</b-button>
-        </div>
-
-        <div class="col-3">
-        </div>
-
+      <div class="display-week">
+        <h1>{{ days[0].month }}, {{ `week ${days[0].week}` }}</h1>
       </div>
-
-      <div class="arrows">
-        <b-icon
-          icon="arrow-up-short"
-          animation="fade"
-          font-scale="4"
+      <div class="flex">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16"
           @click="pastDates"
-        ></b-icon>
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+          />
+        </svg>
+        <div class="button">
+          <b-button
+            v-if="days[0].week != today"
+            @click="backToday"
+            variant="light"
+            class="today"
+            >Today</b-button
+          >
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          fill="currentColor"
+          class="bi bi-arrow-right"
+          viewBox="0 0 16 16"
+          @click="futureDates"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+          />
+        </svg>
       </div>
 
       <div class="week-container">
@@ -39,15 +58,6 @@
           </div>
         </div>
       </div>
-
-      <div class="arrows">
-        <b-icon
-          icon="arrow-down-short"
-          animation="fade"
-          font-scale="4"
-          @click="futureDates"
-        ></b-icon>
-      </div>
     </div>
 
     <!-- Desktop version -->
@@ -55,7 +65,15 @@
       <div id="month" class="row">
         
         <div class="col-3">
-          <b-button @click="backToday" style="padding: 10px; margin-top: 5px">Today</b-button>
+          <div class="button">
+          <b-button
+            v-if="days[0].week != today"
+            @click="backToday"
+            variant="light"
+            class="today"
+            >Today</b-button
+          >
+        </div>
         </div>
         <div class="col-6">
           <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
@@ -109,87 +127,99 @@
 
       
 
-  
   </div>
 </template>
 
 <script>
-import router from "../router";
-import moment from "moment";
+  import router from '../router'
+  import moment from 'moment'
 
-export default {
-  computed: {
-    days() {
-      const calander = this.$store.state.publicHoliday;
+  export default {
+    computed: {
+      days() {
+        const calander = this.$store.state.publicHoliday
 
-      const days = [];
-      for (let x = this.startDate; x < this.startDate + 7; x++) {
-        // Startdate used here to compute when the loop starts -Simeon
-        let date = moment().add(x, "days").format("YYYY[-]MM[-]DD");
+        const days = []
+        for (let x = this.startDate; x < this.startDate + 7; x++) {
+          // Startdate used here to compute when the loop starts -Simeon
+          let date = moment()
+            .add(x, 'days')
+            .format('YYYY[-]MM[-]DD')
 
-        // Added to check Date if holiday confirmed -Patrik
-        let checkDate = moment().add(x, "days").format("YYYY-MM-DD");
-        let specialDay = "";
-        for (let i = 0; i < calander.length; i++) {
-          if (calander[i].date === checkDate) {
-            specialDay = calander[i].localName;
-            i = calander.length;
-          } else {
-            i++;
+          // Added to check Date if holiday confirmed -Patrik
+          let checkDate = moment()
+            .add(x, 'days')
+            .format('YYYY-MM-DD')
+          let specialDay = ''
+          for (let i = 0; i < calander.length; i++) {
+            if (calander[i].date === checkDate) {
+              specialDay = calander[i].localName
+              i = calander.length
+            } else {
+              i++
+            }
           }
+
+          // Find events on days, boolean -Simeon
+          let event = this.$store.state.events.find(
+            event => event.date === date
+          )
+            ? true
+            : false
+
+          // Creating day object - Simeon
+          let dayObject = {
+            dayName:
+              moment()
+                .add(x, 'days')
+                .format('dddd Do MMMM') +
+              ' ' +
+              specialDay,
+            date: date,
+            event: event,
+            week: moment()
+              .add(x, 'days')
+              .format('w'),
+            month: moment()
+              .add(x, 'days')
+              .format('MMMM')
+          }
+
+          days.push(dayObject)
         }
-
-        // Find events on days, boolean -Simeon
-        let event = this.$store.state.events.find(
-          (event) => event.date === date
-        )
-          ? true
-          : false;
-
-        // Creating day object - Simeon
-        let dayObject = {
-          dayName:
-            moment().add(x, "days").format("dddd Do MMMM") + " " + specialDay,
-          date: date,
-          event: event,
-          week: moment().add(x, "days").format("w"),
-          month: moment().add(x, "days").format("MMMM"),
-        };
-
-        days.push(dayObject);
+        return days
       }
-      return days;
     },
-  },
-  data() {
-    return {
-      startDate: 0,
-    };
-  },
-  methods: {
-    // Methods to change the startdate. used in the computed property to make a list of days -Simeon
-    pastDates() {
-      this.startDate -= 7;
+    data() {
+      return {
+        startDate: 0,
+        today: moment().format('w')
+      }
     },
-    futureDates() {
-      this.startDate += 7;
+    methods: {
+      // Methods to change the startdate. used in the computed property to make a list of days -Simeon
+      pastDates() {
+        this.startDate -= 7
+      },
+      futureDates() {
+        this.startDate += 7
+      },
+      backToday() {
+        this.startDate = 0
+      }, // Open the day view -Simeon
+      openDayView(date) {
+        router.push({ path: `/day/${date}` })
+        this.$store.commit('setSelectedDay', {
+          // Set the selected day in Vuex -Simeon
+          selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
+        })
+      }
     },
-    backToday() {
-      this.startDate = 0;
-    }, // Open the day view -Simeon
-    openDayView(date) {
-      router.push({ path: `/day/${date}` });
-      this.$store.commit("setSelectedDay", {
-        // Set the selected day in Vuex -Simeon
-        selectedFormatted: moment(date).format("dddd, MMMM Do, YYYY"),
-      });
-    },
-  },
 
-  mounted() {
-    this.$store.dispatch("fetchAll");
-  },
-};
+    mounted() {
+      this.$store.dispatch('fetchAll')
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -214,7 +244,7 @@ export default {
 
 .week-container {
   background-color: #608b96;
-  width: 100%;
+  width: 95vw;
   height: 100%;
   margin: 40px auto 10px;
   .days {
@@ -225,19 +255,44 @@ export default {
     border: 2px #d3d1c2;
     border-radius: 15px;
     box-shadow: 2px 2px 4px #000000;
+  
     .text {
       margin: 5px;
     }
-    .event-marker {
-      width: 130px;
-      height: 30px;
-      background-color: #e59876;
-      border-radius: 30px;
-      text-align: center;
-      float: right;
-    }
   }
 }
+
+.flex {
+    display: flex;
+    margin-left: 30px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    .button {
+      flex-grow: 3;
+      display: flex;
+      max-height: 20px;
+      
+    }
+}
+
+.today {
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 4px 4px 3px rgba(88, 87, 75, 0.5);
+      }
+
+.display-week {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+.arrows {
+    margin: 0px auto 2px;
+    width: 60px;
+}
+  
+
 
 
 
@@ -246,6 +301,9 @@ export default {
   #mobileVersion{display: none;}
   #desktopVersion{display: block;}
 
+  .week-container{
+    width: 100%;
+  }
   #month{
     position: unset;
   }
@@ -265,4 +323,5 @@ export default {
   }
   
 }
+
 </style>

@@ -126,6 +126,7 @@ export default {
           width: '60%'
         };
       }
+
       todayEvents.sort(function(a, b) {
         return a.startNumber - b.startNumber;
       });
@@ -137,6 +138,9 @@ export default {
     }
   },
   mounted() {
+    if (!this.$store.state.selectedDay) {
+      this.$router.push('/');
+    }
     this.$store.dispatch('fetchAll');
     this.$store.state.publicHoliday.forEach((element) => {
       if (element.date === this.$route.params.day) {

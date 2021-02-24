@@ -42,7 +42,6 @@
 
 <script>
 import router from "../router";
-import Vue from "vue";
 import moment from "moment";
 import Popup from "@/components/Popup.vue";
 import { mapState } from "vuex";
@@ -55,14 +54,7 @@ export default {
       while (!this.$store.state.userName) {
         this.$store.commit("setUserName", prompt("Choose a username"));
       }
-    } else {
-      Vue.axios
-        .get(`${this.$store.state.serverAddress}${this.$store.state.userName}`)
-        .then((events) => {
-          this.$store.commit("setEvents", events.data);
-        });
     }
-
     this.$store.dispatch("fetchAll");
   },
 

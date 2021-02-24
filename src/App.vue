@@ -7,11 +7,12 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from "@/components/Sidebar.vue";
+
 export default {
   components: {
-    Sidebar
-  }
+    Sidebar,
+  },
 };
 </script>
 
@@ -22,7 +23,7 @@ html {
 #app {
   background-color: #608b96;
   margin: 0;
-  font-family: 'Cabin', Arial, sans-serif;
+  font-family: "Cabin", Arial, sans-serif;
   font-size: 15px;
   color: rgb(49, 49, 49);
 }
@@ -47,10 +48,10 @@ h3 {
 }
 </style>
 <script>
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from "@/components/Sidebar.vue";
 export default {
   components: {
-    Sidebar
-  }
+    Sidebar,
+  },
 };
 </script>

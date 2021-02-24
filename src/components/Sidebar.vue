@@ -32,7 +32,18 @@
 </template>
 
 <script>
+import Vue from "vue";
+
 export default {
+  mounted() {
+    if (this.$store.state.userName) {
+      Vue.axios
+        .get(`${this.$store.state.serverAddress}${this.$store.state.userName}`)
+        .then((events) => {
+          this.$store.commit("setEvents", events.data);
+        });
+    }
+  },
   name: "Sidebar",
 };
 </script>

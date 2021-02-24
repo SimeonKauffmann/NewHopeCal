@@ -12,19 +12,23 @@
         v-model="currentEvent.title"
         type="text"
         placeholder="Event Name.."
-        style="margin-bottom:1rem"
+        style="margin-bottom: 1rem"
       />
       <br />
-      <label style="margin-right:1rem">
+      <label style="margin-right: 1rem">
         Starts:
         <input v-model="currentEvent.startTime" type="time" />
       </label>
-      <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
+      <label> Ends: <input v-model="currentEvent.endTime" type="time" /></label>
+      <label for="">
+        Share event? (separated by spaces)
+        <input type="text" v-model="currentEvent.share" />
+      </label>
       <div>
         <label>
           <textarea
             v-model="currentEvent.text"
-            style="margin-top:0.5rem"
+            style="margin-top: 0.5rem"
             placeholder="Write something.."
           ></textarea>
         </label>
@@ -51,9 +55,11 @@ export default Vue.extend({
           this.currentEvent.text +
           this.currentEvent.title +
           this.currentEvent.startTime;
+        this.$store.dispatch("saveInfo", this.currentEvent);
+      } else {
+        this.$store.dispatch("saveUpdateInfo", this.currentEvent);
       }
 
-      this.$store.dispatch("saveInfo", this.currentEvent);
       this.$emit("ok");
     },
     onClose() {
@@ -72,6 +78,7 @@ export default Vue.extend({
         endTime: "10:00",
         text: null,
         id: null,
+        share: null,
       };
 
       return this.event == null ? newEvent : Object.assign({}, this.event);

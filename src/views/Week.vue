@@ -1,14 +1,20 @@
 <template>
   <div>
+
+    <!-- Mobile version -->
     <div id="mobileVersion">
       <div id="month" class="row">
         <div class="col-6">
           <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
         </div>
+
         <div class="col-3">
           <b-button @click="backToday" style="margin-top: 25px">Today</b-button>
         </div>
-        <div class="col-3"></div>
+
+        <div class="col-3">
+        </div>
+
       </div>
 
       <div class="arrows">
@@ -19,6 +25,7 @@
           @click="pastDates"
         ></b-icon>
       </div>
+
       <div class="week-container">
         <div
           class="days"
@@ -32,6 +39,7 @@
           </div>
         </div>
       </div>
+
       <div class="arrows">
         <b-icon
           icon="arrow-down-short"
@@ -42,9 +50,66 @@
       </div>
     </div>
 
+    <!-- Desktop version -->
     <div id="desktopVersion">
-      <h2> Hej </h2>
+      <div id="month" class="row">
+        
+        <div class="col-3">
+          <b-button @click="backToday" style="padding: 10px; margin-top: 5px">Today</b-button>
+        </div>
+        <div class="col-6">
+          <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
+        </div>
+        <div class="col-3"></div>
+        </div>
+      
+      <div class="row">
+
+        <div class="col-2">
+          <div class="arrows-left">
+            <b-icon
+                icon="arrow-left-short"
+                animation="fade"
+                font-scale="8"
+                @click="pastDates"
+            ></b-icon>
+          </div>
+        </div>
+
+        <div class="col-8">
+          <div class="week-container">
+          <div
+            class="days"
+            v-for="day in days"
+            :key="day.date"
+            @click="openDayView(day.date)"
+          >
+            <div class="text">
+              <p>{{ day.dayName }}</p>
+              <div class="event-marker" v-if="day.event">Events</div>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="arrows-right">
+            <b-icon
+                icon="arrow-right-short"
+                animation="fade"
+                font-scale="8"
+                @click="futureDates"
+            ></b-icon>
+          </div>
+        </div>
+
+      </div>
+      
     </div>
+
+      
+
+  
   </div>
 </template>
 
@@ -128,6 +193,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+#mobileVersion{display: block;}
+#desktopVersion{display: none;}
+
 #month {
   width: 100vw;
   height: 100px;
@@ -138,18 +207,19 @@ export default {
   box-shadow: 2px 2px 4px #000000;
   z-index: 1;
 }
-.arrows {
+.arrows, .arrows-left, .arrows-right {
   margin: 100px auto 50px;
   width: 60px;
 }
+
 .week-container {
   background-color: #608b96;
-  width: 95vw;
+  width: 100%;
   height: 100%;
   margin: 40px auto 10px;
   .days {
     margin: 2.5vw auto;
-    width: 95vw;
+    width: 100%;
     height: 60px;
     background-color: white;
     border: 2px #d3d1c2;
@@ -170,9 +240,28 @@ export default {
 }
 
 
-@media (min-width: 900px) {
-  #mobileVersion{
-    display: none;
+
+// Change view look when over 960 px width.
+@media (min-width: 960px) {
+  #mobileVersion{display: none;}
+  #desktopVersion{display: block;}
+
+  #month{
+    position: unset;
+  }
+
+  #month{
+    text-align: center;
+    padding: 20px;
+  }
+ 
+  .arrows-left {position: fixed; left: 0px;}
+  .arrows-right{position: fixed; right: 55px}
+
+  #desktopVersion{
+    grid-template-columns: 120px 4fr 120px;
+    grid-template-areas:
+    none;
   }
   
 }

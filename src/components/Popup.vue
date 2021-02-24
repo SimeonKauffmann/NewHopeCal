@@ -7,10 +7,9 @@
 </template>
 
 <script>
-export default {
-  props: ['TogglePopup']
-  
-}
+  export default {
+    props: ['TogglePopup']
+  }
 </script>
 
 <style lang="scss" scoped>

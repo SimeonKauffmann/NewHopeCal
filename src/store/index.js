@@ -1,11 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import moment from 'moment';
-import axios from 'axios';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import moment from 'moment'
+import axios from 'axios'
 
-
-
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
@@ -17,21 +15,19 @@ export default new Vuex.Store({
     // events: JSON.parse(localStorage.getItem('events') || '[]')
     events: [],
     userName: localStorage.getItem('userName') || null,
-    serverAddress: "http://azureadsimeonkauffmann-fcccfdf1.localhost.run/events/"
+    serverAddress:
+      'http://azureadsimeonkauffmann-88931a28.localhost.run/events/'
   },
-
 
   mutations: {
     importHoliday(state, publicHoliday) {
-      state.publicHoliday = publicHoliday;
+      state.publicHoliday = publicHoliday
     },
 
     setUserName(state, userName) {
       state.userName = userName
       localStorage.setItem('userName', userName)
-      Vue.axios.get(
-        `${state.serverAddress}newuser/${userName}`
-      );
+      Vue.axios.get(`${state.serverAddress}newuser/${userName}`)
     },
 
     setEvents(state, data) {
@@ -39,43 +35,61 @@ export default new Vuex.Store({
     },
 
     setYear(state, year) {
-      state.year = year;
+      state.year = year
     },
 
-
     setSelectedDay(state, ctx) {
-      state.selectedDay = ctx;
+      state.selectedDay = ctx
     },
 
     setQuote(state, quoteList) {
-      const number = Math.floor(Math.random() * (quoteList.length - 0));
-      const quote = quoteList[number].text;
+      const number = Math.floor(Math.random() * (quoteList.length - 0))
+      const quote = quoteList[number].text
 
-      state.quote = quote;
+      state.quote = quote
     },
 
-    async setInfo(state, info) {
+    getEvents(state) {
+      Vue.axios.get(`${state.serverAddress}${state.userName}`).then(events => {
+        this.commit('setEvents', events.data)
+      })
+    },
+
+    updateInfo(state, info) {
+      Vue.axios
+        .put(`${state.serverAddress}${state.userName}/${info.id}`, info)
+        .then(() => this.commit('getEvents'))
+
+      if (info.share) {
+        let names = info.share.split(' ')
+        for (let x = 0; x < names.length; x++) {
+          Vue.axios.post(`${state.serverAddress}${names[x]}`, info)
+        }
+      }
+    },
+
+    setInfo(state, info) {
       // state.events = state.events.filter(function (e) {
       //   return e.id != info.id;
       // });
 
-      Vue.axios.post(`${state.serverAddress}${state.userName}`, info)
-      await Vue.axios
-        .get(`${state.serverAddress}${state.userName}`)
-        .then((events) => {
-          this.commit("setEvents", events.data)
-        })
+      Vue.axios
+        .post(`${state.serverAddress}${state.userName}`, info)
+        .then(() => this.commit('getEvents'))
+
+      if (info.share) {
+        let names = info.share.split(' ')
+        for (let x = 0; x < names.length; x++) {
+          Vue.axios.post(`${state.serverAddress}${names[x]}`, info)
+        }
+      }
 
       // localStorage.setItem('events', JSON.stringify(state.events));
     },
     deleteEvent(state, id) {
-
-      Vue.axios.delete(`${this.state.serverAddress}${this.state.userName}/${id}`)
-        .then(Vue.axios
-          .get(`${this.$store.state.serverAddress}${this.state.userName}`)
-          .then((events) => {
-            this.commit("setEvents", events.data)
-          }))
+      Vue.axios
+        .delete(`${state.serverAddress}${state.userName}/${id}`)
+        .then(() => this.commit('getEvents'))
 
       // state.events = state.events.filter(function (e) {
       //   return e.id != id;
@@ -91,20 +105,23 @@ export default new Vuex.Store({
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         ),
         axios.get('https://type.fit/api/quotes')
-      ]);
+      ])
 
-      commit('importHoliday', holidays.data);
-      commit('setQuote', quotes.data);
+      commit('importHoliday', holidays.data)
+      commit('setQuote', quotes.data)
     },
 
     saveInfo(context, info) {
-      context.commit('setInfo', info);
+      context.commit('setInfo', info)
+    },
 
+    saveUpdateInfo(context, info) {
+      context.commit('updateInfo', info)
     },
 
     deleteEvent(context, id) {
-      context.commit('deleteEvent', id);
+      context.commit('deleteEvent', id)
     }
   },
   modules: {}
-});
+})

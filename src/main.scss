@@ -1,32 +1,31 @@
 $theme-colors: (
-  "primary": rgba(96, 139, 150, 1),
-  "danger": rgba(229, 152, 118, 1),
-  "secondry": rgba(211, 209, 194, 1),
-  "info": rgba(132, 146, 131, 1),
-  "blue": rgba(0, 0, 0, 0.5),
-  "light": #d3d1c2,
-  "warning": rgb(246, 189, 96),
+  'primary': rgba(96, 139, 150, 1),
+  'danger': rgba(229, 152, 118, 1),
+  'secondry': rgba(211, 209, 194, 1),
+  'info': rgba(132, 146, 131, 1),
+  'blue': rgba(0, 0, 0, 0.5),
+  'light': #d3d1c2,
+  'warning': rgb(246, 189, 96)
 );
 $input-bg: rgba(96, 139, 150, 1);
 $body-bg: rgba(96, 139, 150, 1);
 
-@import "node_modules/bootstrap/scss/bootstrap.scss";
-@import "node_modules/bootstrap-vue/src/index.scss";
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
 
 // Font numbers
 .numbers-small {
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 18px;
 }
 .numbers-large {
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-weight: 900;
 }
 
 //  ============
 // Calender Animations
 //  ============
-
 // Nav *1
 .b-calendar-nav {
   animation: 2s ease-in 0s 1 fadeIn-global-nav;
@@ -48,8 +47,7 @@ $body-bg: rgba(96, 139, 150, 1);
   .text-dark,
   span,
   .btn-outline-secondary {
-    font-family: "Ubuntu", sans-serif;
-    // *4
+    font-family: 'Ubuntu', sans-serif; // *4
     animation: 0.5s ease-in 0s 1 fadeIn-global-numbers;
   }
 
@@ -126,5 +124,36 @@ $body-bg: rgba(96, 139, 150, 1);
   }
   to {
     opacity: 1;
+  }
+}
+@media screen and (min-width: 900px) {
+  .b-calendar .b-calendar-grid-body .col[data-date] .btn {
+    margin: 15px auto;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .b-calendar .b-calendar-grid-body .col[data-date] .btn {
+    font-size: 1rem;
+  }
+  .no-gutters {
+    margin: 2rem;
+  }
+  .text-truncate {
+    font-size: 2rem;
+  }
+  .font-weight-bold {
+    font-weight: 700 !important;
+    font-size: 2rem;
+  }
+  .container {
+    max-width: 150rem;
+  }
+
+  .calendar-main div {
+    margin: 1rem;
+  }
+  .b-calendar .b-calendar-grid .row {
+    margin: 3rem;
   }
 }

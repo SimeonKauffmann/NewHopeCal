@@ -19,7 +19,7 @@
         Starts:
         <input v-model="currentEvent.startTime" type="time" />
       </label>
-      <label> Ends: <input v-model="currentEvent.endTime" type="time" /></label>
+      <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
       <label for="">
         Share event? (separated by spaces)
         <input type="text" v-model="currentEvent.share" />
@@ -33,6 +33,20 @@
           ></textarea>
         </label>
       </div>
+
+      <div>
+        <b-form-radio-group
+          v-model="selected"
+          :options="options"
+          class="mb-3"
+          value-field="item"
+          text-field="name"
+          disabled-field="notEnabled"
+        ></b-form-radio-group>
+        <div class="mt-3">
+          Selected: <strong>{{ selected }}</strong>
+        </div>
+      </div>
     </b-modal>
   </div>
 </template>
@@ -41,6 +55,18 @@
 import Vue from "vue";
 export default Vue.extend({
   name: "Event",
+
+  data() {
+    return {
+      selected: "A",
+      options: [
+        { item: "A", name: "None" },
+        { item: "B", name: "Work" },
+        { item: "C", name: "Sport" },
+        { item: "D", name: "Fun" },
+      ],
+    };
+  },
 
   props: {
     show: Boolean,

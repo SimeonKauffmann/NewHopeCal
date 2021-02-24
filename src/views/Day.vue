@@ -4,7 +4,11 @@
     <h2 id="name">{{ redDay }}</h2>
     <div id="gridHolder">
       <b-card-group deck class="container">
-        <b-card v-for="event in getTodaysEvents()" :key="event.id">
+        <b-card
+          v-for="(event, index) in getTodaysEvents()"
+          :key="event.id"
+          :style="gridAreaStart[index] + gridAreaEnd[index]"
+        >
           <div id="note">
             <h3 id="title">{{ event.title }}</h3>
             <ul>
@@ -59,16 +63,18 @@
 </template>
 
 <script>
-import Event from "@/components/Event.vue";
+import Event from '@/components/Event.vue';
 
 export default {
-  name: "Day",
+  name: 'Day',
   data() {
     return {
       modalShow: false,
       editShow: false,
       currentEvent: null,
       redDay: null,
+      gridAreaStart: [],
+      gridAreaEnd: []
     };
   },
 
@@ -88,10 +94,10 @@ export default {
       this.currentEvent = {
         date: this.$route.params.day,
         title: null,
-        startTime: "09:00",
-        endTime: "10:00",
+        startTime: '09:00',
+        endTime: '10:00',
         text: null,
-        id: null,
+        id: null
       };
       this.modalShow = true;
     },
@@ -112,16 +118,14 @@ export default {
         todayEvents[x].startNumber = startNumber;
 
         let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2));
-
         todayEvents[x].styles = {
           backgroundColor: todayEvents[x].color,
           height: `${(endNumber - startNumber) * 2}rem`,
           marginTop: `${startNumber * 2}rem`,
-          position: "absolute",
-          width: "60%",
+          position: 'absolute',
+          width: '60%'
         };
       }
-
       todayEvents.sort(function(a, b) {
         return a.startNumber - b.startNumber;
       });
@@ -129,24 +133,62 @@ export default {
       return todayEvents;
     },
     removeAction(id) {
-      this.$store.dispatch("deleteEvent", id);
-    },
+      this.$store.dispatch('deleteEvent', id);
+    }
   },
   mounted() {
-    this.$store.dispatch("fetchAll");
+    this.$store.dispatch('fetchAll');
     this.$store.state.publicHoliday.forEach((element) => {
       if (element.date === this.$route.params.day) {
         this.redDay = element.name;
       }
     });
+    this.$store.state.events.forEach((element) => {
+      if (element.date === this.$route.params.day) {
+        this.gridAreaStart.push(
+          `grid-row-start:${element.startTime.slice(0, 2)};`
+        );
+        this.gridAreaEnd.push(`grid-row-end:${element.endTime.slice(0, 2)};`);
+        this.gridAreaStart.reverse();
+        this.gridAreaEnd.reverse();
+      }
+    });
   },
-  components: { Event },
+  components: { Event }
 };
 </script>
 
 <style lang="scss" scoped>
 .container {
   margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(24, auto);
+  grid-template-areas:
+    '00 00 00 00'
+    '01 01 01 01'
+    '02 02 02 02'
+    '03 03 03 03'
+    '04 04 04 04'
+    '05 05 05 05'
+    '06 06 06 06'
+    '07 07 07 07'
+    '08 08 08 08'
+    '09 09 09 09'
+    '10 10 10 10'
+    '11 11 11 11'
+    '12 12 12 12'
+    '13 13 13 13'
+    '14 14 14 14'
+    '15 15 15 15'
+    '16 16 16 16'
+    '17 17 17 17'
+    '18 18 18 18'
+    '19 19 19 19'
+    '20 20 20 20'
+    '21 21 21 21'
+    '22 22 22 22'
+    '23 23 23 23';
 }
 .text-wrapper {
   background: #fff;
@@ -167,7 +209,7 @@ ul {
     margin-bottom: 4px;
   }
   li::before {
-    content: url("../assets/clock.svg");
+    content: url('../assets/clock.svg');
     top: 6px;
     left: -20px;
     position: absolute;

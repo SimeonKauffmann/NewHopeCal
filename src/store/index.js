@@ -17,7 +17,7 @@ export default new Vuex.Store({
     // events: JSON.parse(localStorage.getItem('events') || '[]')
     events: [],
     userName: localStorage.getItem('userName') || null,
-    serverAddress: "http://azureadsimeonkauffmann-fcccfdf1.localhost.run/events/"
+    serverAddress: "http://azureadsimeonkauffmann-88931a28.localhost.run/events/"
   },
 
 

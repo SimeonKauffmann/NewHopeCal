@@ -152,22 +152,54 @@
 </script>
 
 <style lang="scss" scoped>
+#month {
+  margin: 0 auto;
+  margin-top: 100px;
+  height: 100px;
+  width: 100vw;
+  background-color: #608b96;
+  box-shadow: 2px 2px 4px #000000;
+}
+.arrows {
+  margin: 100px auto 50px;
+  width: 60px;
+}
+.week-container {
+  background-color: #608b96;
+  width: 95vw;
+  height: 100%;
+  margin: 40px auto 10px;
+}
+  .days {
+    margin: 2.5vw auto;
+    width: 95vw;
+    height: 60px;
+    background-color: white;
+    border: 2px #d3d1c2;
+    border-radius: 15px;
+    box-shadow: 2px 2px 4px #000000;
+  }
+    .text {
+      margin: 5px;
+    }
+
   .flex {
     display: flex;
     margin-left: 30px;
     margin-right: 40px;
     margin-bottom: 30px;
+  }
     .button {
       flex-grow: 3;
       display: flex;
       max-height: 20px;
+    }
       .today {
         margin: auto;
         border-radius: 10px;
         box-shadow: 4px 4px 3px rgba(88, 87, 75, 0.5);
       }
-    }
-  }
+   
   .display-week {
     margin-top: 20px;
     margin-left: 20px;
@@ -178,31 +210,7 @@
     margin: 0px auto 2px;
     width: 60px;
   }
-  .week-container {
-    background-color: #608b96;
-    width: 95vw;
-    height: 100%;
-    margin: 0px auto 0px;
-    .days {
-      margin: 2.5vw auto;
-      width: 95vw;
-      height: 60px;
-      background-color: white;
-      border: 2px #d3d1c2;
-      border-radius: 15px;
-      box-shadow: 2px 2px 4px #000000;
-      .text {
-        margin: 5px;
-      }
-      .event-marker {
-        width: 130px;
-        height: 30px;
-        background-color: #e59876;
-        border-radius: 30px;
-        text-align: center;
-        float: right;
-        cursor: pointer;
-      }
-    }
-  }
+
+
+  
 </style>

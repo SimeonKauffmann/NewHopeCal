@@ -123,14 +123,12 @@ export default {
 
 <style lang="scss" scoped>
 #month {
-  width: 100vw;
-  height: 100px;
   margin: 0 auto;
-  position: fixed;
+  margin-top: 100px;
+  height: 100px;
+  width: 100vw;
   background-color: #608b96;
-  top: 0;
   box-shadow: 2px 2px 4px #000000;
-  z-index: 1;
 }
 .arrows {
   margin: 100px auto 50px;

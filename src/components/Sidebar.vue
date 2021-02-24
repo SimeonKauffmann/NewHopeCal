@@ -35,6 +35,8 @@
 export default {
   name: "Sidebar",
 };
+
+
 </script>
 
 <style lang="scss">
@@ -112,4 +114,12 @@ export default {
     transform-origin: left;
   }
 }
+
+/*Desktop style */
+@media screen and (min-width: 1200px){
+  .nav-list{
+    
+  }
+}
+
 </style>

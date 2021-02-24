@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <div class="navbar-mobile"><Sidebar /></div>
+    <div class="navbar-desktop"><Navbar /></div>
 
     <router-view />
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue';
 import Sidebar from '@/components/Sidebar.vue';
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    Navbar
   }
 };
 </script>
@@ -45,12 +48,21 @@ h3 {
   right: 0;
   top: 25px;
 }
-</style>
-<script>
-import Sidebar from '@/components/Sidebar.vue';
-export default {
-  components: {
-    Sidebar
+
+//Default mode mobil /desktop 
+.navbar-mobile {
+  display: none;
+}
+.navbar-desktop {
+  display: block;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar-mobile {
+    display: block;
   }
-};
-</script>
+  .navbar-desktop {
+    display: none;
+  }
+}
+</style>

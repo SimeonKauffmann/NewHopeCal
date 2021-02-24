@@ -196,21 +196,19 @@ div {
 }
 
 .quote {
-  position: absolute;
-  top: 20vh;
-  left: 10vw;
+    width: 500px;
+    height: 350px;
+    margin: 5% auto;
+    padding: 10px;
 
   button {
-    position: absolute;
     justify-content: center;
     background-color: white;
     border: 1px solid black;
     border-radius: 40px;
     color: black;
-    padding: 15px 32px;
-    margin: 0px;
-    top: 70%;
-    left: 70%;
+    padding: 10px 32px;
+    margin: 50px;
     text-align: center;
     font-size: 16px;
   }

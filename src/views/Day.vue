@@ -292,10 +292,6 @@
     border-radius: 2%;
   }
 
-  #plus {
-    margin-left: 22rem;
-    cursor: pointer;
-  }
   #gridHolder {
     border: solid;
     width: 80%;
@@ -319,18 +315,6 @@
   }
   #name {
     margin: 15px 15px;
-  }
-  .noneColor {
-    background-color: rgba(229, 152, 118, 1);
-  }
-  .workColor {
-    background-color: rgba(96, 139, 150, 1);
-  }
-  .sportColor {
-    background-color: rgba(132, 146, 131, 1);
-  }
-  .funColor {
-    background-color: rgb(246, 189, 96);
   }
 
   @media screen and (min-width: 900px) {
@@ -420,6 +404,15 @@
     #gridHolder {
       max-height: 70vh;
       min-height: none;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    #plus {
+      cursor: pointer;
+      margin-right: 7rem;
+      margin-top: 2rem;
+      font-size: 4rem;
     }
   }
 </style>

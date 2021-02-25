@@ -59,37 +59,29 @@
             class="cardDay"
           >
             <div id="note" :style="eventTypeClass(event)">
-              <h3 id="title">{{ event.title }}</h3>
-              <p>
-                {{ event.text }}
-              </p>
-              <ul>
-                <li>
-                  Start:
-                  <span class="numbers-small">{{ event.startTime }}</span>
-                </li>
-                <li class="li-last">
-                  End: <span class="numbers-small">{{ event.endTime }}</span>
-                </li>
-              </ul>
-              <div>
-                <b-button
-                  id="edit"
-                  href="#"
-                  size="sm"
-                  variant="secondary"
-                  @click="editEvent(event)"
-                  >Edit</b-button
-                >
-                <span
-                  id="remove"
-                  variant="white"
-                  size="sm"
-                  class="h1 mb-2"
-                  @click="removeAction(event.id)"
-                  >Remove</span
-                >
+              <div @click="editEvent(event)" class="content-card">
+                <h3 id="title">{{ event.title }}</h3>
+                <p>
+                  {{ event.text }}
+                </p>
+                <ul>
+                  <li>
+                    Start:
+                    <span class="numbers-small">{{ event.startTime }}</span>
+                  </li>
+                  <li class="li-last">
+                    End: <span class="numbers-small">{{ event.endTime }}</span>
+                  </li>
+                </ul>
               </div>
+              <b-button
+                href="#"
+                size="sm"
+                variant="secondary"
+                @click="removeAction(event.id)"
+                class="remove-btn"
+                >Remove</b-button
+              >
             </div>
           </div>
         </div>
@@ -246,37 +238,26 @@
     margin: 15px 0;
     li {
       position: relative;
-      margin-bottom: 4px;
     }
-
     .container {
       margin-top: 10px;
     }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 15px 0;
-      li {
-        position: relative;
-      }
-
-      li::before {
-        content: url('../assets/clock.svg');
-        top: 6px;
-        left: -20px;
-        position: absolute;
-      }
-    }
-    #edit {
-      float: right;
-    }
-    #remove {
-      font-size: 1rem;
-      color: aliceblue;
-      cursor: pointer;
+    li::before {
+      content: url('../assets/clock.svg');
+      top: 6px;
+      left: -20px;
+      position: absolute;
     }
   }
+  #edit {
+    float: right;
+  }
+  #remove {
+    font-size: 1rem;
+    color: aliceblue;
+    cursor: pointer;
+  }
+
   #edit {
     float: right;
   }
@@ -339,6 +320,10 @@
     }
     .desktop {
       display: block;
+    }
+    .edit-below {
+      height: 100%;
+      width: 20%;
     }
     ul {
       margin: 5px 0;
@@ -415,7 +400,15 @@
       padding: 5px 1.5rem;
       border-radius: 15px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+
+      cursor: pointer;
+    }
+    .content-card {
+      flex-grow: 1;
+    }
+    .remove-btn {
+      height: 30px;
     }
     #gridHolder {
       max-height: 70vh;

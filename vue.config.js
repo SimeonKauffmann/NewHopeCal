@@ -14,7 +14,7 @@ module.exports = {
           options: {
             networkTimeoutSeconds: 5
           },
-          urlPattern: '/holidaysBackup2021'
+          urlPattern: 'https://date.nager.at/api/v2/publicholidays/2021/SE'
         },
         {
           handler: 'NetworkFirst',
@@ -44,7 +44,15 @@ module.exports = {
         // target: "https://cors.bridged.cc/https://date.nager.at/api/v2/publicholidays/2021/SE"
         // target: "https://avancera.app/cities/" < Test Run fetch if the link get error
         // https://type.fit/api/quotes
+      },
+
+      '/quoteAPI': {
+        changeOrigin: true,
+        pathRewrite: { '^/quoteAPI': '' }, 
+        target: 'https://type.fit/api/quotes'
       }
+
+
     }
   }
 }

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import moment from 'moment'
-import axios from 'axios'
+// import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -99,11 +99,12 @@ export default new Vuex.Store({
 
   actions: {
     async fetchAll({ commit }) {
+
       const [holidays, quotes] = await Promise.all([
-        axios.get(
+        Vue.axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         ),
-        axios.get('https://type.fit/api/quotes')
+        Vue.axios.get('https://type.fit/api/quotes')
       ])
 
       commit('importHoliday', holidays.data)

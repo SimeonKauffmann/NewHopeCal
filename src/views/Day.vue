@@ -111,6 +111,10 @@ export default {
         id: null,
         type: 'None'
       }
+      this.modalShow = true
+    },
+    onClose() {
+      this.modalShow = false
     },
     getTodaysEvents() {
       let todayEvents = []

@@ -216,17 +216,6 @@ export default {
 
         todayEvents[x].startNumber = startNumber
 
-<<<<<<< HEAD
-        let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
-        todayEvents[x].styles = {
-          gridRowStart: startNumber + 1,
-          gridRowEnd: endNumber + 1,
-          height: `100%`,
-          width: '100%',
-          backgroundColor: 'transparent',
-          marginLeft: '50px',
-          zIndex: '2'
-=======
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
             gridRowStart: startNumber + 1,
@@ -238,9 +227,8 @@ export default {
             zIndex: '2',
             borderBottom: ' 3px solid transparent'
           }
->>>>>>> 170f6edde9d68736d63f1bb859ec2c67ddb0b4d8
         }
-      }
+      
 
       todayEvents.sort(function (a, b) {
         return a.startNumber - b.startNumber

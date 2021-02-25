@@ -20,6 +20,7 @@
       </svg>
       <div class="button">
         <b-button
+          id="todayBtn"
           v-if="days[0].week != today"
           @click="backToday"
           variant="light"
@@ -51,7 +52,7 @@
         @click="openDayView(day.date)"
       >
         <div class="text">
-          <p>{{ day.dayName }}</p>
+          <p id="day">{{ day.dayName }}</p>
         </div>
         <div class="events-desktop" v-if="day.event">
           <div
@@ -255,6 +256,9 @@
   }
 
   @media only screen and (min-width: 900px) {
+    #todayBtn {
+      font-size: 2rem;
+    }
     .event-marker {
       display: none;
     }
@@ -276,6 +280,10 @@
     .days {
       height: 70vh;
       width: 13%;
+    }
+    #day {
+      font-size: 2rem;
+      text-align: center;
     }
   }
 </style>

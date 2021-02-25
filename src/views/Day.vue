@@ -123,6 +123,7 @@
       removeAction(event) {
         this.$store.commit('deleteEvent', event)
       },
+
       createLines() {
         for (let y = 0; y < 24; y++) {
           this.lines.push({
@@ -135,7 +136,7 @@
               height: '100%',
               width: '100%'
             },
-            id: Math.random()
+            id: y + Math.random()
           })
         }
       },
@@ -197,6 +198,7 @@
 
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
+            // Styles used by the cards to get right position in grid
             gridRowStart: startNumber + 1,
             gridRowEnd: endNumber + 1,
             height: `100%`,
@@ -318,30 +320,7 @@
       height: 100%;
       width: 20%;
     }
-    ul {
-      margin: 5px 0;
-    }
-    li {
-      margin-left: 10px;
-      margin-bottom: 4px;
-      display: inline-block;
-    }
-    li::before {
-      content: url('../assets/clock.svg');
-      top: 6px;
-      left: -20px;
-      position: absolute;
-    }
-    .li-last {
-      margin-left: 40px;
-    }
-    p {
-      display: inline-block;
-      margin: 0;
-    }
-    #title {
-      margin: 0;
-    }
+    // Desktop grid
     .container {
       position: relative;
       margin-top: 10px;
@@ -374,19 +353,46 @@
         '22 22 22 22'
         '23 23 23 23';
     }
+    // Lines
     .times-h {
       position: absolute;
       border-bottom: 3px solid rgba(0, 0, 0, 0.6);
       pointer-events: none;
       z-index: 1;
     }
-    .day {
-      counter-reset: section -1;
-    }
+    // Timestamps
     .times-h::before {
       counter-increment: section;
       content: counter(section) '.00';
     }
+    ul {
+      margin: 5px 0;
+    }
+    li {
+      margin-left: 10px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    li::before {
+      content: url('../assets/clock.svg');
+      top: 6px;
+      left: -20px;
+      position: absolute;
+    }
+    .li-last {
+      margin-left: 40px;
+    }
+    p {
+      margin: 0;
+    }
+    #title {
+      margin: 0;
+    }
+
+    .day {
+      counter-reset: section -1;
+    }
+
     #note {
       height: 100%;
       margin: 0 5px;
@@ -394,7 +400,6 @@
       border-radius: 15px;
       display: flex;
       flex-direction: row;
-
       cursor: pointer;
     }
     .content-card {

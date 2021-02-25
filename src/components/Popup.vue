@@ -7,14 +7,13 @@
 </template>
 
 <script>
-  export default {
-    props: ['TogglePopup']
-  }
+export default {
+  props: ['TogglePopup']
+}
 </script>
 
 <style lang="scss" scoped>
-
-.popups{
+.popups {
   display: relative;
   box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
   width: 50vh;
@@ -22,10 +21,6 @@
   align-items: center;
   justify-content: center;
   border-radius: 40px;
-  background-color: rgba(255, 255, 255, 0.982)
-
-
+  background-color: rgba(255, 255, 255, 0.982);
 }
-
-
 </style>

@@ -41,107 +41,107 @@
 </template>
 
 <script>
-  import router from '../router'
-  import moment from 'moment'
-  import Popup from '@/components/Popup.vue'
-  import { mapState } from 'vuex'
+import router from '../router'
+import moment from 'moment'
+import Popup from '@/components/Popup.vue'
+import { mapState } from 'vuex'
 
-  export default {
-    name: 'Home',
+export default {
+  name: 'Home',
 
-    created() {
-      if (!this.$store.state.userName) {
-        while (!this.$store.state.userName) {
-          this.$store.commit('setUserName', prompt('Choose a username'))
-        }
-      }
-      this.$store.dispatch('fetchAll')
-    },
-
-    data() {
-      return {
-        popupTriggers: false
-      }
-    },
-
-    methods: {
-      time() {
-        setTimeout(() => {
-          this.popupTriggers = true
-        }, 500)
-      },
-      openDayView(date) {
-        router.push({ path: `/day/${date}` })
-        this.$store.commit('setSelectedDay', {
-          selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
-        })
-      },
-      closeButton() {
-        this.popupTriggers = false
-      }
-    },
-
-    mounted() {
-      this.time()
-    },
-
-    components: {
-      Popup
-      //VueXStore
-    },
-
-    computed: {
-      ...mapState({
-        quote: state => state.quote
-      }),
-      events() {
-        let todayEvents = []
-        this.$store.state.events.forEach(element => {
-          if (element.date === this.$store.state.today) {
-            let startNumber = parseInt(element.startTime.slice(0, 2))
-            element.startNumber = startNumber
-            todayEvents.push(element)
-          }
-        })
-
-        todayEvents.sort(function(a, b) {
-          return a.startNumber - b.startNumber
-        })
-
-        if (todayEvents.length === 0) {
-          todayEvents = null
-        }
-
-        return todayEvents
+  created() {
+    if (!this.$store.state.userName) {
+      while (!this.$store.state.userName) {
+        this.$store.commit('setUserName', prompt('Choose a username'))
       }
     }
+    this.$store.dispatch('fetchAll')
+  },
+
+  data() {
+    return {
+      popupTriggers: false
+    }
+  },
+
+  methods: {
+    time() {
+      setTimeout(() => {
+        this.popupTriggers = true
+      }, 500)
+    },
+    openDayView(date) {
+      router.push({ path: `/day/${date}` })
+      this.$store.commit('setSelectedDay', {
+        selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
+      })
+    },
+    closeButton() {
+      this.popupTriggers = false
+    }
+  },
+
+  mounted() {
+    this.time()
+  },
+
+  components: {
+    Popup
+    //VueXStore
+  },
+
+  computed: {
+    ...mapState({
+      quote: (state) => state.quote
+    }),
+    events() {
+      let todayEvents = []
+      this.$store.state.events.forEach((element) => {
+        if (element.date === this.$store.state.today) {
+          let startNumber = parseInt(element.startTime.slice(0, 2))
+          element.startNumber = startNumber
+          todayEvents.push(element)
+        }
+      })
+
+      todayEvents.sort(function (a, b) {
+        return a.startNumber - b.startNumber
+      })
+
+      if (todayEvents.length === 0) {
+        todayEvents = null
+      }
+
+      return todayEvents
+    }
   }
+}
 </script>
 
 <style scoped lang="scss">
-  /*===============
+/*===============
     Typografi
 ============= */
-  h1 {
-    text-align: center;
-    padding: 50px 0px;
-  }
+h1 {
+  text-align: center;
+  padding: 50px 0px;
+}
 
-  h2 {
-    padding: 50px;
-    text-align: center;
-  }
+h2 {
+  padding: 50px;
+  text-align: center;
+}
 
-  h3 {
-    padding-left: 20px;
-  }
+h3 {
+  padding-left: 20px;
+}
 
-  p {
-    text-align: left;
-    margin: 15px;
-  }
+p {
+  text-align: left;
+  margin: 15px;
+}
 
-  /* =================
+/* =================
        Layout
     ================*/
 .home-col {
@@ -188,10 +188,10 @@ div {
 }
 
 .quote {
-    width: 500px;
-    height: 350px;
-    margin: 5% auto;
-    padding: 10px;
+  width: 500px;
+  height: 350px;
+  margin: 5% auto;
+  padding: 10px;
 
   button {
     justify-content: center;

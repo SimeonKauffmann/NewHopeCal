@@ -14,13 +14,12 @@
 
 <script>
 export default {
-  name: "Navbar",
-};
+  name: 'Navbar'
+}
 </script>
 
 <style lang="scss" scoped>
-
-$yellow-color: #D3D1C2;
+$yellow-color: #d3d1c2;
 .hope-navbar {
   background-color: $yellow-color;
   box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
@@ -28,7 +27,7 @@ $yellow-color: #D3D1C2;
 
 ul {
   list-style: none;
-  
+
   li {
     display: block;
     flex: 1;
@@ -37,10 +36,10 @@ ul {
     a {
       color: black;
       text-align: center;
-      padding: .4em 0;
+      padding: 0.4em 0;
 
       &:hover {
-        background-color: rgba(255,255,255,.25);
+        background-color: rgba(255, 255, 255, 0.25);
       }
 
       &.router-link-exact-active {

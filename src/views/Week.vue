@@ -57,7 +57,7 @@
           <div
             :class="`events ${event.type}`"
             v-for="event in day.events"
-            :key="event"
+            :key="event.id"
           >
             {{ event.title }}
           </div>

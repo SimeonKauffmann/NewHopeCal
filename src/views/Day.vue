@@ -283,6 +283,7 @@ ul {
 .sportColor {
   background-color: rgba(132, 146, 131, 1);
 }
+
 .funColor {
   background-color: rgb(246, 189, 96);
 }

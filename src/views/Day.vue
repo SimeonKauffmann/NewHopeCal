@@ -3,11 +3,12 @@
     <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
     <h2 id="name">{{ redDay }}</h2>
     <div id="gridHolder">
-      <b-card-group deck class="container">
-        <b-card
-          v-for="(event, index) in getTodaysEvents()"
+      <div deck class="container">
+        <div
+          v-for="event in getTodaysEvents()"
           :key="event.id"
-          :style="gridAreaStart[index] + gridAreaEnd[index]"
+          :style="event.styles"
+          class="cardDay"
         >
           <div id="note">
             <h3 id="title">{{ event.title }}</h3>
@@ -25,25 +26,27 @@
                 {{ event.text }}
               </p>
             </div>
-
-            <b-button
-              id="edit"
-              href="#"
-              size="lg"
-              variant="secondary"
-              @click="editEvent(event)"
-              >Edit</b-button
-            >
-            <span
-              id="remove"
-              variant="white"
-              class="h1 mb-2"
-              @click="removeAction(event.id)"
-              >Remove</span
-            >
+            <div>
+              <b-button
+                id="edit"
+                href="#"
+                size="sm"
+                variant="secondary"
+                @click="editEvent(event)"
+                >Edit</b-button
+              >
+              <span
+                id="remove"
+                variant="white"
+                size="sm"
+                class="h1 mb-2"
+                @click="removeAction(event.id)"
+                >Remove</span
+              >
+            </div>
           </div>
-        </b-card>
-      </b-card-group>
+        </div>
+      </div>
     </div>
     <span id="editHolder">
       <b-icon-plus-circle
@@ -77,7 +80,6 @@
         gridAreaEnd: []
       }
     },
-
     methods: {
       editEvent(event) {
         this.currentEvent = event
@@ -119,18 +121,18 @@
 
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
-            backgroundColor: todayEvents[x].color,
-            height: `${(endNumber - startNumber) * 2}rem`,
-            marginTop: `${startNumber * 2}rem`,
-            position: 'absolute',
-            width: '60%'
+            gridRowStart: startNumber + 1,
+            gridRowEnd: endNumber + 1,
+            height: `100%`,
+            width: '100%',
+            backgroundColor: 'transparent'
+            // marginTop: `${startNumber * 2}rem`
           }
         }
 
         todayEvents.sort(function(a, b) {
           return a.startNumber - b.startNumber
         })
-
         return todayEvents
       },
       removeAction(id) {
@@ -147,17 +149,8 @@
           this.redDay = element.name
         }
       })
-      this.$store.state.events.forEach(element => {
-        if (element.date === this.$route.params.day) {
-          this.gridAreaStart.push(
-            `grid-row-start:${element.startTime.slice(0, 2)};`
-          )
-          this.gridAreaEnd.push(`grid-row-end:${element.endTime.slice(0, 2)};`)
-          this.gridAreaStart.reverse()
-          this.gridAreaEnd.reverse()
-        }
-      })
     },
+
     components: { Event }
   }
 </script>
@@ -167,18 +160,18 @@
     margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(4, auto);
-    grid-template-rows: repeat(24, auto);
+    grid-template-rows: repeat(24, 100px);
     grid-template-areas:
       '00 00 00 00'
-      '01 01 01 01'
-      '02 02 02 02'
-      '03 03 03 03'
-      '04 04 04 04'
-      '05 05 05 05'
-      '06 06 06 06'
-      '07 07 07 07'
-      '08 08 08 08'
-      '09 09 09 09'
+      '1 1 1 1'
+      '2 2 2 2'
+      '3 3 3 3'
+      '4 4 4 4'
+      '5 5 5 5'
+      '6 6 6 6'
+      '7 7 7 7'
+      '8 8 8 8'
+      '9 9 9 9'
       '10 10 10 10'
       '11 11 11 11'
       '12 12 12 12'
@@ -194,16 +187,7 @@
       '22 22 22 22'
       '23 23 23 23';
   }
-  .text-wrapper {
-    background: #fff;
-    border: 2px solid black;
-    margin-bottom: 20px;
-    max-height: 150px;
-    overflow: scroll;
-    p {
-      padding: 2px 8px;
-    }
-  }
+
   ul {
     list-style: none;
     padding: 0;
@@ -229,9 +213,13 @@
   }
 
   #note {
+    height: 100%;
+    margin: 0 5px;
     background-color: rgba(229, 152, 118, 1);
-    padding: 2rem;
+    padding: 2px 1.5rem;
     border-radius: 2%;
+    display: flex;
+    flex-direction: column;
   }
 
   #plus {
@@ -241,18 +229,21 @@
   #gridHolder {
     border: solid;
     width: 80%;
-    min-height: 70vh;
+    max-height: 70vh;
+    overflow: scroll;
     background-color: white;
     margin: 40px auto;
   }
-
+  #title {
+    margin: 0;
+  }
   #newEventInput {
     margin-bottom: 1rem;
   }
   #editHolder {
     float: right;
     margin: auto;
-    margin-right: 1rem;
+    margin-right: 1em;
   }
   #date {
     margin: 15px 15px;

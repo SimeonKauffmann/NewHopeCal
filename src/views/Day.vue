@@ -248,9 +248,6 @@
       position: relative;
       margin-bottom: 4px;
     }
-    .day {
-      counter-reset: section -1;
-    }
 
     .container {
       margin-top: 10px;
@@ -398,6 +395,9 @@
       border-bottom: 3px solid rgba(0, 0, 0, 0.5);
       pointer-events: none;
       z-index: 1;
+    }
+    .day {
+      counter-reset: section -1;
     }
     .times-h::before {
       counter-increment: section;

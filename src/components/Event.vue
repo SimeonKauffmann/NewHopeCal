@@ -92,7 +92,7 @@
         this.$emit('cancel')
       }
     },
-    // if prop-event is null make a newEvent -Sofia
+    // If prop-event is null make a newEvent if not create a copy of current event-Sofia
     computed: {
       currentEvent() {
         const newEvent = {

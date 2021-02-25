@@ -5,7 +5,6 @@
     <div class="mobile">
       <div id="gridHolder">
         <b-card-group deck class="container">
-          //looping in todayEvents Array -Sofia
           <b-card v-for="event in getTodaysEvents()" :key="event.id">
             <div id="note" :style="eventTypeClass(event)">
               <h3 id="title">{{ event.title }}</h3>
@@ -120,7 +119,7 @@
       }
     },
     methods: {
-      // delete the event -Sofia
+      // Delete the event -Sofia
       removeAction(event) {
         this.$store.commit('deleteEvent', event)
       },
@@ -140,7 +139,7 @@
           })
         }
       },
-      // sgive different colors to different types of events -Sofia
+      // Save different colors to different types of events -Sofia
       eventTypeClass(event) {
         if (event.type === 'Work') {
           return 'background-color: rgba(96, 139, 150, 1)'
@@ -152,12 +151,12 @@
         return 'background-color: rgba(229, 152, 118, 1);'
       },
 
-      // showing the existing event using prop -Sofia
+      // Showing the existing event using prop -Sofia
       editEvent(event) {
         this.currentEvent = event
         this.modalShow = true
       },
-
+      //closing the Edit(modal) -Sofia
       onCancel() {
         this.modalShow = false
       },
@@ -165,7 +164,10 @@
       onOk() {
         this.modalShow = false
       },
-      // create an new object(event) -Sofia
+      onClose() {
+        this.modalShow = false
+      },
+      // Create an new object(event) -Sofia
       createEvent() {
         this.currentEvent = {
           date: this.$route.params.day,
@@ -178,10 +180,8 @@
         }
         this.modalShow = true
       },
-      onClose() {
-        this.modalShow = false
-      },
-      // getting all the events from store and check if their date is the same with url parameter sending them in todayEvents -Sofia
+
+      // getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
       getTodaysEvents() {
         let todayEvents = []
         this.$store.state.events.forEach(element => {
@@ -220,7 +220,7 @@
         this.$router.push('/')
       }
 
-      //  show if the day is a holiday-Sofia
+      //  Show if the day is a holiday-Sofia
       this.$store.dispatch('fetchAll')
       this.$store.state.publicHoliday.forEach(element => {
         if (element.date === this.$route.params.day) {

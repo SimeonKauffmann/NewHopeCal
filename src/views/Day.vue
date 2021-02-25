@@ -144,9 +144,6 @@ export default {
       }
     },
     methods: {
-      removeAction(event) {
-        this.$store.commit('deleteEvent', event)
-      },
       createLines() {
         for (let y = 0; y < 24; y++) {
           this.lines.push({
@@ -174,47 +171,47 @@ export default {
         return 'background-color: rgba(229, 152, 118, 1);'
       },
 
-    editEvent(event) {
-      this.currentEvent = event
-      this.modalShow = true
-    },
-    onCancel() {
-      this.modalShow = false
-    },
-    onOk() {
-      this.modalShow = false
-    },
+      editEvent(event) {
+        this.currentEvent = event
+        this.modalShow = true
+      },
+      onCancel() {
+        this.modalShow = false
+      },
+      onOk() {
+        this.modalShow = false
+      },
 
-    createEvent() {
-      this.currentEvent = {
-        date: this.$route.params.day,
-        title: null,
-        startTime: '09:00',
-        endTime: '10:00',
-        text: null,
-        id: null,
-        type: 'None'
-      }
-      this.modalShow = true
-    },
-    onClose() {
-      this.modalShow = false
-    },
-    removeAction(event) {
-      this.$store.commit('deleteEvent', event)
-    },
-    getTodaysEvents() {
-      let todayEvents = []
-      this.$store.state.events.forEach((element) => {
-        if (element.date === this.$route.params.day) {
-          todayEvents.push(element)
+      createEvent() {
+        this.currentEvent = {
+          date: this.$route.params.day,
+          title: null,
+          startTime: '09:00',
+          endTime: '10:00',
+          text: null,
+          id: null,
+          type: 'None'
         }
-      })
+        this.modalShow = true
+      },
+      onClose() {
+        this.modalShow = false
+      },
+      removeAction(event) {
+        this.$store.commit('deleteEvent', event)
+      },
+      getTodaysEvents() {
+        let todayEvents = []
+        this.$store.state.events.forEach((element) => {
+          if (element.date === this.$route.params.day) {
+            todayEvents.push(element)
+          }
+        })
 
-      for (let x = 0; x < todayEvents.length; x++) {
-        let startNumber = parseInt(todayEvents[x].startTime.slice(0, 2))
+        for (let x = 0; x < todayEvents.length; x++) {
+          let startNumber = parseInt(todayEvents[x].startTime.slice(0, 2))
 
-        todayEvents[x].startNumber = startNumber
+          todayEvents[x].startNumber = startNumber
 
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
@@ -228,12 +225,12 @@ export default {
             borderBottom: ' 3px solid transparent'
           }
         }
-      
 
-      todayEvents.sort(function (a, b) {
-        return a.startNumber - b.startNumber
-      })
-      return todayEvents
+        todayEvents.sort(function (a, b) {
+          return a.startNumber - b.startNumber
+        })
+        return todayEvents
+      }
     }
   },
   mounted() {
@@ -429,103 +426,95 @@ ul {
     margin: 0 5px;
     padding: 2px 1.5rem;
 
-<<<<<<< HEAD
-    display: flex;
-    flex-direction: column;
-  }
-  #gridHolder {
-    max-height: 70vh;
-    min-height: none;
-=======
-  @media screen and (min-width: 900px) {
-    .mobile {
-      display: none;
+    @media screen and (min-width: 900px) {
+      .mobile {
+        display: none;
+      }
+      .desktop {
+        display: block;
+      }
+      ul {
+        margin: 5px 0;
+      }
+      li {
+        margin-left: 10px;
+        margin-bottom: 4px;
+        display: inline-block;
+      }
+      li::before {
+        content: url('../assets/clock.svg');
+        top: 6px;
+        left: -20px;
+        position: absolute;
+      }
+      .li-last {
+        margin-left: 40px;
+      }
+      p {
+        display: inline-block;
+        margin: 0;
+      }
+      #title {
+        margin: 0;
+      }
+      .container {
+        position: relative;
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        grid-template-rows: repeat(24, 100px);
+        grid-template-areas:
+          '00 00 00 00'
+          '1 1 1 1'
+          '2 2 2 2'
+          '3 3 3 3'
+          '4 4 4 4'
+          '5 5 5 5'
+          '6 6 6 6'
+          '7 7 7 7'
+          '8 8 8 8'
+          '9 9 9 9'
+          '10 10 10 10'
+          '11 11 11 11'
+          '12 12 12 12'
+          '13 13 13 13'
+          '14 14 14 14'
+          '15 15 15 15'
+          '16 16 16 16'
+          '17 17 17 17'
+          '18 18 18 18'
+          '19 19 19 19'
+          '20 20 20 20'
+          '21 21 21 21'
+          '22 22 22 22'
+          '23 23 23 23';
+      }
+      .times-h {
+        position: absolute;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+        z-index: 1;
+      }
+      .day {
+        counter-reset: section -1;
+      }
+      .times-h::before {
+        counter-increment: section;
+        content: counter(section) '.00';
+      }
+      #note {
+        height: 100%;
+        margin: 0 5px;
+        padding: 5px 1.5rem;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+      }
+      #gridHolder {
+        max-height: 70vh;
+        min-height: none;
+      }
     }
-    .desktop {
-      display: block;
-    }
-    ul {
-      margin: 5px 0;
-    }
-    li {
-      margin-left: 10px;
-      margin-bottom: 4px;
-      display: inline-block;
-    }
-    li::before {
-      content: url('../assets/clock.svg');
-      top: 6px;
-      left: -20px;
-      position: absolute;
-    }
-    .li-last {
-      margin-left: 40px;
-    }
-    p {
-      display: inline-block;
-      margin: 0;
-    }
-    #title {
-      margin: 0;
-    }
-    .container {
-      position: relative;
-      margin-top: 10px;
-      display: grid;
-      grid-template-columns: repeat(4, auto);
-      grid-template-rows: repeat(24, 100px);
-      grid-template-areas:
-        '00 00 00 00'
-        '1 1 1 1'
-        '2 2 2 2'
-        '3 3 3 3'
-        '4 4 4 4'
-        '5 5 5 5'
-        '6 6 6 6'
-        '7 7 7 7'
-        '8 8 8 8'
-        '9 9 9 9'
-        '10 10 10 10'
-        '11 11 11 11'
-        '12 12 12 12'
-        '13 13 13 13'
-        '14 14 14 14'
-        '15 15 15 15'
-        '16 16 16 16'
-        '17 17 17 17'
-        '18 18 18 18'
-        '19 19 19 19'
-        '20 20 20 20'
-        '21 21 21 21'
-        '22 22 22 22'
-        '23 23 23 23';
-    }
-    .times-h {
-      position: absolute;
-      border-bottom: 3px solid rgba(0, 0, 0, 0.6);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .day {
-      counter-reset: section -1;
-    }
-    .times-h::before {
-      counter-increment: section;
-      content: counter(section) '.00';
-    }
-    #note {
-      height: 100%;
-      margin: 0 5px;
-      padding: 5px 1.5rem;
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-    }
-    #gridHolder {
-      max-height: 70vh;
-      min-height: none;
-    }
->>>>>>> 170f6edde9d68736d63f1bb859ec2c67ddb0b4d8
   }
 }
 </style>

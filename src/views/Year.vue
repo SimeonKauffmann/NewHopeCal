@@ -3,7 +3,7 @@
     <b-container>
       <b-row no-gutters>
         <b-col class="year-col year-col-title">
-          <h1 class="numbers-large">{{ year }}</h1>
+          <h1 class="numbers-large mobil">{{ year }}</h1>
         </b-col>
         <b-col class="year-col year-col-svg">
           <!-- Arrow left -->
@@ -121,7 +121,7 @@
           </b-row>
 
           <b-row no-gutters>
-            <b-col class="year-col year-col-buttons  July">
+            <b-col class="year-col year-col-buttons July">
               <b-button
                 size="lg"
                 class="date-button"
@@ -191,6 +191,7 @@
           </b-row>
         </b-col>
       </b-row>
+
       <!-- End of Month buttons -->
     </b-container>
   </div>
@@ -322,5 +323,8 @@
     to {
       opacity: 1;
     }
+  }
+
+  @media only screen and (min-width: 900px) {
   }
 </style>

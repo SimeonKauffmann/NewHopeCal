@@ -54,8 +54,12 @@
           <p>{{ day.dayName }}</p>
         </div>
         <div class="events-desktop" v-if="day.event">
-          <div class="events" v-for="event in day.events" :key="event">
-            {{ event }}
+          <div
+            :class="`events ${event.type}`"
+            v-for="event in day.events"
+            :key="event"
+          >
+            {{ event.title }}
           </div>
         </div>
         <div class="event-marker" v-if="day.event"></div>
@@ -80,7 +84,7 @@ export default {
         let events = []
         this.$store.state.events.forEach((element) => {
           if (element.date === date) {
-            events.push(element.title)
+            events.push(element)
           }
         })
 
@@ -225,6 +229,18 @@ export default {
 .events-desktop {
   display: none;
 }
+.Work {
+  background-color: rgba(96, 139, 150, 1);
+}
+.Sport {
+  background-color: rgba(132, 146, 131, 1);
+}
+.Fun {
+  background-color: rgb(246, 189, 96);
+}
+.None {
+  background-color: rgba(229, 152, 118, 1);
+}
 
 @media only screen and (min-width: 900px) {
   .event-marker {
@@ -232,7 +248,6 @@ export default {
   }
   .events {
     width: 100%;
-    background-color: violet;
     padding: 5px;
     margin: 5px 0;
   }

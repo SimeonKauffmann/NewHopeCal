@@ -3,7 +3,7 @@
     <b-container>
       <b-row no-gutters>
         <b-col class="year-col year-col-title">
-          <h1 class="numbers-large">{{ year }}</h1>
+          <h1 class="numbers-large mobil">{{ year }}</h1>
         </b-col>
         <b-col class="year-col year-col-svg">
           <!-- Arrow left -->
@@ -121,7 +121,7 @@
           </b-row>
 
           <b-row no-gutters>
-            <b-col class="year-col year-col-buttons  July">
+            <b-col class="year-col year-col-buttons July">
               <b-button
                 size="lg"
                 class="date-button"
@@ -191,136 +191,140 @@
           </b-row>
         </b-col>
       </b-row>
+
       <!-- End of Month buttons -->
     </b-container>
   </div>
 </template>
 <script>
-  import moment from 'moment'
-  export default {
-    data() {
-      return {
-        year: moment().format('YYYY')
-      }
+import moment from 'moment'
+export default {
+  data() {
+    return {
+      year: moment().format('YYYY')
+    }
+  },
+  methods: {
+    decreaseYear() {
+      return this.year--
     },
-    methods: {
-      decreaseYear() {
-        return this.year--
-      },
-      increaseYear() {
-        return this.year++
-      },
+    increaseYear() {
+      return this.year++
+    },
 
-      // When you press a month it sumbits and sends the right year and month to Month.Vue
-      submitYear(month) {
-        this.$store.commit('setYear', `${this.year}-${month}-01`)
-        setTimeout(() => {
-          this.$router.push('/month')
-        }, 300)
-      }
+    // When you press a month it sumbits and sends the right year and month to Month.Vue
+    submitYear(month) {
+      this.$store.commit('setYear', `${this.year}-${month}-01`)
+      setTimeout(() => {
+        this.$router.push('/month')
+      }, 300)
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  /*==========
+/*==========
     Layout
 ===========*/
-  .year-col-title {
-    margin-left: 15px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+.year-col-title {
+  margin-left: 15px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.year-col-buttons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.year-col-svg {
+  margin-top: 30px;
+  .svg-left {
+    display: inline-block;
+    padding-right: 50px;
+    padding-top: 10px;
   }
-  .year-col-buttons {
-    text-align: center;
-    margin-bottom: 10px;
+  .svg-right {
+    display: inline-block;
   }
-  .year-col-svg {
-    margin-top: 30px;
-    .svg-left {
-      display: inline-block;
-      padding-right: 50px;
-      padding-top: 10px;
-    }
-    .svg-right {
-      display: inline-block;
-    }
-  }
-  .year-col {
-    border: 2px solid transparent;
-  }
+}
+.year-col {
+  border: 2px solid transparent;
+}
 
-  /*==========
+/*==========
    Styling
 ===========*/
-  .container {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  .btn-lg {
-    padding: 0;
-  }
-  .date-button {
-    height: 120px;
-    width: 110px;
-    border-radius: 25px;
-    box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
-  }
+.container {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.btn-lg {
+  padding: 0;
+}
+.date-button {
+  height: 120px;
+  width: 110px;
+  border-radius: 25px;
+  box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
+}
 
-  /*===========
+/*===========
   Animations
 ============*/
 
-  // Hover animation buttons
-  .btn {
-    transform: scale(1);
-    transform-origin: center;
-    transition: transform 250ms ease-in;
-  }
-  .btn:hover {
-    transform: scale(1.1);
-    box-shadow: none;
-  }
-  .btn-light:hover,
-  .btn:active {
-    background: #849283;
-    border: none;
+// Hover animation buttons
+.btn {
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 250ms ease-in;
+}
+.btn:hover {
+  transform: scale(1.1);
+  box-shadow: none;
+}
+.btn-light:hover,
+.btn:active {
+  background: #849283;
+  border: none;
+}
+
+// on render animations for buttons
+.January {
+  animation: 0.5s ease-in 0s 1 fadeIn;
+}
+.February,
+.April {
+  animation: 1s ease-in 0s 1 fadeIn;
+}
+.March,
+.May,
+.July {
+  animation: 1.5s ease-in 0s 1 fadeIn;
+}
+.June,
+.August,
+.October {
+  animation: 2s ease-in 0s 1 fadeIn;
+}
+
+.September,
+.November {
+  animation: 2.5s ease-in 0s 1 fadeIn;
+}
+
+.December {
+  animation: 3s ease-in 0s 1 fadeIn;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  // on render animations for buttons
-  .January {
-    animation: 0.5s ease-in 0s 1 fadeIn;
+  to {
+    opacity: 1;
   }
-  .February,
-  .April {
-    animation: 1s ease-in 0s 1 fadeIn;
-  }
-  .March,
-  .May,
-  .July {
-    animation: 1.5s ease-in 0s 1 fadeIn;
-  }
-  .June,
-  .August,
-  .October {
-    animation: 2s ease-in 0s 1 fadeIn;
-  }
+}
 
-  .September,
-  .November {
-    animation: 2.5s ease-in 0s 1 fadeIn;
-  }
-
-  .December {
-    animation: 3s ease-in 0s 1 fadeIn;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
+@media only screen and (min-width: 900px) {
+}
 </style>

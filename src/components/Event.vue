@@ -20,7 +20,7 @@
         <input v-model="currentEvent.startTime" type="time" />
       </label>
       <label> Ends: <input v-model="currentEvent.endTime" type="time" /></label>
-      <label for="">
+      <label for="" v-if="!currentEvent.id">
         Share event? (separated by spaces)
         <input type="text" v-model="currentEvent.share" />
       </label>

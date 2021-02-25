@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue';
-import Sidebar from '@/components/Sidebar.vue';
-export default {
-  components: {
-    Sidebar,
-    Navbar
+  import Navbar from '@/components/Navbar.vue'
+  import Sidebar from '@/components/Sidebar.vue'
+  export default {
+    components: {
+      Sidebar,
+      Navbar
+    }
   }
-}
 </script>
 
 <style lang="scss">
@@ -42,27 +42,27 @@ export default {
     font-weight: 400;
   }
 
-.navbar-mobile {
-  z-index: 3;
-  position: absolute;
-  right: 0;
-  top: 25px;
-}
-
-//Default mode mobil /desktop 
-.navbar-mobile {
-  display: none;
-}
-.navbar-desktop {
-  display: block;
-}
-
-@media only screen and (max-width: 768px) {
   .navbar-mobile {
-    display: block;
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    top: 25px;
   }
-  .navbar-desktop {
+
+  //Default mode mobil /desktop
+  .navbar-mobile {
     display: none;
   }
-}
+  .navbar-desktop {
+    display: block;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .navbar-mobile {
+      display: block;
+    }
+    .navbar-desktop {
+      display: none;
+    }
+  }
 </style>

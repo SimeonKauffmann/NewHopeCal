@@ -13,52 +13,51 @@
 </template>
 
 <script>
-export default {
-  name: "Navbar",
-};
+  export default {
+    name: 'Navbar'
+  }
 </script>
 
 <style lang="scss" scoped>
+  $yellow-color: #d3d1c2;
+  .hope-navbar {
+    background-color: $yellow-color;
+    box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
+  }
 
-$yellow-color: #D3D1C2;
-.hope-navbar {
-  background-color: $yellow-color;
-  box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
-}
+  ul {
+    list-style: none;
 
-ul {
-  list-style: none;
-  
-  li {
-    display: block;
-    flex: 1;
-    font-size: 2em;
+    li {
+      display: block;
+      flex: 1;
+      font-size: 2em;
 
-    a {
-      color: black;
-      text-align: center;
-      padding: .4em 0;
+      a {
+        color: black;
+        text-align: center;
+        padding: 0.4em 0;
 
-      &:hover {
-        background-color: rgba(255,255,255,.25);
-      }
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.25);
+        }
 
-      &.router-link-exact-active {
-        position: relative;
+        &.router-link-exact-active {
+          position: relative;
 
-        &::before {
-          transform: none !important;
-          content: '';
-          position: absolute;
-          bottom: -20px;
-          left: calc(50% - 30px);
-          // Triangel
-          border-left: 30px solid transparent;
-          border-right: 30px solid transparent;
-          border-top: 20px solid $yellow-color;
+          &::before {
+            transform: none !important;
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: calc(50% - 30px);
+            // Triangel
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 20px solid $yellow-color;
+          }
         }
       }
     }
   }
-}
 </style>

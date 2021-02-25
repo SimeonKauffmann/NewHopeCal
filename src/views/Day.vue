@@ -9,7 +9,7 @@
           :key="event.id"
           :style="gridAreaStart[index] + gridAreaEnd[index]"
         >
-          <div id="note">
+          <div id="note" :class="eventTypeClass(event)">
             <h3 id="title">{{ event.title }}</h3>
             <ul>
               <li>
@@ -79,6 +79,17 @@ export default {
   },
 
   methods: {
+    eventTypeClass(event) {
+      if (event.type === 'Work') {
+        return 'workColor'
+      } else if (event.type === 'Sport') {
+        return 'sportColor'
+      } else if (event.type === 'Fun') {
+        return 'funColor'
+      }
+      return 'noneColor'
+    },
+
     editEvent(event) {
       this.currentEvent = event
       this.modalShow = true
@@ -97,12 +108,9 @@ export default {
         startTime: '09:00',
         endTime: '10:00',
         text: null,
-        id: null
+        id: null,
+        type: 'None'
       }
-      this.modalShow = true
-    },
-    onClose() {
-      this.modalShow = false
     },
     getTodaysEvents() {
       let todayEvents = []
@@ -118,6 +126,7 @@ export default {
         todayEvents[x].startNumber = startNumber
 
         let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
+
         todayEvents[x].styles = {
           backgroundColor: todayEvents[x].color,
           height: `${(endNumber - startNumber) * 2}rem`,
@@ -125,13 +134,13 @@ export default {
           position: 'absolute',
           width: '60%'
         }
+
+        todayEvents.sort(function (a, b) {
+          return a.startNumber - b.startNumber
+        })
+
+        return todayEvents
       }
-
-      todayEvents.sort(function (a, b) {
-        return a.startNumber - b.startNumber
-      })
-
-      return todayEvents
     },
     removeAction(id) {
       this.$store.dispatch('deleteEvent', id)
@@ -260,5 +269,17 @@ ul {
 }
 #name {
   margin: 15px 15px;
+}
+.noneColor {
+  background-color: rgba(229, 152, 118, 1);
+}
+.workColor {
+  background-color: rgba(96, 139, 150, 1);
+}
+.sportColor {
+  background-color: rgba(132, 146, 131, 1);
+}
+.funColor {
+  background-color: rgb(246, 189, 96);
 }
 </style>

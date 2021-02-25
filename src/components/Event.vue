@@ -33,6 +33,19 @@
           ></textarea>
         </label>
       </div>
+
+      <div>
+        <b-form-radio-group
+          id="event-type"
+          v-model="currentEvent.type"
+          :options="options"
+          class="mb-3"
+          value-field="item"
+          text-field="name"
+          disabled-field="notEnabled"
+        ></b-form-radio-group>
+        <div class="mt-3"></div>
+      </div>
     </b-modal>
   </div>
 </template>
@@ -42,10 +55,41 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'Event',
 
+<<<<<<< HEAD
   props: {
     show: Boolean,
     event: null
   },
+=======
+    data() {
+      return {
+        options: [
+          { item: 'None', name: 'None' },
+          { item: 'Work', name: 'Work' },
+          { item: 'Sport', name: 'Sport' },
+          { item: 'Fun', name: 'Fun' }
+        ]
+      }
+    },
+
+    props: {
+      show: Boolean,
+      event: null
+    },
+
+    methods: {
+      saveEvent() {
+        if (this.currentEvent.id === null) {
+          this.currentEvent.id =
+            this.currentEvent.date +
+            this.currentEvent.text +
+            this.currentEvent.title +
+            this.currentEvent.startTime
+          this.$store.dispatch('saveInfo', this.currentEvent)
+        } else {
+          this.$store.dispatch('saveUpdateInfo', this.currentEvent)
+        }
+>>>>>>> d675cad66ab5f386a75507366649a5516ab00a23
 
   methods: {
     saveEvent() {
@@ -59,6 +103,22 @@ export default Vue.extend({
       } else {
         this.$store.dispatch('saveUpdateInfo', this.currentEvent)
       }
+<<<<<<< HEAD
+=======
+    },
+    computed: {
+      currentEvent() {
+        const newEvent = {
+          date: this.$route.params.day,
+          title: null,
+          startTime: '09:00',
+          endTime: '10:00',
+          text: null,
+          id: null,
+          share: null,
+          type: 'None'
+        }
+>>>>>>> d675cad66ab5f386a75507366649a5516ab00a23
 
       this.$emit('ok')
     },
@@ -86,3 +146,18 @@ export default Vue.extend({
   }
 })
 </script>
+<style>
+  #event-type_BV_option_0 + label::before {
+    background-color: rgba(229, 152, 118, 1);
+  }
+  #event-type_BV_option_1 + label::before {
+    background-color: rgba(96, 139, 150, 1);
+  }
+  #event-type_BV_option_2 + label::before {
+    background-color: rgba(132, 146, 131, 1);
+  }
+
+  #event-type_BV_option_3 + label::before {
+    background-color: rgb(246, 189, 96);
+  }
+</style>

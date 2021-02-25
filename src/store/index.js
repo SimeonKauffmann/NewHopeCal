@@ -68,6 +68,7 @@ export default new Vuex.Store({
     },
 
     setInfo(state, info) {
+      //Sofia
       // state.events = state.events.filter(function (e) {
       //   return e.id != info.id;
       // });
@@ -89,7 +90,7 @@ export default new Vuex.Store({
       Vue.axios
         .delete(`${state.serverAddress}${state.userName}/${id}`)
         .then(() => this.commit('getEvents'))
-
+      //Sofia
       // state.events = state.events.filter(function (e) {
       //   return e.id != id;
       // });
@@ -99,7 +100,6 @@ export default new Vuex.Store({
 
   actions: {
     async fetchAll({ commit }) {
-
       const [holidays, quotes] = await Promise.all([
         Vue.axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'

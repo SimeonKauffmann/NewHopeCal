@@ -55,6 +55,7 @@
   export default Vue.extend({
     name: 'Event',
     data() {
+      // set different types for radio buttons -Sofia
       return {
         options: [
           { item: 'None', name: 'None' },
@@ -68,7 +69,7 @@
       show: Boolean,
       event: null
     },
-
+    // save the event in VueX and making id in case the event already exist(edited) -Sofia
     methods: {
       saveEvent() {
         if (this.currentEvent.id === null) {
@@ -91,6 +92,7 @@
         this.$emit('cancel')
       }
     },
+    // if prop-event is null make a newEvent -Sofia
     computed: {
       currentEvent() {
         const newEvent = {
@@ -103,7 +105,7 @@
           share: null
         }
 
-        return this.event == null ? newEvent : Object.assign({}, this.event)
+        return this.event === null ? newEvent : Object.assign({}, this.event)
       }
     }
   })

@@ -127,6 +127,9 @@
       }
     },
     methods: {
+      removeAction(event) {
+        this.$store.commit('deleteEvent', event)
+      },
       createLines() {
         for (let y = 0; y < 24; y++) {
           this.lines.push({
@@ -145,16 +148,12 @@
       },
       eventTypeClass(event) {
         if (event.type === 'Work') {
-          console.log('work')
           return 'background-color: rgba(96, 139, 150, 1)'
         } else if (event.type === 'Sport') {
-          console.log('Sport')
           return 'background-color: rgba(132, 146, 131, 1)'
         } else if (event.type === 'Fun') {
-          console.log('Fun')
           return 'background-color: rgb(246, 189, 96)'
         }
-        console.log('none')
         return 'background-color: rgba(229, 152, 118, 1);'
       },
 
@@ -205,7 +204,8 @@
             width: '100%',
             backgroundColor: 'transparent',
             marginLeft: '50px',
-            zIndex: '2'
+            zIndex: '2',
+            borderBottom: ' 3px solid transparent'
           }
         }
 
@@ -344,8 +344,15 @@
       margin: 5px 0;
     }
     li {
+      margin-left: 10px;
       margin-bottom: 4px;
       display: inline-block;
+    }
+    li::before {
+      content: url('../assets/clock.svg');
+      top: 6px;
+      left: -20px;
+      position: absolute;
     }
     .li-last {
       margin-left: 40px;
@@ -361,7 +368,6 @@
       position: relative;
       margin-top: 10px;
       display: grid;
-      row-gap: 5px;
       grid-template-columns: repeat(4, auto);
       grid-template-rows: repeat(24, 100px);
       grid-template-areas:
@@ -392,7 +398,7 @@
     }
     .times-h {
       position: absolute;
-      border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+      border-bottom: 3px solid rgba(0, 0, 0, 0.6);
       pointer-events: none;
       z-index: 1;
     }
@@ -406,8 +412,8 @@
     #note {
       height: 100%;
       margin: 0 5px;
-      padding: 2px 1.5rem;
-
+      padding: 5px 1.5rem;
+      border-radius: 15px;
       display: flex;
       flex-direction: column;
     }

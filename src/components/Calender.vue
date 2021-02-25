@@ -39,6 +39,7 @@
         this.context = ctx
         this.$store.commit('setSelectedDay', ctx)
       },
+
       onClick(ymd) {
         router.push({ path: `/day/${ymd}` })
       },
@@ -48,7 +49,7 @@
         this.$store.state.events.forEach(element => {
           days.push(element.date)
         })
-
+        // Showing the events and holidays on Calendar -Sofia
         this.$store.state.publicHoliday.forEach(element => {
           redDays.push(element.date)
         })

@@ -20,7 +20,7 @@
         <input v-model="currentEvent.startTime" type="time" />
       </label>
       <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
-      <label for="">
+      <label for="" v-if="!currentEvent.id">
         Share event? (separated by spaces)
         <input type="text" v-model="currentEvent.share" />
       </label>
@@ -54,7 +54,6 @@
   import Vue from 'vue'
   export default Vue.extend({
     name: 'Event',
-
     data() {
       return {
         options: [
@@ -65,7 +64,6 @@
         ]
       }
     },
-
     props: {
       show: Boolean,
       event: null
@@ -102,8 +100,7 @@
           endTime: '10:00',
           text: null,
           id: null,
-          share: null,
-          type: 'None'
+          share: null
         }
 
         return this.event == null ? newEvent : Object.assign({}, this.event)
@@ -111,6 +108,7 @@
     }
   })
 </script>
+
 <style>
   #event-type_BV_option_0 + label::before {
     background-color: rgba(229, 152, 118, 1);
@@ -121,7 +119,6 @@
   #event-type_BV_option_2 + label::before {
     background-color: rgba(132, 146, 131, 1);
   }
-
   #event-type_BV_option_3 + label::before {
     background-color: rgb(246, 189, 96);
   }

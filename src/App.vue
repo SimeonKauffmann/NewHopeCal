@@ -57,6 +57,14 @@
     display: block;
   }
 
+  //Default mode mobil /desktop
+  .navbar-mobile {
+    display: none;
+  }
+  .navbar-desktop {
+    display: block;
+  }
+
   @media only screen and (max-width: 768px) {
     .navbar-mobile {
       display: block;

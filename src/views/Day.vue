@@ -213,9 +213,6 @@
           return a.startNumber - b.startNumber
         })
         return todayEvents
-      },
-      removeAction(id) {
-        this.$store.dispatch('deleteEvent', id)
       }
     },
     mounted() {
@@ -242,23 +239,6 @@
   .desktop {
     display: none;
   }
-  .text-wrapper {
-    background: #fff;
-    border: 2px solid black;
-    margin-bottom: 20px;
-    max-height: 150px;
-    overflow: scroll;
-    p {
-      padding: 2px 8px;
-    }
-  }
-  .day {
-    counter-reset: section -1;
-  }
-
-  .container {
-    margin-top: 10px;
-  }
 
   ul {
     list-style: none;
@@ -266,13 +246,38 @@
     margin: 15px 0;
     li {
       position: relative;
+      margin-bottom: 4px;
+    }
+    .day {
+      counter-reset: section -1;
     }
 
-    li::before {
-      content: url('../assets/clock.svg');
-      top: 6px;
-      left: -20px;
-      position: absolute;
+    .container {
+      margin-top: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+      li {
+        position: relative;
+      }
+
+      li::before {
+        content: url('../assets/clock.svg');
+        top: 6px;
+        left: -20px;
+        position: absolute;
+      }
+    }
+    #edit {
+      float: right;
+    }
+    #remove {
+      font-size: 1rem;
+      color: aliceblue;
+      cursor: pointer;
     }
   }
   #edit {

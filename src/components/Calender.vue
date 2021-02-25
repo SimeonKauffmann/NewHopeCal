@@ -36,7 +36,6 @@
 
     methods: {
       onContext(ctx) {
-        console.log(ctx)
         this.context = ctx
         this.$store.commit('setSelectedDay', ctx)
       },

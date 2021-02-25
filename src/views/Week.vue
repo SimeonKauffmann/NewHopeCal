@@ -52,8 +52,17 @@
       >
         <div class="text">
           <p>{{ day.dayName }}</p>
-          <div class="event-marker" v-if="day.event">Events</div>
         </div>
+        <div class="events-desktop" v-if="day.event">
+          <div
+            :class="`events ${event.type}`"
+            v-for="event in day.events"
+            :key="event.id"
+          >
+            {{ event.title }}
+          </div>
+        </div>
+        <div class="event-marker" v-if="day.event"></div>
       </div>
     </div>
   </div>
@@ -74,6 +83,12 @@
           let date = moment()
             .add(x, 'days')
             .format('YYYY[-]MM[-]DD')
+          let events = []
+          this.$store.state.events.forEach(element => {
+            if (element.date === date) {
+              events.push(element)
+            }
+          })
 
           // Added to check Date if holiday confirmed -Patrik
           let checkDate = moment()
@@ -106,6 +121,7 @@
               specialDay,
             date: date,
             event: event,
+            events: events,
             week: moment()
               .add(x, 'days')
               .format('w'),
@@ -160,6 +176,17 @@
     background-color: #608b96;
     box-shadow: 2px 2px 4px #000000;
   }
+
+  .event-marker {
+    display: block;
+    float: right;
+    border-radius: 30px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    background-color: #e59876;
+  }
+
   .arrows {
     margin: 100px auto 50px;
     width: 60px;
@@ -209,5 +236,46 @@
   .arrows {
     margin: 0px auto 2px;
     width: 60px;
+  }
+
+  .events-desktop {
+    display: none;
+  }
+  .Work {
+    background-color: rgba(96, 139, 150, 1);
+  }
+  .Sport {
+    background-color: rgba(132, 146, 131, 1);
+  }
+  .Fun {
+    background-color: rgb(246, 189, 96);
+  }
+  .None {
+    background-color: rgba(229, 152, 118, 1);
+  }
+
+  @media only screen and (min-width: 900px) {
+    .event-marker {
+      display: none;
+    }
+    .events {
+      width: 100%;
+      padding: 5px;
+      margin: 5px 0;
+    }
+    .events-desktop {
+      display: block;
+      height: 70%;
+      width: 80%;
+      margin: 2px auto;
+    }
+    .week-container {
+      display: flex;
+      align-content: space-between;
+    }
+    .days {
+      height: 70vh;
+      width: 13%;
+    }
   }
 </style>

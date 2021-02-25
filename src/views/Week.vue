@@ -84,15 +84,23 @@
         </svg>
       </div>
 
-      <div class="week-container">
-        <div
-          class="days"
-          v-for="day in days"
-          :key="day.date"
-          @click="openDayView(day.date)"
-        >
-          <div class="text">
-            <p id="desktop-p">{{ day.dayName }}</p>
+    <div class="week-container">
+      <div
+        class="days"
+        v-for="day in days"
+        :key="day.date"
+        @click="openDayView(day.date)"
+      >
+        <div class="text">
+          <p id="desktop-p">{{ day.dayName }}</p>
+        </div>
+        <div class="events-desktop" v-if="day.event">
+          <div
+            :class="`events ${event.type}`"
+            v-for="event in day.events"
+            :key="event.id"
+          >
+            {{ event.title }}
           </div>
           <div class="events-desktop" v-if="day.event">
             <div class="events" v-for="event in day.events" :key="event">
@@ -105,94 +113,108 @@
 
     </div>
 
+   </div>
+
   </div>
 </template>
 
 <script>
-import router from '../router'
-import moment from 'moment'
+  import router from '../router'
+  import moment from 'moment'
 
-export default {
-  computed: {
-    days() {
-      const calander = this.$store.state.publicHoliday
+  export default {
+    computed: {
+      days() {
+        const calander = this.$store.state.publicHoliday
 
-      const days = []
-      for (let x = this.startDate; x < this.startDate + 7; x++) {
-        // Startdate used here to compute when the loop starts -Simeon
-        let date = moment().add(x, 'days').format('YYYY[-]MM[-]DD')
-        let events = []
-        this.$store.state.events.forEach((element) => {
-          if (element.date === date) {
-            events.push(element.title)
+        const days = []
+        for (let x = this.startDate; x < this.startDate + 7; x++) {
+          // Startdate used here to compute when the loop starts -Simeon
+          let date = moment()
+            .add(x, 'days')
+            .format('YYYY[-]MM[-]DD')
+          let events = []
+          this.$store.state.events.forEach(element => {
+            if (element.date === date) {
+              events.push(element)
+            }
+          })
+
+          // Added to check Date if holiday confirmed -Patrik
+          let checkDate = moment()
+            .add(x, 'days')
+            .format('YYYY-MM-DD')
+          let specialDay = ''
+          for (let i = 0; i < calander.length; i++) {
+            if (calander[i].date === checkDate) {
+              specialDay = calander[i].localName
+              i = calander.length
+            } else {
+              i++
+            }
           }
-        })
 
-        // Added to check Date if holiday confirmed -Patrik
-        let checkDate = moment().add(x, 'days').format('YYYY-MM-DD')
-        let specialDay = ''
-        for (let i = 0; i < calander.length; i++) {
-          if (calander[i].date === checkDate) {
-            specialDay = calander[i].localName
-            i = calander.length
-          } else {
-            i++
+          // Find events on days, boolean -Simeon
+          let event = this.$store.state.events.find(
+            event => event.date === date
+          )
+            ? true
+            : false
+
+          // Creating day object - Simeon
+          let dayObject = {
+            dayName:
+              moment()
+                .add(x, 'days')
+                .format('dddd Do MMMM') +
+              ' ' +
+              specialDay,
+            date: date,
+            event: event,
+            events: events,
+            week: moment()
+              .add(x, 'days')
+              .format('w'),
+            month: moment()
+              .add(x, 'days')
+              .format('MMMM')
           }
+
+          days.push(dayObject)
         }
-
-        // Find events on days, boolean -Simeon
-        let event = this.$store.state.events.find(
-          (event) => event.date === date
-        )
-          ? true
-          : false
-
-        // Creating day object - Simeon
-        let dayObject = {
-          dayName:
-            moment().add(x, 'days').format('dddd Do MMMM') + ' ' + specialDay,
-          date: date,
-          event: event,
-          events: events,
-          week: moment().add(x, 'days').format('w'),
-          month: moment().add(x, 'days').format('MMMM')
-        }
-
-        days.push(dayObject)
+        return days
       }
-      return days
-    }
-  },
-  data() {
-    return {
-      startDate: 0,
-      today: moment().format('w')
-    }
-  },
-  methods: {
-    // Methods to change the startdate. used in the computed property to make a list of days -Simeon
-    pastDates() {
-      this.startDate -= 7
     },
-    futureDates() {
-      this.startDate += 7
+    data() {
+      return {
+        startDate: 0,
+        today: moment().format('w')
+      }
     },
-    backToday() {
-      this.startDate = 0
-    }, // Open the day view -Simeon
-    openDayView(date) {
-      router.push({ path: `/day/${date}` })
-      this.$store.commit('setSelectedDay', {
-        // Set the selected day in Vuex -Simeon
-        selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
-      })
-    }
-  },
+    methods: {
+      // Methods to change the startdate. used in the computed property to make a list of days -Simeon
+      pastDates() {
+        this.startDate -= 7
+      },
+      futureDates() {
+        this.startDate += 7
+      },
+      backToday() {
+        this.startDate = 0
+      }, // Open the day view -Simeon
+      openDayView(date) {
+        router.push({ path: `/day/${date}` })
+        this.$store.commit('setSelectedDay', {
+          // Set the selected day in Vuex -Simeon
+          selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
+        })
+      }
+    },
 
-  mounted() {
-    this.$store.dispatch('fetchAll')
+    mounted() {
+      this.$store.dispatch('fetchAll')
+    }
   }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -276,7 +298,18 @@ export default {
 .DesktopArrow{
     display: none;
 }
-
+.Work {
+  background-color: rgba(96, 139, 150, 1);
+}
+.Sport {
+  background-color: rgba(132, 146, 131, 1);
+}
+.Fun {
+  background-color: rgb(246, 189, 96);
+}
+.None {
+  background-color: rgba(229, 152, 118, 1);
+}
 
 // Change view look when over 770px width.
 @media (min-width: 770px) {
@@ -301,9 +334,16 @@ export default {
   }
   .events {
     width: 100%;
-    background-color: violet;
     padding: 5px;
     margin: 5px 0;
+  #month {
+    margin: 0 auto;
+    margin-top: 100px;
+    height: 100px;
+    width: 100vw;
+    background-color: #608b96;
+    box-shadow: 2px 2px 4px #000000;
+  }
   }
   .events-desktop {
     display: block;
@@ -311,19 +351,24 @@ export default {
     width: 80%;
     margin: 2px auto;
   }
+  .arrows {
+    margin: 100px auto 50px;
+    width: 60px;
+  }
   .week-container {
     display: flex;
     column-gap: 10px;
     align-content: space-between;
     .days {
-    height: 500px;
+    height: 70vh;
     width: 13%;
+    }
   }
-  }
-
   #desktop-p{
+    font-size: 110%;
     margin: 10px;
     text-align: center;
   }
 }
+
 </style>

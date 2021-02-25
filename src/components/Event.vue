@@ -19,8 +19,8 @@
         Starts:
         <input v-model="currentEvent.startTime" type="time" />
       </label>
-      <label> Ends: <input v-model="currentEvent.endTime" type="time" /></label>
-      <label for="">
+      <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
+      <label for="" v-if="!currentEvent.id">
         Share event? (separated by spaces)
         <input type="text" v-model="currentEvent.share" />
       </label>
@@ -51,75 +51,75 @@
 </template>
 
 <script>
-import Vue from 'vue'
-export default Vue.extend({
-  name: 'Event',
-  data() {
-    return {
-      options: [
-        { item: 'None', name: 'None' },
-        { item: 'Work', name: 'Work' },
-        { item: 'Sport', name: 'Sport' },
-        { item: 'Fun', name: 'Fun' }
-      ]
-    }
-  },
-  props: {
-    show: Boolean,
-    event: null
-  },
-
-  methods: {
-    saveEvent() {
-      if (this.currentEvent.id === null) {
-        this.currentEvent.id =
-          this.currentEvent.date +
-          this.currentEvent.text +
-          this.currentEvent.title +
-          this.currentEvent.startTime
-        this.$store.dispatch('saveInfo', this.currentEvent)
-      } else {
-        this.$store.dispatch('saveUpdateInfo', this.currentEvent)
+  import Vue from 'vue'
+  export default Vue.extend({
+    name: 'Event',
+    data() {
+      return {
+        options: [
+          { item: 'None', name: 'None' },
+          { item: 'Work', name: 'Work' },
+          { item: 'Sport', name: 'Sport' },
+          { item: 'Fun', name: 'Fun' }
+        ]
       }
+    },
+    props: {
+      show: Boolean,
+      event: null
+    },
 
-      this.$emit('ok')
-    },
-    onClose() {
-      this.$emit('close')
-    },
-    onCancel() {
-      this.$emit('cancel')
-    }
-  },
-  computed: {
-    currentEvent() {
-      const newEvent = {
-        date: this.$route.params.day,
-        title: null,
-        startTime: '09:00',
-        endTime: '10:00',
-        text: null,
-        id: null,
-        share: null
+    methods: {
+      saveEvent() {
+        if (this.currentEvent.id === null) {
+          this.currentEvent.id =
+            this.currentEvent.date +
+            this.currentEvent.text +
+            this.currentEvent.title +
+            this.currentEvent.startTime
+          this.$store.dispatch('saveInfo', this.currentEvent)
+        } else {
+          this.$store.dispatch('saveUpdateInfo', this.currentEvent)
+        }
+
+        this.$emit('ok')
+      },
+      onClose() {
+        this.$emit('close')
+      },
+      onCancel() {
+        this.$emit('cancel')
       }
+    },
+    computed: {
+      currentEvent() {
+        const newEvent = {
+          date: this.$route.params.day,
+          title: null,
+          startTime: '09:00',
+          endTime: '10:00',
+          text: null,
+          id: null,
+          share: null
+        }
 
-      return this.event == null ? newEvent : Object.assign({}, this.event)
+        return this.event == null ? newEvent : Object.assign({}, this.event)
+      }
     }
-  }
-})
+  })
 </script>
 
 <style>
-#event-type_BV_option_0 + label::before {
-  background-color: rgba(229, 152, 118, 1);
-}
-#event-type_BV_option_1 + label::before {
-  background-color: rgba(96, 139, 150, 1);
-}
-#event-type_BV_option_2 + label::before {
-  background-color: rgba(132, 146, 131, 1);
-}
-#event-type_BV_option_3 + label::before {
-  background-color: rgb(246, 189, 96);
-}
+  #event-type_BV_option_0 + label::before {
+    background-color: rgba(229, 152, 118, 1);
+  }
+  #event-type_BV_option_1 + label::before {
+    background-color: rgba(96, 139, 150, 1);
+  }
+  #event-type_BV_option_2 + label::before {
+    background-color: rgba(132, 146, 131, 1);
+  }
+  #event-type_BV_option_3 + label::before {
+    background-color: rgb(246, 189, 96);
+  }
 </style>

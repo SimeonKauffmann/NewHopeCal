@@ -100,14 +100,17 @@ export default new Vuex.Store({
   actions: {
     async fetchAll({ commit }) {
 
+      console.log("Test Fetch Begin")
+      
+      // Early version fetch when promise all to get data before show website.
+      // const [holidays, quotes] = await Promise.all([
+      //   axios.get(
+      //     '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
+      //   ),
+      //   axios.get('/quoteAPI')
+      // ])
 
-      const [holidays, quotes] = await Promise.all([
-        axios.get(
-          '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
-        ),
-        axios.get('/quoteAPI')
-      ])
-
+      // Late version to tries if one fetch get error and replace with backup JSON file.
       // let holidays = []
       // try {
       //   holidays = await axios.get(
@@ -117,9 +120,12 @@ export default new Vuex.Store({
       //   holidays = await axios.get("/holidaysBackup2021")
       // }
 
-      // let quotes = await axios.get('https://type.fit/api/quotes')
-      
-
+      // Today version due of fast test run if work or not cause uhhh? Idk.
+      let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
+      // let quotes = await axios.get('/quoteAPI')
+      let quotes = []
+      // console.log("Holidays" + holidays.data)
+      // console.log("Quotes" + quotes.data)
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)
     },

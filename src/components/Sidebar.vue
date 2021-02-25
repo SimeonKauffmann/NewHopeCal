@@ -32,104 +32,75 @@
 </template>
 
 <script>
-  import Vue from 'vue'
+import Vue from 'vue'
 
-  export default {
-    mounted() {
-      if (this.$store.state.userName) {
-        Vue.axios
-          .get(
-            `${this.$store.state.serverAddress}${this.$store.state.userName}`
-          )
-          .then(events => {
-            this.$store.commit('setEvents', events.data)
-          })
-      }
-    },
-    name: 'Sidebar'
-  }
+export default {
+  mounted() {
+    if (this.$store.state.userName) {
+      Vue.axios
+        .get(`${this.$store.state.serverAddress}${this.$store.state.userName}`)
+        .then((events) => {
+          this.$store.commit('setEvents', events.data)
+        })
+    }
+  },
+  name: 'Sidebar'
+}
 </script>
 
 <style lang="scss">
-  #hamburger {
-    margin-right: 30px;
-  }
+#hamburger {
+  margin-right: 30px;
+}
 
-  #navbar {
-    width: 50%;
-  }
-  .nav-list {
-    list-style: none;
-    padding: 0;
-    li {
-      .nav-link {
-        font-size: 20px;
-        font-weight: 400;
-        text-align: center;
-        padding-top: 40px;
-        padding-bottom: 15px;
-        color: rgb(49, 49, 49);
-        position: relative;
-      }
-      .nav-link::before {
-        content: '';
-        width: 80%;
-        height: 2px;
-        bottom: 0;
-        left: 10%;
-        background: rgba(0, 0, 0, 0.6);
-        position: absolute;
-      }
+#navbar {
+  width: 50%;
+}
+.nav-list {
+  list-style: none;
+  padding: 0;
+  li {
+    .nav-link {
+      font-size: 20px;
+      font-weight: 400;
+      text-align: center;
+      padding-top: 40px;
+      padding-bottom: 15px;
+      color: rgb(49, 49, 49);
+      position: relative;
     }
-  }
-
-  @media only screen and (max-width: 900px) {
     .nav-link::before {
-      transform-origin: center;
-      animation: 1.2s ease-out 100ms 1 linesMobile;
-    }
-    @keyframes linesMobile {
-      from {
-        opacity: 0;
-        transform: scaleX(0);
-      }
-      to {
-        opacity: 1;
-        transform: scaleX(1);
-      }
-    }
-  }
-
-  @media only screen and (min-width: 900px) {
-    .nav-link::after {
       content: '';
-      position: absolute;
       width: 80%;
       height: 2px;
-      top: 22px;
+      bottom: 0;
       left: 10%;
       background: rgba(0, 0, 0, 0.6);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 400ms 250ms ease-in;
-    }
-    .nav-link::before {
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 400ms 250ms ease-in;
-      animation: none;
-    }
-    .nav-link:hover::before,
-    .nav-link:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
+      position: absolute;
     }
   }
+}
 
+@media only screen and (max-width: 900px) {
+  .nav-link::before {
+    transform-origin: center;
+    animation: 1.2s ease-out 100ms 1 linesMobile;
+  }
+  @keyframes linesMobile {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+}
 
 @media only screen and (min-width: 900px) {
   .nav-link::after {
-    content: "";
+    content: '';
     position: absolute;
     width: 80%;
     height: 2px;
@@ -152,12 +123,4 @@
     transform-origin: left;
   }
 }
-
-/*Desktop style */
-@media screen and (min-width: 1200px){
-  .nav-list{
-    
-  }
-}
-
 </style>

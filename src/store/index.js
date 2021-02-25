@@ -16,7 +16,7 @@ export default new Vuex.Store({
     events: [],
     userName: localStorage.getItem('userName') || null,
     serverAddress:
-      'http://azureadsimeonkauffmann-88931a28.localhost.run/events/'
+      'http://bd2b6be57a20.ngrok.io/events/'
   },
 
   mutations: {

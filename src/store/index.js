@@ -16,7 +16,7 @@ export default new Vuex.Store({
     events: [],
     userName: localStorage.getItem('userName') || null,
     serverAddress:
-      'http://azureadsimeonkauffmann-88931a28.localhost.run/events/'
+      'http://bd2b6be57a20.ngrok.io/events/'
   },
 
   mutations: {
@@ -100,12 +100,17 @@ export default new Vuex.Store({
 
   actions: {
     async fetchAll({ commit }) {
-      const [holidays, quotes] = await Promise.all([
-        axios.get(
+      let holidays
+
+      try {
+        holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
-        ),
-        axios.get('https://type.fit/api/quotes')
-      ])
+        )
+      } catch (error) {
+        holidays = await axios.get("/holidaysBackup2021")
+      }
+
+      let quotes = await axios.get('https://type.fit/api/quotes')
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)

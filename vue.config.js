@@ -14,7 +14,7 @@ module.exports = {
           options: {
             networkTimeoutSeconds: 5
           },
-          urlPattern: 'https://date.nager.at/api/v2/publicholidays/2021/SE'
+          urlPattern: '/holidaysBackup2021'
         },
         {
           handler: 'NetworkFirst',
@@ -41,6 +41,7 @@ module.exports = {
         // logLevel: "debug", < Check if this code logged in like link.
         pathRewrite: { '^/calanderAPI': '' }, //<<<THIS GOTDAMNIT FIX EVERYTHING
         target: 'https://date.nager.at/api'
+        // target: "https://cors.bridged.cc/https://date.nager.at/api/v2/publicholidays/2021/SE"
         // target: "https://avancera.app/cities/" < Test Run fetch if the link get error
         // https://type.fit/api/quotes
       }

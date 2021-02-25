@@ -1,10 +1,13 @@
 <template>
   <div>
 
+    <!-- Mobile Version -->
     <div id="mobileVersion">
+      <!-- Display Weekend -->
       <div class="display-week">
         <h1>{{ days[0].month }}, {{ `week ${days[0].week}` }}</h1>
       </div>
+      <!-- Arrow to Left -->
       <div class="flex">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +23,8 @@
             d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
           />
         </svg>
+
+        <!-- Button  -->
         <div class="button">
           <b-button
             v-if="days[0].week != today"
@@ -29,6 +34,8 @@
             >Today</b-button
           >
         </div>
+
+        <!-- Arrow to Right -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"
@@ -45,7 +52,9 @@
         </svg>
       </div>
 
+      <!-- Week container -->
       <div class="week-container">
+        <!-- Div for in range loop -->
         <div
           class="days"
           v-for="day in days"
@@ -53,81 +62,14 @@
           @click="openDayView(day.date)"
         >
           <div class="text">
-            <p>{{ day.dayName }}</p>
+            <p id="desktop-p">{{ day.dayName }}</p>
             <div class="event-marker" v-if="day.event">Events</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Desktop version -->
-    <div id="desktopVersion">
-      <div id="month" class="row">
-        
-        <div class="col-3">
-          <div class="button">
-          <b-button
-            v-if="days[0].week != today"
-            @click="backToday"
-            variant="light"
-            class="today"
-            >Today</b-button
-          >
-        </div>
-        </div>
-        <div class="col-6">
-          <h1>{{ `${days[0].month} week ${days[0].week}` }}</h1>
-        </div>
-        <div class="col-3"></div>
-        </div>
-      
-      <div class="row">
-
-        <div class="col-2">
-          <div class="arrows-left">
-            <b-icon
-                icon="arrow-left-short"
-                animation="fade"
-                font-scale="8"
-                @click="pastDates"
-            ></b-icon>
-          </div>
-        </div>
-
-        <div class="col-8">
-          <div class="week-container">
-          <div
-            class="days"
-            v-for="day in days"
-            :key="day.date"
-            @click="openDayView(day.date)"
-          >
-            <div class="text">
-              <p>{{ day.dayName }}</p>
-              <div class="event-marker" v-if="day.event">Events</div>
-            </div>
-          </div>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <div class="arrows-right">
-            <b-icon
-                icon="arrow-right-short"
-                animation="fade"
-                font-scale="8"
-                @click="futureDates"
-            ></b-icon>
-          </div>
-        </div>
-
-      </div>
-      
-    </div>
-
-      
-
-  </div>
+</div>
 </template>
 
 <script>
@@ -224,9 +166,6 @@
 
 <style lang="scss" scoped>
 
-#mobileVersion{display: block;}
-#desktopVersion{display: none;}
-
 #month {
   width: 100vw;
   height: 100px;
@@ -236,10 +175,6 @@
   top: 0;
   box-shadow: 2px 2px 4px #000000;
   z-index: 1;
-}
-.arrows, .arrows-left, .arrows-right {
-  margin: 100px auto 50px;
-  width: 60px;
 }
 
 .week-container {
@@ -267,19 +202,20 @@
     margin-left: 30px;
     margin-right: 40px;
     margin-bottom: 30px;
-    .button {
+  
+  .button {
       flex-grow: 3;
       display: flex;
       max-height: 20px;
       
-    }
+  }
 }
 
 .today {
-        margin: auto;
-        border-radius: 10px;
-        box-shadow: 4px 4px 3px rgba(88, 87, 75, 0.5);
-      }
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 4px 4px 3px rgba(88, 87, 75, 0.5);
+}
 
 .display-week {
     margin-top: 20px;
@@ -296,32 +232,57 @@
 
 
 
-// Change view look when over 960 px width.
-@media (min-width: 960px) {
-  #mobileVersion{display: none;}
-  #desktopVersion{display: block;}
+// Change view look when over 770 px width.
+@media (min-width: 770px) {
+//   #mobileVersion{display: none;}
+//   #desktopVersion{display: block;}
 
-  .week-container{
-    width: 100%;
-  }
-  #month{
-    position: unset;
-  }
+//   .week-container{
+//     width: 100%;
+//   }
+//   #month{
+//     position: unset;
+//   }
 
-  #month{
+  .display-week{
     text-align: center;
-    padding: 20px;
   }
- 
-  .arrows-left {position: fixed; left: 0px;}
-  .arrows-right{position: fixed; right: 55px}
 
-  #desktopVersion{
-    grid-template-columns: 120px 4fr 120px;
-    grid-template-areas:
-    none;
-  }
+//   .arrows-left, .arrows-right {
+
+//     margin: 100px auto 50px;
+//     width: 60px;
+//   }
+ 
+//   .arrows-left {position: fixed; left: 0px;}
+//   .arrows-right{position: fixed; right: 55px}
+  
+
+//   #desktopVersion{
+//     grid-template-columns: 120px 4fr 120px;
+//     grid-template-areas:
+//     none;
+//   }
   
 }
+
+@media (min-width: 1300px) {
+  .week-container{
+    display: flex;
+    
+    .days{
+      width: 12%;
+      height: 500px;
+    }
+  }
+
+  #desktop-p {
+    margin: 20px;
+
+  }
+}
+
+
+
 
 </style>

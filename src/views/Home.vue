@@ -144,29 +144,65 @@
   /* =================
        Layout
     ================*/
-  .home-col {
-    margin: 15px 0px;
-  }
-  .img-container {
-    width: 200px;
-    height: 200px;
-  }
-  img {
-    width: 100%;
-    height: 100%;
-  }
+.home-col {
+  margin: 15px 0px;
+}
+.img-container {
+  width: 200px;
+  height: 200px;
+}
+img {
+  width: 100%;
+  height: 100%;
+}
 
-  div {
-    border-spacing: 10px;
-  }
+div {
+  border-spacing: 10px;
+}
 
-  .box1 {
-    width: 400px;
+.box1 {
+  width: 400px;
+  padding: 10px;
+  background: #849283;
+  border: 1px solid white;
+  border-radius: 40px;
+  margin: 2vh auto;
+}
+
+.box2 {
+  width: 400px;
+  padding: 10px;
+  background: #828282;
+  border: 1px solid white;
+  border-radius: 40px;
+  margin: 2vh auto;
+}
+
+.box3 {
+  width: 400px;
+  padding: 10px;
+  background: #e59876;
+  border: 1px solid white;
+  border-radius: 40px;
+  margin: 2vh auto;
+}
+
+.quote {
+    width: 500px;
+    height: 350px;
+    margin: 5% auto;
     padding: 10px;
-    background: #849283;
-    border: 1px solid white;
+
+  button {
+    justify-content: center;
+    background-color: white;
+    border: 1px solid black;
     border-radius: 40px;
-    margin: 2vh auto;
+    color: black;
+    padding: 10px 32px;
+    margin: 50px;
+    text-align: center;
+    font-size: 16px;
   }
 
   .box2 {
@@ -212,4 +248,5 @@
       text-align: center;
     }
   }
+}
 </style>

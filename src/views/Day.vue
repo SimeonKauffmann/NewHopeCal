@@ -343,7 +343,6 @@
       margin-left: 40px;
     }
     p {
-      display: inline-block;
       margin: 0;
     }
     #title {

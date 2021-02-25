@@ -16,6 +16,7 @@ module.exports = {
           },
           urlPattern: 'https://date.nager.at/api/v2/publicholidays/2021/SE'
         },
+        // Kommentera bort på grund av deras 522 Error -Patrik
         // {
         //   handler: 'NetworkFirst',
         //   options: {
@@ -23,14 +24,14 @@ module.exports = {
         //   },
         //   urlPattern: 'https://type.fit/api/quotes'
         // },
-        // {
-        //   handler: 'NetworkFirst',
-        //   options: {
-        //     networkTimeoutSeconds: 5
-        //   },
-        //   urlPattern:
-        //     'http://azureadsimeonkauffmann-fcccfdf1.localhost.run/events/'
-        // }
+         {
+          handler: 'NetworkFirst',
+          options: {
+            networkTimeoutSeconds: 5
+          },
+          urlPattern:
+            'http://azureadsimeonkauffmann-fcccfdf1.localhost.run/events/'
+        }
       ]
     }
   },
@@ -45,6 +46,7 @@ module.exports = {
         // https://type.fit/api/quotes
       },
 
+      // Det hade varit att dom har blockad av CORS, men error 522 gäller så kommentera bort -Patrik
       // '/quoteAPI': {
       //   changeOrigin: true,
       //   logLevel: "debug",

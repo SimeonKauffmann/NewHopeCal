@@ -1,13 +1,14 @@
 <template>
   <div>
-    <!-- Mobile Version -->
-    <div id="mobileVersion">
+    <!-- Change id to "Weekend" due of NOT using grid by display flex box - Patrik -->
+    <div id="Weekend">
       <!-- Display Weekend -->
       <div class="display-week">
         <h1>{{ days[0].month }}, {{ `week ${days[0].week}` }}</h1>
       </div>
       
       <div class="flex">
+        <!-- Added comment and seperate Arrow button for desktop version due size - Patrik -->
         <!-- Arrow to Left -->
         <!-- Mobile -->
         <svg
@@ -92,7 +93,8 @@
         @click="openDayView(day.date)"
       >
         <div class="text">
-          <p id="desktop-p">{{ day.dayName }}</p>
+          <p class="desktop-p">{{ day.dayName }}</p>
+          <p class="specialDay">{{ day.daySpecial }}</p> <!-- Added own paragrahp for holiday - Patrik -->
         </div>
         <div class="events-desktop" v-if="day.event">
           <div
@@ -119,106 +121,96 @@
 </template>
 
 <script>
-  import router from '../router'
-  import moment from 'moment'
+import router from '../router'
+import moment from 'moment'
 
-  export default {
-    computed: {
-      days() {
-        const calander = this.$store.state.publicHoliday
+export default {
+  computed: {
+    days() {
+      const calander = this.$store.state.publicHoliday
 
-        const days = []
-        for (let x = this.startDate; x < this.startDate + 7; x++) {
-          // Startdate used here to compute when the loop starts -Simeon
-          let date = moment()
-            .add(x, 'days')
-            .format('YYYY[-]MM[-]DD')
-          let events = []
-          this.$store.state.events.forEach(element => {
-            if (element.date === date) {
-              events.push(element)
-            }
-          })
-
-          // Added to check Date if holiday confirmed -Patrik
-          let checkDate = moment()
-            .add(x, 'days')
-            .format('YYYY-MM-DD')
-          let specialDay = ''
-          for (let i = 0; i < calander.length; i++) {
-            if (calander[i].date === checkDate) {
-              specialDay = calander[i].localName
-              i = calander.length
-            } else {
-              i++
-            }
+      const days = []
+      for (let x = this.startDate; x < this.startDate + 7; x++) {
+        // Startdate used here to compute when the loop starts -Simeon
+        let date = moment().add(x, 'days').format('YYYY[-]MM[-]DD')
+        let events = []
+        this.$store.state.events.forEach((element) => {
+          if (element.date === date) {
+            events.push(element)
           }
-
-          // Find events on days, boolean -Simeon
-          let event = this.$store.state.events.find(
-            event => event.date === date
-          )
-            ? true
-            : false
-
-          // Creating day object - Simeon
-          let dayObject = {
-            dayName:
-              moment()
-                .add(x, 'days')
-                .format('dddd Do MMMM') +
-              ' ' +
-              specialDay,
-            date: date,
-            event: event,
-            events: events,
-            week: moment()
-              .add(x, 'days')
-              .format('w'),
-            month: moment()
-              .add(x, 'days')
-              .format('MMMM')
-          }
-
-          days.push(dayObject)
-        }
-        return days
-      }
-    },
-    data() {
-      return {
-        startDate: 0,
-        today: moment().format('w')
-      }
-    },
-    methods: {
-      // Methods to change the startdate. used in the computed property to make a list of days -Simeon
-      pastDates() {
-        this.startDate -= 7
-      },
-      futureDates() {
-        this.startDate += 7
-      },
-      backToday() {
-        this.startDate = 0
-      }, // Open the day view -Simeon
-      openDayView(date) {
-        router.push({ path: `/day/${date}` })
-        this.$store.commit('setSelectedDay', {
-          // Set the selected day in Vuex -Simeon
-          selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
         })
-      }
-    },
 
-    mounted() {
-      this.$store.dispatch('fetchAll')
+        // Added to check Date if holiday confirmed -Patrik
+        let checkDate = moment().add(x, 'days').format('YYYY-MM-DD')
+        let specialDay = ''
+        for (let i = 0; i < calander.length; i++) {
+          if (calander[i].date === checkDate) {
+            specialDay = calander[i].localName
+            i = calander.length
+          } else {
+            i++
+          }
+        }
+
+        // Find events on days, boolean -Simeon
+        let event = this.$store.state.events.find(
+          (event) => event.date === date
+        )
+          ? true
+          : false
+
+        // Creating day object - Simeon
+        let dayObject = {
+          dayName:
+            moment().add(x, 'days').format('dddd Do MMMM'),
+          daySpecial: specialDay, //Added own paragrahp for holiday - Patrik
+          date: date,
+          event: event,
+          events: events,
+          week: moment().add(x, 'days').format('w'),
+          month: moment().add(x, 'days').format('MMMM')
+        }
+
+        days.push(dayObject)
+      }
+      return days
     }
+  },
+  data() {
+    return {
+      startDate: 0,
+      today: moment().format('w')
+    }
+  },
+  methods: {
+    // Methods to change the startdate. used in the computed property to make a list of days -Simeon
+    pastDates() {
+      this.startDate -= 7
+    },
+    futureDates() {
+      this.startDate += 7
+    },
+    backToday() {
+      this.startDate = 0
+    }, // Open the day view -Simeon
+    openDayView(date) {
+      router.push({ path: `/day/${date}` })
+      this.$store.commit('setSelectedDay', {
+        // Set the selected day in Vuex -Simeon
+        selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
+      })
+    }
+  },
+
+  mounted() {
+    this.$store.dispatch('fetchAll')
   }
+}
 </script>
 
 <style lang="scss" scoped>
 
+// Update och ändringar -Patrik 2021-02-25
 #month {
   width: 100vw;
   height: 100px;
@@ -273,28 +265,23 @@
       
   }
 }
-
 .today {
   margin: auto;
   border-radius: 10px;
   box-shadow: 4px 4px 3px rgba(88, 87, 75, 0.5);
 }
-
 .display-week {
     margin-top: 20px;
     margin-left: 20px;
     margin-bottom: 30px;
 }
-
 .arrows {
     margin: 0px auto 2px;
     width: 60px;
 }
-
 .events-desktop {
   display: none;
 }
-
 .DesktopArrow{
     display: none;
 }
@@ -327,7 +314,7 @@
   }
 }
 
-// Change view look when over 900px width.
+// Change view look when over 900px width. 
 @media only screen and (min-width: 975px) {
   .event-marker {
     display: none;
@@ -360,11 +347,15 @@
     column-gap: 10px;
     align-content: space-between;
     .days {
-    height: 70vh;
+    height: 60vh;
     width: 13%;
     }
+    #day {
+      font-size: 2rem;
+      text-align: center;
+    }
   }
-  #desktop-p{
+  .desktop-p, .specialDay{
     font-size: 110%;
     margin: 10px;
     text-align: center;

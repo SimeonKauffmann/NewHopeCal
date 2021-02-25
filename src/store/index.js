@@ -102,6 +102,8 @@ export default new Vuex.Store({
 
       console.log("Test Fetch Begin")
       
+      // Detta är tidigare testning för med eller utan Promise och med tries som för backup.
+      //Just nu låt detta vara tills vi eller mest jag som tar detta arbete tills hitta lösning -Patrik
       // Early version fetch when promise all to get data before show website.
       // const [holidays, quotes] = await Promise.all([
       //   axios.get(
@@ -109,7 +111,6 @@ export default new Vuex.Store({
       //   ),
       //   axios.get('/quoteAPI')
       // ])
-
       // Late version to tries if one fetch get error and replace with backup JSON file.
       // let holidays = []
       // try {
@@ -120,12 +121,13 @@ export default new Vuex.Store({
       //   holidays = await axios.get("/holidaysBackup2021")
       // }
 
-      // Today version due of fast test run if work or not cause uhhh? Idk.
+   
       let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
+
+      // Kommentera bort på grund av deras 522 Error -Patrik
       // let quotes = await axios.get('/quoteAPI')
       let quotes = []
-      // console.log("Holidays" + holidays.data)
-      // console.log("Quotes" + quotes.data)
+
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)
     },

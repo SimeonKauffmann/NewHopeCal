@@ -219,17 +219,27 @@
           return a.startNumber - b.startNumber
         })
         return todayEvents
+      },
+      // scrolls to 9.00 or first event of the day
+      checkScroll() {
+        if (this.$refs['cardDay'] != undefined) {
+          this.$refs['cardDay'][0].scrollIntoView({ behavior: 'smooth' })
+        } else {
+          this.$refs['gridHolder'].scrollTo({
+            top: 900,
+            left: 0,
+            behavior: 'smooth'
+          })
+        }
       }
     },
     mounted() {
-      // scrolls to 9.00
-      this.$refs['gridHolder'].scrollTo({
-        top: 900,
-        left: 0,
-        behavior: 'smooth'
-      })
+      // scrolls to 9.00 or first event of the day
+      this.checkScroll()
 
+      // Creates the lines
       this.createLines()
+
       if (!this.$store.state.selectedDay) {
         this.$router.push('/')
       }

@@ -101,7 +101,6 @@ export default new Vuex.Store({
 
   actions: {
     async fetchAll({ commit }) {
-
       // Detta är tidigare testning för med eller utan Promise och med tries som för backup.
       //Just nu låt detta vara tills vi eller mest jag som tar detta arbete tills hitta lösning -Patrik
       // Early version fetch when promise all to get data before show website.
@@ -119,10 +118,9 @@ export default new Vuex.Store({
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         )
       } catch (error) {
-        holidays = await axios.get("/holidaysBackup2021")
+        holidays = await axios.get('/holidaysBackup2021')
       }
 
-   
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
       // Kommentera bort på grund av deras 522 Error -Patrik

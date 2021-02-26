@@ -2,6 +2,7 @@
   <div class="day">
     <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
     <h2 id="name">{{ redDay }}</h2>
+
     <div class="mobile">
       <div id="gridHolder">
         <b-card-group deck class="container">
@@ -52,6 +53,7 @@
             v-for="line in lines"
             :style="line.styles"
           ></div>
+          <div class="times-spacing"></div>
           <div
             v-for="event in getTodaysEvents()"
             :key="event.id"
@@ -61,11 +63,13 @@
           >
             <div id="note" :style="eventTypeClass(event)">
               <div @click="editEvent(event)" class="content-card">
-                <h3 id="title">{{ event.title }}</h3>
-                <p>
-                  {{ event.text }}
-                </p>
-                <ul>
+                <div class="content-text">
+                  <h3 id="title">{{ event.title }}</h3>
+                  <p id="event-text">
+                    {{ event.text }}
+                  </p>
+                </div>
+                <!-- <ul>
                   <li>
                     Start:
                     <span class="numbers-small">{{ event.startTime }}</span>
@@ -73,7 +77,7 @@
                   <li class="li-last">
                     End: <span class="numbers-small">{{ event.endTime }}</span>
                   </li>
-                </ul>
+                </ul> -->
               </div>
               <b-button
                 href="#"
@@ -203,9 +207,9 @@
             gridRowStart: startNumber + 1,
             gridRowEnd: endNumber + 1,
             height: `100%`,
-            width: '100%',
+            maxWidth: '100%',
             backgroundColor: 'transparent',
-            marginLeft: '50px',
+            marginLeft: '40px',
             zIndex: '2',
             borderBottom: ' 3px solid transparent'
           }
@@ -251,6 +255,48 @@
     display: none;
   }
 
+  // =============
+  //     Layout
+  // ============
+  #gridHolder {
+    // border: 2px solid rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    width: 80%;
+    min-height: 70vh;
+    overflow-y: scroll;
+    background-color: white;
+    margin: 40px auto;
+  }
+  #edit {
+    float: right;
+  }
+  #editHolder {
+    float: right;
+    margin: auto;
+    margin-right: 1em;
+  }
+  #newEventInput {
+    margin-bottom: 1rem;
+  }
+  #remove {
+    font-size: 1rem;
+    color: aliceblue;
+    cursor: pointer;
+  }
+  #note {
+    background-color: rgba(229, 152, 118, 1);
+    padding: 2rem;
+    border-radius: 2%;
+  }
+
+  #date {
+    margin: 15px 15px;
+    width: 80%;
+  }
+  #name {
+    margin: 15px 15px;
+  }
+
   ul {
     list-style: none;
     padding: 0;
@@ -258,9 +304,7 @@
     li {
       position: relative;
     }
-    .container {
-      margin-top: 10px;
-    }
+
     li::before {
       content: url('../assets/clock.svg');
       top: 6px;
@@ -268,54 +312,8 @@
       position: absolute;
     }
   }
-  #edit {
-    float: right;
-  }
-  #remove {
-    font-size: 1rem;
-    color: aliceblue;
-    cursor: pointer;
-  }
-
-  #edit {
-    float: right;
-  }
-  #remove {
-    font-size: 1rem;
-    color: aliceblue;
-    cursor: pointer;
-  }
-
-  #note {
-    background-color: rgba(229, 152, 118, 1);
-    padding: 2rem;
-    border-radius: 2%;
-  }
-
-  #gridHolder {
-    // border: 2px solid rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    width: 80%;
-    min-height: 70vh;
-    overflow: scroll;
-    background-color: white;
-    margin: 40px auto;
-  }
-
-  #newEventInput {
-    margin-bottom: 1rem;
-  }
-  #editHolder {
-    float: right;
-    margin: auto;
-    margin-right: 1em;
-  }
-  #date {
-    margin: 15px 15px;
-    width: 80%;
-  }
-  #name {
-    margin: 15px 15px;
+  .container {
+    margin-top: 10px;
   }
 
   @media screen and (min-width: 900px) {
@@ -325,10 +323,7 @@
     .desktop {
       display: block;
     }
-    .edit-below {
-      height: 100%;
-      width: 20%;
-    }
+
     // Desktop grid
     .container {
       position: relative;
@@ -373,6 +368,12 @@
     .times-h::before {
       counter-increment: section;
       content: counter(section) '.00';
+      position: absolute;
+    }
+
+    .edit-below {
+      height: 100%;
+      width: 20%;
     }
     ul {
       margin: 5px 0;
@@ -391,17 +392,12 @@
     .li-last {
       margin-left: 40px;
     }
-    p {
-      margin: 0;
-    }
-    #title {
-      margin: 0;
-    }
 
     .day {
       counter-reset: section -1;
     }
 
+    // Card content
     #note {
       height: 100%;
       margin: 0 5px;
@@ -410,7 +406,16 @@
       display: flex;
       flex-direction: row;
       cursor: pointer;
+      overflow: hidden;
     }
+    #event-text {
+      margin: 10px 0;
+      width: 200px;
+    }
+    #title {
+      margin: 0;
+    }
+
     .content-card {
       flex-grow: 1;
     }
@@ -418,9 +423,9 @@
       height: 30px;
       color: white;
     }
+    // end of card content
     #gridHolder {
       max-height: 70vh;
-      min-height: none;
       overflow-x: hidden;
       scrollbar-width: thin;
       scrollbar-color: rgba(0, 0, 0, 1) rgba(96, 139, 150, 1);

@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="desktop">
-      <div id="gridHolder">
+      <div id="gridHolder" ref="gridHolder">
         <div deck class="container">
           <div
             class="times-h"
@@ -57,6 +57,7 @@
             :key="event.id"
             :style="event.styles"
             class="cardDay"
+            ref="cardDay"
           >
             <div id="note" :style="eventTypeClass(event)">
               <div @click="editEvent(event)" class="content-card">
@@ -217,6 +218,13 @@
       }
     },
     mounted() {
+      // scrolls to 9.00
+      this.$refs['gridHolder'].scrollTo({
+        top: 900,
+        left: 0,
+        behavior: 'smooth'
+      })
+
       this.createLines()
       if (!this.$store.state.selectedDay) {
         this.$router.push('/')

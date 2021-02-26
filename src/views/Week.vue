@@ -112,6 +112,7 @@
             </div>
             <div class="event-marker" v-if="day.event"></div>
           </div>
+          <div class="event-marker" v-if="day.event">Events</div>
         </div>
       </div>
     </div>
@@ -323,6 +324,9 @@
     .event-marker {
       display: none;
     }
+    .events-desktop {
+      display: block;
+    }
     .events {
       width: 100%;
       padding: 5px;
@@ -339,9 +343,8 @@
     .Sport {
       background-color: rgba(132, 146, 131, 1);
     }
-    .arrows {
-      margin: 100px auto 50px;
-      width: 60px;
+    .Fun {
+      background-color: rgb(246, 189, 96);
     }
     .week-container {
       display: flex;
@@ -354,6 +357,14 @@
       #day {
         font-size: 2rem;
         text-align: center;
+      }
+
+      .MobileArrow {
+        display: none;
+      }
+
+      .DesktopArrow {
+        display: block;
       }
     }
     .desktop-p,

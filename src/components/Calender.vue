@@ -46,18 +46,24 @@
       },
       // Showing the events and holidays with the same url parameter(date) and marked them on calendar -Sofia
       cellStyling(ymd) {
-        let days = []
         let redDays = []
+        let eventsOfDay = []
         this.$store.state.events.forEach(element => {
-          days.push(element.date)
+          if (element.date == ymd) {
+            eventsOfDay.push(element)
+          }
         })
 
         this.$store.state.publicHoliday.forEach(element => {
           redDays.push(element.date)
         })
-
-        if (days.includes(ymd)) {
+        // Showing the busy days  -Sofia
+        if (eventsOfDay.length > 0 && eventsOfDay.length < 3) {
           return 'calendar-cell-marked'
+        } else if (3 < eventsOfDay.length && eventsOfDay.length < 5) {
+          return 'calendar-cell-marked-medium'
+        } else if (5 < eventsOfDay.length) {
+          return 'calendar-cell-marked-max'
         } else if (redDays.includes(ymd)) {
           return 'calendar-cell-red'
         } else {
@@ -88,6 +94,18 @@
   }
   .calendar-cell-marked {
     background-color: rgba(229, 152, 118, 1);
+    box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
+    border-radius: 10px;
+    margin: 0.5rem;
+  }
+  .calendar-cell-marked-medium {
+    background-color: rgb(211, 110, 66);
+    box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
+    border-radius: 10px;
+    margin: 0.5rem;
+  }
+  .calendar-cell-marked-max {
+    background-color: rgb(193, 84, 37);
     box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
     border-radius: 10px;
     margin: 0.5rem;

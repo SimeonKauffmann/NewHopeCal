@@ -1,0 +1,178 @@
+[
+  {
+    "date": "2021-01-01",
+    "localName": "Nyårsdagen",
+    "name": "New Year's Day",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-01-06",
+    "localName": "Trettondedag jul",
+    "name": "Epiphany",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-04-02",
+    "localName": "Långfredagen",
+    "name": "Good Friday",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-04-04",
+    "localName": "Påskdagen",
+    "name": "Easter Sunday",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-04-05",
+    "localName": "Annandag påsk",
+    "name": "Easter Monday",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-05-01",
+    "localName": "Första maj",
+    "name": "International Workers' Day",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-05-13",
+    "localName": "Kristi himmelsfärds dag",
+    "name": "Ascension Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-05-23",
+    "localName": "Pingstdagen",
+    "name": "Pentecost Sunday",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-06-06",
+    "localName": "Sveriges nationaldag",
+    "name": "National Day of Sweden",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-06-25",
+    "localName": "Midsommarafton",
+    "name": "Midsummer Eve",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-06-26",
+    "localName": "Midsommar",
+    "name": "Midsummer Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-11-06",
+    "localName": "Alla helgons dag",
+    "name": "All Saints' Day",
+    "countryCode": "SE",
+    "fixed": false,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-12-24",
+    "localName": "Julafton",
+    "name": "Christmas Eve",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-12-25",
+    "localName": "Juldagen",
+    "name": "Christmas Day",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-12-26",
+    "localName": "Annandag jul",
+    "name": "St. Stephen's Day",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  },
+  {
+    "date": "2021-12-31",
+    "localName": "Nyårsafton",
+    "name": "New Year's Eve",
+    "countryCode": "SE",
+    "fixed": true,
+    "global": true,
+    "counties": null,
+    "launchYear": null,
+    "type": "Public"
+  }
+]

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import moment from 'moment'
-// import axios from 'axios'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -42,10 +42,11 @@ export default new Vuex.Store({
     },
 
     setQuote(state, quoteList) {
-      const number = Math.floor(Math.random() * (quoteList.length - 0))
-      const quote = quoteList[number].text
+      // Comment away and change "quote" to "quoteList" due of link 522 -Patrik
+      // const number = Math.floor(Math.random() * (quoteList.length - 0))
+      // const quote = quoteList[number].text
 
-      state.quote = quote
+      state.quote = quoteList
     },
 
     getEvents(state) {
@@ -100,12 +101,33 @@ export default new Vuex.Store({
 
   actions: {
     async fetchAll({ commit }) {
-      const [holidays, quotes] = await Promise.all([
-        Vue.axios.get(
+
+      // Detta är tidigare testning för med eller utan Promise och med tries som för backup.
+      //Just nu låt detta vara tills vi eller mest jag som tar detta arbete tills hitta lösning -Patrik
+      // Early version fetch when promise all to get data before show website.
+      // const [holidays, quotes] = await Promise.all([
+      //   axios.get(
+      //     '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
+      //   ),
+      //   axios.get('/quoteAPI')
+      // ])
+      // Late version to tries if one fetch get error and replace with backup JSON file.
+
+      let holidays = []
+      try {
+        holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
-        ),
-        Vue.axios.get('https://type.fit/api/quotes')
-      ])
+        )
+      } catch (error) {
+        holidays = await axios.get("/holidaysBackup2021")
+      }
+
+   
+      // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
+
+      // Kommentera bort på grund av deras 522 Error -Patrik
+      // let quotes = await axios.get('/quoteAPI')
+      let quotes = []
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)

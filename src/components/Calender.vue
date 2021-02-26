@@ -94,19 +94,19 @@
     margin: 0.5rem;
   }
   .calendar-cell-marked {
-    background-color: rgba(229, 152, 118, 1);
+    background-color: rgb(249, 153, 118);
     box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
     border-radius: 10px;
     margin: 0.5rem;
   }
   .calendar-cell-marked-medium {
-    background-color: rgb(211, 110, 66);
+    background-color: rgb(208, 115, 82);
     box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
     border-radius: 10px;
     margin: 0.5rem;
   }
   .calendar-cell-marked-max {
-    background-color: rgb(193, 84, 37);
+    background-color: rgb(191, 89, 51);
     box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
     border-radius: 10px;
     margin: 0.5rem;

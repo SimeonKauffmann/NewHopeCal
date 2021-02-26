@@ -78,7 +78,7 @@
               <b-button
                 href="#"
                 size="sm"
-                variant="secondary"
+                variant="white"
                 @click="removeAction(event.id)"
                 class="remove-btn"
                 >Remove</b-button
@@ -293,7 +293,8 @@
   }
 
   #gridHolder {
-    border: solid;
+    // border: 2px solid rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
     width: 80%;
     min-height: 70vh;
     overflow: scroll;
@@ -415,10 +416,14 @@
     }
     .remove-btn {
       height: 30px;
+      color: white;
     }
     #gridHolder {
       max-height: 70vh;
       min-height: none;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 1) rgba(96, 139, 150, 1);
     }
   }
 

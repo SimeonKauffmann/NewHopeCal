@@ -35,13 +35,16 @@
     },
 
     methods: {
+      //Set selected day in VueX -Sofia
       onContext(ctx) {
         this.context = ctx
         this.$store.commit('setSelectedDay', ctx)
       },
+      // Opening the dagsvy-Sofia
       onClick(ymd) {
         router.push({ path: `/day/${ymd}` })
       },
+      // Showing the events and holidays with the same url parameter(date) and marked them on calendar -Sofia
       cellStyling(ymd) {
         let days = []
         let redDays = []

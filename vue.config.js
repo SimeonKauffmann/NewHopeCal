@@ -39,7 +39,7 @@ module.exports = {
     proxy: {
       '/calanderAPI': {
         changeOrigin: true,
-        logLevel: "debug",
+        // logLevel: "debug",
         pathRewrite: { '^/calanderAPI': '' },
         target: 'https://date.nager.at/api'
         // target: "https://avancera.app/cities/" < Test Run fetch if the link get error

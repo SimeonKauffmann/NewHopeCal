@@ -42,10 +42,11 @@ export default new Vuex.Store({
     },
 
     setQuote(state, quoteList) {
-      const number = Math.floor(Math.random() * (quoteList.length - 0))
-      const quote = quoteList[number].text
+      // Comment away and change "quote" to "quoteList" due of link 522 -Patrik
+      // const number = Math.floor(Math.random() * (quoteList.length - 0))
+      // const quote = quoteList[number].text
 
-      state.quote = quote
+      state.quote = quoteList
     },
 
     getEvents(state) {
@@ -68,6 +69,7 @@ export default new Vuex.Store({
     },
 
     setInfo(state, info) {
+      //Sofia
       // state.events = state.events.filter(function (e) {
       //   return e.id != info.id;
       // });
@@ -89,7 +91,7 @@ export default new Vuex.Store({
       Vue.axios
         .delete(`${state.serverAddress}${state.userName}/${id}`)
         .then(() => this.commit('getEvents'))
-
+      //Sofia
       // state.events = state.events.filter(function (e) {
       //   return e.id != id;
       // });
@@ -100,8 +102,6 @@ export default new Vuex.Store({
   actions: {
     async fetchAll({ commit }) {
 
-      console.log("Test Fetch Begin")
-      
       // Detta är tidigare testning för med eller utan Promise och med tries som för backup.
       //Just nu låt detta vara tills vi eller mest jag som tar detta arbete tills hitta lösning -Patrik
       // Early version fetch when promise all to get data before show website.
@@ -112,17 +112,18 @@ export default new Vuex.Store({
       //   axios.get('/quoteAPI')
       // ])
       // Late version to tries if one fetch get error and replace with backup JSON file.
-      // let holidays = []
-      // try {
-      //   holidays = await axios.get(
-      //     '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
-      //   )
-      // } catch (error) {
-      //   holidays = await axios.get("/holidaysBackup2021")
-      // }
+
+      let holidays = []
+      try {
+        holidays = await axios.get(
+          '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
+        )
+      } catch (error) {
+        holidays = await axios.get("/holidaysBackup2021")
+      }
 
    
-      let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
+      // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
       // Kommentera bort på grund av deras 522 Error -Patrik
       // let quotes = await axios.get('/quoteAPI')

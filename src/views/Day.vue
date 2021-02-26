@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="desktop">
-      <div id="gridHolder">
+      <div id="gridHolder" ref="gridHolder">
         <div deck class="container">
           <div
             class="times-h"
@@ -57,6 +57,7 @@
             :key="event.id"
             :style="event.styles"
             class="cardDay"
+            ref="cardDay"
           >
             <div id="note" :style="eventTypeClass(event)">
               <div @click="editEvent(event)" class="content-card">
@@ -77,7 +78,7 @@
               <b-button
                 href="#"
                 size="sm"
-                variant="secondary"
+                variant="white"
                 @click="removeAction(event.id)"
                 class="remove-btn"
                 >Remove</b-button
@@ -119,9 +120,11 @@
       }
     },
     methods: {
+      // Delete the event -Sofia
       removeAction(event) {
         this.$store.commit('deleteEvent', event)
       },
+
       createLines() {
         for (let y = 0; y < 24; y++) {
           this.lines.push({
@@ -134,10 +137,11 @@
               height: '100%',
               width: '100%'
             },
-            id: Math.random()
+            id: y + Math.random()
           })
         }
       },
+      // Save different colors to different types of events -Sofia
       eventTypeClass(event) {
         if (event.type === 'Work') {
           return 'background-color: rgba(96, 139, 150, 1)'
@@ -149,17 +153,23 @@
         return 'background-color: rgba(229, 152, 118, 1);'
       },
 
+      // Showing the existing event using prop -Sofia
       editEvent(event) {
         this.currentEvent = event
         this.modalShow = true
       },
+      //closing the Edit(modal) -Sofia
       onCancel() {
         this.modalShow = false
       },
+
       onOk() {
         this.modalShow = false
       },
-
+      onClose() {
+        this.modalShow = false
+      },
+      // Create an new object(event) -Sofia
       createEvent() {
         this.currentEvent = {
           date: this.$route.params.day,
@@ -172,9 +182,8 @@
         }
         this.modalShow = true
       },
-      onClose() {
-        this.modalShow = false
-      },
+
+      // getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
       getTodaysEvents() {
         let todayEvents = []
         this.$store.state.events.forEach(element => {
@@ -190,6 +199,7 @@
 
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
+            // Styles used by the cards to get right position in grid
             gridRowStart: startNumber + 1,
             gridRowEnd: endNumber + 1,
             height: `100%`,
@@ -208,14 +218,23 @@
       }
     },
     mounted() {
+      // scrolls to 9.00
+      this.$refs['gridHolder'].scrollTo({
+        top: 900,
+        left: 0,
+        behavior: 'smooth'
+      })
+
       this.createLines()
       if (!this.$store.state.selectedDay) {
         this.$router.push('/')
       }
+
+      //  Show if the day is a holiday-Sofia
       this.$store.dispatch('fetchAll')
       this.$store.state.publicHoliday.forEach(element => {
         if (element.date === this.$route.params.day) {
-          this.redDay = element.name
+          this.redDay === element.name
         }
       })
     },
@@ -273,12 +292,9 @@
     border-radius: 2%;
   }
 
-  #plus {
-    margin-left: 22rem;
-    cursor: pointer;
-  }
   #gridHolder {
-    border: solid;
+    // border: 2px solid rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
     width: 80%;
     min-height: 70vh;
     overflow: scroll;
@@ -301,18 +317,6 @@
   #name {
     margin: 15px 15px;
   }
-  .noneColor {
-    background-color: rgba(229, 152, 118, 1);
-  }
-  .workColor {
-    background-color: rgba(96, 139, 150, 1);
-  }
-  .sportColor {
-    background-color: rgba(132, 146, 131, 1);
-  }
-  .funColor {
-    background-color: rgb(246, 189, 96);
-  }
 
   @media screen and (min-width: 900px) {
     .mobile {
@@ -325,30 +329,7 @@
       height: 100%;
       width: 20%;
     }
-    ul {
-      margin: 5px 0;
-    }
-    li {
-      margin-left: 10px;
-      margin-bottom: 4px;
-      display: inline-block;
-    }
-    li::before {
-      content: url('../assets/clock.svg');
-      top: 6px;
-      left: -20px;
-      position: absolute;
-    }
-    .li-last {
-      margin-left: 40px;
-    }
-    p {
-      display: inline-block;
-      margin: 0;
-    }
-    #title {
-      margin: 0;
-    }
+    // Desktop grid
     .container {
       position: relative;
       margin-top: 10px;
@@ -381,19 +362,46 @@
         '22 22 22 22'
         '23 23 23 23';
     }
+    // Lines
     .times-h {
       position: absolute;
       border-bottom: 3px solid rgba(0, 0, 0, 0.6);
       pointer-events: none;
       z-index: 1;
     }
-    .day {
-      counter-reset: section -1;
-    }
+    // Timestamps
     .times-h::before {
       counter-increment: section;
       content: counter(section) '.00';
     }
+    ul {
+      margin: 5px 0;
+    }
+    li {
+      margin-left: 10px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+    li::before {
+      content: url('../assets/clock.svg');
+      top: 6px;
+      left: -20px;
+      position: absolute;
+    }
+    .li-last {
+      margin-left: 40px;
+    }
+    p {
+      margin: 0;
+    }
+    #title {
+      margin: 0;
+    }
+
+    .day {
+      counter-reset: section -1;
+    }
+
     #note {
       height: 100%;
       margin: 0 5px;
@@ -401,7 +409,6 @@
       border-radius: 15px;
       display: flex;
       flex-direction: row;
-
       cursor: pointer;
     }
     .content-card {
@@ -409,10 +416,23 @@
     }
     .remove-btn {
       height: 30px;
+      color: white;
     }
     #gridHolder {
       max-height: 70vh;
       min-height: none;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 1) rgba(96, 139, 150, 1);
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    #plus {
+      cursor: pointer;
+      margin-right: 7rem;
+      margin-top: 2rem;
+      font-size: 4rem;
     }
   }
 </style>

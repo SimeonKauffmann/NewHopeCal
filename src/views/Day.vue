@@ -228,11 +228,13 @@
         if (this.$refs['cardDay'] != undefined) {
           this.$refs['cardDay'][0].scrollIntoView({ behavior: 'smooth' })
         } else {
-          this.$refs['gridHolder'].scrollTo({
-            top: 900,
-            left: 0,
-            behavior: 'smooth'
-          })
+          if (this.$refs['gridHolder'] != undefined) {
+            this.$refs['gridHolder'].scrollTo({
+              top: 900,
+              left: 0,
+              behavior: 'smooth'
+            })
+          }
         }
       }
     },

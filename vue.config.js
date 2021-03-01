@@ -1,9 +1,8 @@
 module.exports = {
-    publicPath: "/newhopecal",
-    pwa: {
-        manifestOptions: {
-            background_color: "White"
-
+  publicPath: '/newhopecal',
+  pwa: {
+    manifestOptions: {
+      background_color: 'White'
     },
     name: 'New Hope',
     themeColor: 'White',
@@ -24,13 +23,12 @@ module.exports = {
         //   },
         //   urlPattern: 'https://type.fit/api/quotes'
         // },
-         {
+        {
           handler: 'NetworkFirst',
           options: {
             networkTimeoutSeconds: 5
           },
-          urlPattern:
-            'http://bd2b6be57a20.ngrok.io/events/'
+          urlPattern: 'http://bd2b6be57a20.ngrok.io/events/'
         }
       ]
     }
@@ -44,16 +42,15 @@ module.exports = {
         target: 'https://date.nager.at/api'
         // target: "https://avancera.app/cities/" < Test Run fetch if the link get error
         // https://type.fit/api/quotes
-      },
+      }
 
       // Det hade varit att dom har blockad av CORS, men error 522 gäller så kommentera bort -Patrik
       // '/quoteAPI': {
       //   changeOrigin: true,
       //   logLevel: "debug",
-      //   pathRewrite: { '^/quoteAPI': '' }, 
+      //   pathRewrite: { '^/quoteAPI': '' },
       //   target: 'https://type.fit/api/quotes'
       // }
-
     }
   }
 }

@@ -165,13 +165,16 @@
       //closing the Edit(modal) -Sofia
       onCancel() {
         this.modalShow = false
+        this.checkScroll()
       },
 
       onOk() {
         this.modalShow = false
+        this.checkScroll()
       },
       onClose() {
         this.modalShow = false
+        this.checkScroll()
       },
       // Create an new object(event) -Sofia
       createEvent() {

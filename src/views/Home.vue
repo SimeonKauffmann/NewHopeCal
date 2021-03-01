@@ -21,15 +21,6 @@
         </p>
       </div>
       <h2 v-if="!events">No plan for today!</h2>
-      <!-- <div class="box1">
-        <p>Meeting with ...</p>
-      </div>
-      <div class="box2">
-        <p>Today is ... birthday</p>
-      </div>
-      <div class="box3">
-        <p>Lunch with ...</p>
-      </div> -->
 
       <Popup class="quote" v-if="popupTriggers">
         <h2>Quote of the day</h2>
@@ -171,24 +162,6 @@
     border-spacing: 10px;
   }
 
-  .box1 {
-    width: 400px;
-    padding: 10px;
-    background: #849283;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 2vh auto;
-  }
-
-  .box2 {
-    width: 400px;
-    padding: 10px;
-    background: #828282;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 2vh auto;
-  }
-
   .box3 {
     width: 400px;
     padding: 10px;
@@ -217,23 +190,13 @@
       text-align: center;
       font-size: 16px;
     }
-
-    .box2 {
-      width: 400px;
-      padding: 10px;
-      background: #828282;
-      border: 1px solid white;
-      border-radius: 40px;
-      margin: 2vh auto;
+  }
+  @media screen and (max-width: 515px) {
+    .quote {
+      width: 370px;
     }
-
     .box3 {
-      width: 400px;
-      padding: 10px;
-      background: #e59876;
-      border: 1px solid white;
-      border-radius: 40px;
-      margin: 2vh auto;
+      width: 370px;
     }
   }
 </style>

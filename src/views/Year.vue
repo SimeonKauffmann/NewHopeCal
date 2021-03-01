@@ -3,15 +3,14 @@
     <b-container>
       <b-row no-gutters>
         <b-col class="year-col year-col-title">
-          <h1 class="numbers-large mobil">{{ year }}</h1>
+          <h1 class="numbers-large">{{ year }}</h1>
         </b-col>
+        <div class="break"></div>
         <b-col class="year-col year-col-svg">
           <!-- Arrow left -->
           <div class="svg-left">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
               fill="currentColor"
               class="bi bi-arrow-left"
               viewBox="0 0 16 16"
@@ -28,8 +27,6 @@
           <div class="svg-right">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
               fill="currentColor"
               class="bi bi-arrow-right"
               viewBox="0 0 16 16"
@@ -44,11 +41,11 @@
         </b-col>
 
         <!-- Empty row for seperation -->
-        <b-col></b-col>
+        <b-col class="disable-desktop"></b-col>
       </b-row>
 
       <!-- Month buttons -->
-      <b-row no-gutters>
+      <b-row no-gutters class="desktop-buttons">
         <b-col class="year-col">
           <b-row no-gutters>
             <b-col class="year-col year-col-buttons January">
@@ -225,8 +222,9 @@
 
 <style lang="scss" scoped>
   /*==========
-    Layout
-===========*/
+          Layout
+      ===========*/
+
   .year-col-title {
     margin-left: 15px;
     margin-top: 30px;
@@ -252,8 +250,13 @@
   }
 
   /*==========
-   Styling
-===========*/
+         Styling
+      ===========*/
+  .bi-arrow-left,
+  .bi-arrow-right {
+    height: 28px;
+    width: 28px;
+  }
   .container {
     padding-left: 5px;
     padding-right: 5px;
@@ -269,8 +272,8 @@
   }
 
   /*===========
-  Animations
-============*/
+        Animations
+      ============*/
 
   // Hover animation buttons
   .btn {
@@ -325,6 +328,53 @@
     }
   }
 
-  @media only screen and (min-width: 900px) {
+  //Layout Desktop version
+  @media screen and(min-width: 900px) {
+    .year-col-title {
+      margin: 0;
+      width: 95vw;
+      text-align: center;
+      .numbers-large {
+        font-size: 3rem;
+      }
+    }
+    //Seperate Year & Arrows
+    .break {
+      flex-basis: 100%;
+      height: 0;
+    }
+
+    //Arrows, placement & Size
+    .year-col-svg {
+      margin: 0;
+      display: flex;
+      .svg-left {
+        padding: 0;
+        flex-grow: 1;
+      }
+    }
+    .bi-arrow-left,
+    .bi-arrow-right {
+      height: 75px;
+      width: 75px;
+    }
+    .disable-desktop {
+      display: none;
+    }
+
+    .year-col-buttons {
+      margin: 0;
+      width: 50px;
+    }
+    .date-button {
+      height: 180px;
+      width: 200px;
+    }
+  }
+  //Size monthly buttons screen 1400px
+  @media screen and(min-width: 1400px) {
+    .date-button {
+      width: 400px;
+    }
   }
 </style>

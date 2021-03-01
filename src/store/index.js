@@ -15,7 +15,7 @@ export default new Vuex.Store({
     // events: JSON.parse(localStorage.getItem('events') || '[]')
     events: [],
     userName: localStorage.getItem('userName') || null,
-    serverAddress: 'http://bd2b6be57a20.ngrok.io/events/'
+    serverAddress: 'http://061844f18b6a.ngrok.io/events/'
   },
 
   mutations: {
@@ -70,9 +70,9 @@ export default new Vuex.Store({
 
     setInfo(state, info) {
       //Sofia
-      // state.events = state.events.filter(function (e) {
-      //   return e.id != info.id;
-      // });
+      state.events = state.events.filter(function (e) {
+        return e.id != info.id;
+      });
 
       Vue.axios
         .post(`${state.serverAddress}${state.userName}`, info)
@@ -91,11 +91,11 @@ export default new Vuex.Store({
       Vue.axios
         .delete(`${state.serverAddress}${state.userName}/${id}`)
         .then(() => this.commit('getEvents'))
-      //Sofia
-      // state.events = state.events.filter(function (e) {
-      //   return e.id != id;
-      // });
-      // localStorage.setItem('events', JSON.stringify(state.events));
+      // Sofia
+      state.events = state.events.filter(function (e) {
+        return e.id != id;
+      });
+      localStorage.setItem('events', JSON.stringify(state.events));
     }
   },
 
@@ -118,7 +118,7 @@ export default new Vuex.Store({
         holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         )
-      } catch (error) {
+      } catch (err) {
         holidays = await axios.get("/holidaysBackup2021")
       }
 

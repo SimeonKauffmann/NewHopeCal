@@ -128,7 +128,6 @@
       removeAction(event) {
         this.$store.commit('deleteEvent', event)
       },
-
       createLines() {
         for (let y = 0; y < 24; y++) {
           this.lines.push({
@@ -156,7 +155,6 @@
         }
         return 'background-color: rgba(229, 152, 118, 1);'
       },
-
       // Showing the existing event using prop -Sofia
       editEvent(event) {
         this.currentEvent = event
@@ -167,7 +165,6 @@
         this.modalShow = false
         this.checkScroll()
       },
-
       onOk() {
         this.modalShow = false
         this.checkScroll()
@@ -189,7 +186,6 @@
         }
         this.modalShow = true
       },
-
       // Getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
       getTodaysEvents() {
         let todayEvents = []
@@ -198,12 +194,9 @@
             todayEvents.push(element)
           }
         })
-
         for (let x = 0; x < todayEvents.length; x++) {
           let startNumber = parseInt(todayEvents[x].startTime.slice(0, 2))
-
           todayEvents[x].startNumber = startNumber
-
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
             // Styles used by the cards to get right position in grid -Erik
@@ -217,7 +210,6 @@
             borderBottom: ' 3px solid transparent'
           }
         }
-
         todayEvents.sort(function(a, b) {
           return a.startNumber - b.startNumber
         })
@@ -228,13 +220,11 @@
         if (this.$refs['cardDay'] != undefined) {
           this.$refs['cardDay'][0].scrollIntoView({ behavior: 'smooth' })
         } else {
-          if (this.$refs['gridHolder'] != undefined) {
-            this.$refs['gridHolder'].scrollTo({
-              top: 900,
-              left: 0,
-              behavior: 'smooth'
-            })
-          }
+          this.$refs['gridHolder'].scrollTo({
+            top: 900,
+            left: 0,
+            behavior: 'smooth'
+          })
         }
       }
     },

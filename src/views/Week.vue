@@ -239,6 +239,7 @@
     height: 100%;
     margin: 40px auto 10px;
     .days {
+      cursor: pointer;
       margin: 2.5vw auto;
       width: 100%;
       height: 60px;

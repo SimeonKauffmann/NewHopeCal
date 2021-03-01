@@ -439,10 +439,13 @@
     }
     // end of card content
     #gridHolder {
+      border-bottom: 2px solid black;
+      border-top: 2px solid black;
+      border-left: 2px solid black;
       max-height: 70vh;
       overflow-x: hidden;
       scrollbar-width: thin;
-      scrollbar-color: rgba(0, 0, 0, 1) rgba(96, 139, 150, 1);
+      scrollbar-color: rgba(0, 0, 0, 1) white;
     }
   }
   @keyframes fadeIn {

@@ -173,13 +173,14 @@
   }
 
   //Styling Popup-box
+
   .quote {
     width: 500px;
     height: 350px;
     margin: 5% auto;
     padding: 10px;
     position: relative;
-    animation: 3s ease-in 0s 1 fadeIn;
+    animation: 2s ease-in 0s 1 fadeIn;
     h2 {
       padding: 20px 0 10px 11px;
       text-align: left;

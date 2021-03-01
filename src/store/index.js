@@ -51,10 +51,15 @@ export default new Vuex.Store({
       state.selectedDay = ctx
     },
 
-    setQuote(state, quote) {
-      // const number = Math.floor(Math.random() * (quoteList.length - 0))
-      // const quote = quoteList[number].text
+    setQuote(state, quoteList) {
 
+      // Get content quote
+      const content = quoteList.content
+      // Get Author of quotes
+      const author = quoteList.author
+
+      // Assemble together
+      const quote = content + " -" + author
       state.quote = quote
     },
 
@@ -136,11 +141,18 @@ export default new Vuex.Store({
         holidays = await axios.get("/holidaysBackup2021.json")
       }
 
+      let quotes = []
+      try {
+        quotes = await axios.get('http://api.quotable.io/random')
+      } catch (err) {
+        quotes = await axios.get("/quotesBackup.json")
+      }
+
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
       // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
       // let quotes = await axios.get('/quoteAPI')
-      let quotes = []
+
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)

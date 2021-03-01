@@ -30,7 +30,7 @@ module.exports = {
             networkTimeoutSeconds: 5
           },
           urlPattern:
-            'http://azureadsimeonkauffmann-fcccfdf1.localhost.run/events/'
+            'http://bd2b6be57a20.ngrok.io/events/'
         }
       ]
     }

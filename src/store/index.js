@@ -42,11 +42,10 @@ export default new Vuex.Store({
     },
 
     setQuote(state, quoteList) {
-      // Comment away and change "quote" to "quoteList" due of link 522 -Patrik
-      // const number = Math.floor(Math.random() * (quoteList.length - 0))
-      // const quote = quoteList[number].text
+      const number = Math.floor(Math.random() * (quoteList.length - 0))
+      const quote = quoteList[number].text
 
-      state.quote = quoteList
+      state.quote = quote
     },
 
     getEvents(state) {
@@ -101,7 +100,6 @@ export default new Vuex.Store({
 
   actions: {
     async fetchAll({ commit }) {
-
       // Detta är tidigare testning för med eller utan Promise och med tries som för backup.
       //Just nu låt detta vara tills vi eller mest jag som tar detta arbete tills hitta lösning -Patrik
       // Early version fetch when promise all to get data before show website.
@@ -122,7 +120,6 @@ export default new Vuex.Store({
         holidays = await axios.get("/holidaysBackup2021")
       }
 
-   
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
       // Kommentera bort på grund av deras 522 Error -Patrik

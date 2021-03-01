@@ -122,7 +122,7 @@ export default new Vuex.Store({
 
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
-      // Kommentera bort på grund av deras 522 Error -Patrik
+      // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
       // let quotes = await axios.get('/quoteAPI')
       let quotes = []
 

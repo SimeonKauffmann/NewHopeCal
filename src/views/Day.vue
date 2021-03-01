@@ -2,6 +2,7 @@
   <div class="day">
     <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
     <h2 id="name">{{ redDay }}</h2>
+    <p :style="{ color: 'red' }">{{ offlineMessage }}</p>
 
     <div class="mobile">
       <div id="gridHolder">
@@ -120,13 +121,18 @@ export default {
       editShow: false,
       currentEvent: null,
       redDay: null,
-      lines: []
+      lines: [],
+      offlineMessage: ''
     }
   },
   methods: {
     // Delete the event -Sofia
     removeAction(event) {
-      this.$store.commit('deleteEvent', event)
+      if (this.$store.state.isOnline) {
+        this.$store.commit('deleteEvent', event)
+      } else {
+        this.offlineMessage = 'You can not delete an event when offline'
+      }
     },
     createLines() {
       for (let y = 0; y < 24; y++) {
@@ -165,7 +171,8 @@ export default {
       this.modalShow = false
       this.checkScroll()
     },
-    onOk() {
+    onOk(message) {
+      this.offlineMessage = message
       this.modalShow = false
       this.checkScroll()
     },

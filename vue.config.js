@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: "/newhopecal",
+  publicPath: ".",
   pwa: {
     manifestOptions: {
       background_color: "White"
@@ -30,7 +30,7 @@ module.exports = {
             networkTimeoutSeconds: 5
           },
           urlPattern:
-            'http://061844f18b6a.ngrok.io/events/'
+            'https://061844f18b6a.ngrok.io/events/'
         }
       ]
     }

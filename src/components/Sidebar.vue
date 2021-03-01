@@ -153,11 +153,4 @@
   }
 }
 
-/*Desktop style */
-@media screen and (min-width: 1200px){
-  .nav-list{
-    
-  }
-}
-
 </style>

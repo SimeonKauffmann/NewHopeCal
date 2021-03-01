@@ -230,9 +230,8 @@ div {
 
     button {
       position: absolute;
-      justify-content: center;
       background-color: white;
-      border: 1px solid black;
+      border: 5px solid black;
       border-radius: 40px;
       color: black;
       padding: 15px 32px;

@@ -24,7 +24,7 @@
 
       <Popup class="quote" v-if="popupTriggers">
         <h2>Quote of the day</h2>
-        <p v-if="quote">"{{ quote }}"</p>
+        <p v-if="quote">{{ quote }}</p>
 
         <button @click="closeButton">Close</button>
       </Popup>

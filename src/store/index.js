@@ -72,9 +72,9 @@ export default new Vuex.Store({
 
     setInfo(state, info) {
       //Sofia
-      // state.events = state.events.filter(function (e) {
-      //   return e.id != info.id;
-      // });
+      state.events = state.events.filter(function (e) {
+        return e.id != info.id;
+      });
 
       Vue.axios
         .post(`${state.serverAddress}${state.userName}`, info)
@@ -131,13 +131,13 @@ export default new Vuex.Store({
         holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         )
-      } catch (error) {
-        holidays = await axios.get('/holidaysBackup2021')
+      } catch (err) {
+        holidays = await axios.get("/holidaysBackup2021")
       }
 
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
-      // Kommentera bort på grund av deras 522 Error -Patrik
+      // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
       // let quotes = await axios.get('/quoteAPI')
       let quotes = []
 

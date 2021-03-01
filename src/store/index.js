@@ -52,14 +52,13 @@ export default new Vuex.Store({
     },
 
     setQuote(state, quoteList) {
-
       // Get content quote
       const content = quoteList.content
       // Get Author of quotes
       const author = quoteList.author
 
       // Assemble together
-      const quote = content + " -" + author
+      const quote = content + ' -' + author
       state.quote = quote
     },
 
@@ -77,9 +76,9 @@ export default new Vuex.Store({
 
     setInfo(state, info) {
       //Sofia
-      state.events = state.events.filter(function (e) {
-        return e.id != info.id;
-      });
+      state.events = state.events.filter(function(e) {
+        return e.id != info.id
+      })
 
       Vue.axios
         .post(`${state.serverAddress}${state.userName}`, info)
@@ -96,25 +95,28 @@ export default new Vuex.Store({
     },
 
     sendOfflineEvents(state) {
-      state.offlineEvents.forEach(event => {
-        Vue.axios
-          .post(`${state.serverAddress}${state.userName}`, event)
-      }).then(() => this.commit('getEvents'))
+      state.offlineEvents
+        .forEach(event => {
+          Vue.axios.post(`${state.serverAddress}${state.userName}`, event)
+        })
+        .then(() => this.commit('getEvents'))
     },
 
     deleteEvent(state, id) {
       if (!state.isOnline) {
         // Sofia
-        state.offlineEvents = state.offlineEvents.filter(function (e) {
-          return e.id != id;
-        });
-        localStorage.setItem('offlineEvents', JSON.stringify(state.offlineEvents));
+        state.offlineEvents = state.offlineEvents.filter(function(e) {
+          return e.id != id
+        })
+        localStorage.setItem(
+          'offlineEvents',
+          JSON.stringify(state.offlineEvents)
+        )
       } else {
         Vue.axios
           .delete(`${state.serverAddress}${state.userName}/${id}`)
           .then(() => this.commit('getEvents'))
       }
-
     }
   },
 
@@ -138,21 +140,20 @@ export default new Vuex.Store({
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         )
       } catch (err) {
-        holidays = await axios.get("/holidaysBackup2021.json")
+        holidays = await axios.get('/holidaysBackup2021.json')
       }
 
       let quotes = []
       try {
         quotes = await axios.get('http://api.quotable.io/random')
       } catch (err) {
-        quotes = await axios.get("/quotesBackup.json")
+        quotes = await axios.get('/quotesBackup.json')
       }
 
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
       // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
       // let quotes = await axios.get('/quoteAPI')
-
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)

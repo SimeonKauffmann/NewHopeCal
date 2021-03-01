@@ -205,15 +205,13 @@
     padding: 10px;
 
     button {
-<<<<<<< HEAD
       position: absolute;
-=======
       justify-content: center;
->>>>>>> 5f15603e0f2b7f197660cd8189f392196ac5cbf8
       background-color: white;
-      border: 5px solid black;
+      border: none;
+      box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
       border-radius: 40px;
-      color: black;
+      //color: black;
       padding: 10px 32px;
       margin: 50px;
       text-align: center;
@@ -236,32 +234,6 @@
       border: 1px solid white;
       border-radius: 40px;
       margin: 2vh auto;
-    }
-
-    .quote {
-      position: absolute;
-      top: 20vh;
-      left: 10vw;
-
-      button {
-        position: absolute;
-        justify-content: center;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 40px;
-        color: black;
-        padding: 15px 32px;
-        margin: 0px;
-        top: 70%;
-        left: 70%;
-        text-align: center;
-        font-size: 16px;
-      }
-
-      p {
-        font-style: italic;
-        text-align: center;
-      }
     }
   }
 </style>

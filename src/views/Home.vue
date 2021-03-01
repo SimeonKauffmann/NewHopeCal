@@ -21,15 +21,6 @@
         </p>
       </div>
       <h2 v-if="!events">No plan for today!</h2>
-      <!-- <div class="box1">
-        <p>Meeting with ...</p>
-      </div>
-      <div class="box2">
-        <p>Today is ... birthday</p>
-      </div>
-      <div class="box3">
-        <p>Lunch with ...</p>
-      </div> -->
 
       <Popup class="quote" v-if="popupTriggers">
         <h2>Quote of the day</h2>
@@ -171,24 +162,6 @@
     border-spacing: 10px;
   }
 
-  .box1 {
-    width: 400px;
-    padding: 10px;
-    background: #849283;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 2vh auto;
-  }
-
-  .box2 {
-    width: 400px;
-    padding: 10px;
-    background: #828282;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 2vh auto;
-  }
-
   .box3 {
     width: 400px;
     padding: 10px;
@@ -205,59 +178,25 @@
     padding: 10px;
 
     button {
+      position: absolute;
       justify-content: center;
       background-color: white;
-      border: 1px solid black;
+      border: none;
+      box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
       border-radius: 40px;
-      color: black;
+      //color: black;
       padding: 10px 32px;
       margin: 50px;
       text-align: center;
       font-size: 16px;
     }
-
-    .box2 {
-      width: 400px;
-      padding: 10px;
-      background: #828282;
-      border: 1px solid white;
-      border-radius: 40px;
-      margin: 2vh auto;
-    }
-
-    .box3 {
-      width: 400px;
-      padding: 10px;
-      background: #e59876;
-      border: 1px solid white;
-      border-radius: 40px;
-      margin: 2vh auto;
-    }
-
+  }
+  @media screen and (max-width: 515px) {
     .quote {
-      position: absolute;
-      top: 20vh;
-      left: 10vw;
-
-      button {
-        position: absolute;
-        justify-content: center;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 40px;
-        color: black;
-        padding: 15px 32px;
-        margin: 0px;
-        top: 70%;
-        left: 70%;
-        text-align: center;
-        font-size: 16px;
-      }
-
-      p {
-        font-style: italic;
-        text-align: center;
-      }
+      width: 370px;
+    }
+    .box3 {
+      width: 370px;
     }
   }
 </style>

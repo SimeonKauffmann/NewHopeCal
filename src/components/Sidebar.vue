@@ -99,4 +99,19 @@
       }
     }
   }
+
+  @media only screen and (min-width: 900px) {
+    //Animation & transition for triangel Navbar
+    .nav-link::before {
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 400ms 0ms ease-out;
+      animation: none;
+    }
+    .nav-link:hover::before,
+    .nav-link:hover::after {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+  }
 </style>

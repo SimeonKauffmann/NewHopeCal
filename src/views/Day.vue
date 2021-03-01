@@ -165,13 +165,16 @@
       //closing the Edit(modal) -Sofia
       onCancel() {
         this.modalShow = false
+        this.checkScroll()
       },
 
       onOk() {
         this.modalShow = false
+        this.checkScroll()
       },
       onClose() {
         this.modalShow = false
+        this.checkScroll()
       },
       // Create an new object(event) -Sofia
       createEvent() {
@@ -247,7 +250,7 @@
       //  Show if the day is a holiday -Sofia
       this.$store.dispatch('fetchAll')
       this.$store.state.publicHoliday.forEach(element => {
-        if ((element.date = this.$route.params.day)) {
+        if (element.date === this.$route.params.day) {
           this.redDay = element.name
         }
       })

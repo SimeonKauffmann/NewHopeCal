@@ -3,6 +3,7 @@
     <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
     <h2 id="name">{{ redDay }}</h2>
 
+    <!-- Mobile version -->
     <div class="mobile">
       <div id="gridHolder">
         <b-card-group deck class="container">
@@ -44,6 +45,8 @@
         </b-card-group>
       </div>
     </div>
+
+    <!-- Desktop version -->
     <div class="desktop">
       <div id="gridHolder" ref="gridHolder">
         <div deck class="container">
@@ -92,6 +95,7 @@
         </div>
       </div>
     </div>
+    <!-- Edit plusbutton -->
     <span id="editHolder">
       <b-icon-plus-circle
         id="plus"
@@ -129,6 +133,7 @@
         this.$store.commit('deleteEvent', event)
       },
 
+      // create timelines
       createLines() {
         for (let y = 0; y < 24; y++) {
           this.lines.push({
@@ -165,13 +170,15 @@
       //closing the Edit(modal) -Sofia
       onCancel() {
         this.modalShow = false
+        this.checkScroll()
       },
-
       onOk() {
         this.modalShow = false
+        this.checkScroll()
       },
       onClose() {
         this.modalShow = false
+        this.checkScroll()
       },
       // Create an new object(event) -Sofia
       createEvent() {
@@ -186,7 +193,6 @@
         }
         this.modalShow = true
       },
-
       // Getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
       getTodaysEvents() {
         let todayEvents = []
@@ -195,12 +201,9 @@
             todayEvents.push(element)
           }
         })
-
         for (let x = 0; x < todayEvents.length; x++) {
           let startNumber = parseInt(todayEvents[x].startTime.slice(0, 2))
-
           todayEvents[x].startNumber = startNumber
-
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
             // Styles used by the cards to get right position in grid -Erik
@@ -214,12 +217,12 @@
             borderBottom: ' 3px solid transparent'
           }
         }
-
         todayEvents.sort(function(a, b) {
           return a.startNumber - b.startNumber
         })
         return todayEvents
       },
+
       // scrolls to 9.00 or first event of the day
       checkScroll() {
         if (this.$refs['cardDay'] != undefined) {
@@ -237,7 +240,7 @@
       // scrolls to 9.00 or first event of the day
       this.checkScroll()
 
-      // Creates the lines
+      // Creates the timelines
       this.createLines()
 
       if (!this.$store.state.selectedDay) {
@@ -247,7 +250,7 @@
       //  Show if the day is a holiday -Sofia
       this.$store.dispatch('fetchAll')
       this.$store.state.publicHoliday.forEach(element => {
-        if ((element.date = this.$route.params.day)) {
+        if (element.date === this.$route.params.day) {
           this.redDay = element.name
         }
       })
@@ -417,6 +420,7 @@
       flex-direction: row;
       cursor: pointer;
       overflow: hidden;
+      animation: 1s ease-out 0s 1 fadeIn;
     }
     #event-text {
       margin: 10px 0;
@@ -435,13 +439,28 @@
     }
     // end of card content
     #gridHolder {
+      border-bottom: 2px solid black;
+      border-top: 2px solid black;
+      border-left: 2px solid black;
       max-height: 70vh;
       overflow-x: hidden;
       scrollbar-width: thin;
-      scrollbar-color: rgba(0, 0, 0, 1) rgba(96, 139, 150, 1);
+      scrollbar-color: rgba(0, 0, 0, 1) white;
     }
   }
+  @keyframes fadeIn {
+    from {
+      transform: translate(100px, 100px);
+      opacity: 0.5;
+      transform-origin: left;
+    }
 
+    to {
+      transform: translate(0px, 0px);
+      opacity: 1;
+      transform-origin: left;
+    }
+  }
   @media screen and (min-width: 900px) {
     #plus {
       cursor: pointer;

@@ -101,28 +101,17 @@
   }
 
   @media only screen and (min-width: 900px) {
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 80%;
-      height: 2px;
-      top: 22px;
-      left: 10%;
-      background: rgba(0, 0, 0, 0.6);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 400ms 250ms ease-in;
-    }
+    //Animation & transition for triangel Navbar
     .nav-link::before {
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 400ms 250ms ease-in;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 400ms 0ms ease-out;
       animation: none;
     }
     .nav-link:hover::before,
     .nav-link:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
+      transform: scaleY(1);
+      transform-origin: top;
     }
   }
 </style>

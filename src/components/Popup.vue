@@ -21,6 +21,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 40px;
-    background-color: rgba(255, 255, 255, 0.982);
+    background-color: #d3d1c2;
+    transform-origin: right;
+    transition: transform 400ms 250ms ease-in;
   }
 </style>

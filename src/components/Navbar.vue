@@ -3,7 +3,9 @@
   <nav class="hope-navbar">
     <div class="container container-fluid">
       <ul class="d-flex flex-row">
-        <li><router-link to="/" class="nav-link">Home</router-link></li>
+        <li>
+          <router-link to="/" class="nav-link">Home</router-link>
+        </li>
         <li><router-link to="/week" class="nav-link">Week</router-link></li>
         <li><router-link to="/month" class="nav-link">Month</router-link></li>
         <li><router-link to="/year" class="nav-link">Year</router-link></li>
@@ -20,6 +22,8 @@
 
 <style lang="scss" scoped>
   $yellow-color: #d3d1c2;
+
+  //Navbar Style
   .hope-navbar {
     background-color: $yellow-color;
     box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
@@ -46,12 +50,11 @@
           position: relative;
 
           &::before {
-            transform: none !important;
             content: '';
             position: absolute;
             bottom: -20px;
             left: calc(50% - 30px);
-            // Triangel
+            // CSS Triangel
             border-left: 30px solid transparent;
             border-right: 30px solid transparent;
             border-top: 20px solid $yellow-color;

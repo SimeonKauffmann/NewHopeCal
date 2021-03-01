@@ -105,12 +105,6 @@
             >
               {{ event.title }}
             </div>
-            <div class="events-desktop" v-if="day.event">
-              <div class="events" v-for="event in day.events" :key="event.id">
-                {{ event.title }}
-              </div>
-            </div>
-            <div class="event-marker" v-if="day.event"></div>
           </div>
           <div class="event-marker" v-if="day.event">Events</div>
         </div>
@@ -245,6 +239,7 @@
     height: 100%;
     margin: 40px auto 10px;
     .days {
+      cursor: pointer;
       margin: 2.5vw auto;
       width: 100%;
       height: 60px;

@@ -21,19 +21,10 @@
         </p>
       </div>
       <h2 v-if="!events">No plan for today!</h2>
-      <!-- <div class="box1">
-        <p>Meeting with ...</p>
-      </div>
-      <div class="box2">
-        <p>Today is ... birthday</p>
-      </div>
-      <div class="box3">
-        <p>Lunch with ...</p>
-      </div> -->
 
       <Popup class="quote" v-if="popupTriggers">
         <h2>Quote of the day</h2>
-        <p v-if="quote">"{{ quote }}"</p>
+        <p v-if="quote">{{ quote }}</p>
 
         <button @click="closeButton">Close</button>
       </Popup>
@@ -61,7 +52,7 @@
 
     data() {
       return {
-        popupTriggers: false
+        popupTriggers: true
       }
     },
 
@@ -81,6 +72,7 @@
           this.popupTriggers = true
         }, 500)
       },
+
       openDayView(date) {
         router.push({ path: `/day/${date}` })
         this.$store.commit('setSelectedDay', {
@@ -93,7 +85,7 @@
     },
 
     mounted() {
-      this.time()
+      // this.time()
     },
 
     components: {
@@ -171,93 +163,64 @@
     border-spacing: 10px;
   }
 
-  .box1 {
-    width: 400px;
-    padding: 10px;
-    background: #849283;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 2vh auto;
-  }
-
-  .box2 {
-    width: 400px;
-    padding: 10px;
-    background: #828282;
-    border: 1px solid white;
-    border-radius: 40px;
-    margin: 2vh auto;
-  }
-
   .box3 {
     width: 400px;
     padding: 10px;
-
+    cursor: pointer;
     border: 1px solid white;
     border-radius: 40px;
     margin: 2vh auto;
   }
+
+  //Styling Popup-box
 
   .quote {
     width: 500px;
     height: 350px;
     margin: 5% auto;
     padding: 10px;
+    position: relative;
+    animation: 2s ease-in 0s 1 fadeIn;
+    h2 {
+      padding: 20px 0 10px 11px;
+      text-align: left;
+    }
+    p {
+      font-style: italic;
+    }
 
+    //Button styling in Pop-up Box
     button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
       justify-content: center;
       background-color: white;
-      border: 1px solid black;
+      border: none;
+      box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
       border-radius: 40px;
-      color: black;
       padding: 10px 32px;
-      margin: 50px;
       text-align: center;
       font-size: 16px;
     }
-
-    .box2 {
-      width: 400px;
-      padding: 10px;
-      background: #828282;
-      border: 1px solid white;
-      border-radius: 40px;
-      margin: 2vh auto;
-    }
-
-    .box3 {
-      width: 400px;
-      padding: 10px;
-      background: #e59876;
-      border: 1px solid white;
-      border-radius: 40px;
-      margin: 2vh auto;
-    }
-
+  }
+  @media screen and (max-width: 515px) {
     .quote {
-      position: absolute;
-      top: 20vh;
-      left: 10vw;
+      width: 370px;
+    }
+    .box3 {
+      width: 370px;
+    }
+  }
 
-      button {
-        position: absolute;
-        justify-content: center;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 40px;
-        color: black;
-        padding: 15px 32px;
-        margin: 0px;
-        top: 70%;
-        left: 70%;
-        text-align: center;
-        font-size: 16px;
-      }
+  //Animation for quote pop-up box
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
 
-      p {
-        font-style: italic;
-        text-align: center;
-      }
+    to {
+      opacity: 1;
     }
   }
 </style>

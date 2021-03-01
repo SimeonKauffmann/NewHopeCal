@@ -15,12 +15,22 @@ export default new Vuex.Store({
     // events: JSON.parse(localStorage.getItem('events') || '[]')
     events: [],
     userName: localStorage.getItem('userName') || null,
-    serverAddress: 'http://bd2b6be57a20.ngrok.io/events/'
+    serverAddress: 'http://061844f18b6a.ngrok.io/events/',
+    offlineEvents: JSON.parse(localStorage.getItem('events') || '[]'),
+    isOnline: true
   },
 
   mutations: {
     importHoliday(state, publicHoliday) {
       state.publicHoliday = publicHoliday
+    },
+
+    setOnline(state) {
+      state.isOnline = true
+    },
+
+    setOffline(state) {
+      state.isOnline = false
     },
 
     setUserName(state, userName) {
@@ -42,9 +52,13 @@ export default new Vuex.Store({
     },
 
     setQuote(state, quoteList) {
-      const number = Math.floor(Math.random() * (quoteList.length - 0))
-      const quote = quoteList[number].text
+      // Get content quote
+      const content = quoteList.content
+      // Get Author of quotes
+      const author = quoteList.author
 
+      // Assemble together
+      const quote = content + ' -' + author
       state.quote = quote
     },
 
@@ -58,20 +72,13 @@ export default new Vuex.Store({
       Vue.axios
         .put(`${state.serverAddress}${state.userName}/${info.id}`, info)
         .then(() => this.commit('getEvents'))
-
-      if (info.share) {
-        let names = info.share.split(' ')
-        for (let x = 0; x < names.length; x++) {
-          Vue.axios.post(`${state.serverAddress}${names[x]}`, info)
-        }
-      }
     },
 
     setInfo(state, info) {
       //Sofia
-      // state.events = state.events.filter(function (e) {
-      //   return e.id != info.id;
-      // });
+      state.events = state.events.filter(function(e) {
+        return e.id != info.id
+      })
 
       Vue.axios
         .post(`${state.serverAddress}${state.userName}`, info)
@@ -86,15 +93,30 @@ export default new Vuex.Store({
 
       // localStorage.setItem('events', JSON.stringify(state.events));
     },
-    deleteEvent(state, id) {
-      Vue.axios
-        .delete(`${state.serverAddress}${state.userName}/${id}`)
+
+    sendOfflineEvents(state) {
+      state.offlineEvents
+        .forEach(event => {
+          Vue.axios.post(`${state.serverAddress}${state.userName}`, event)
+        })
         .then(() => this.commit('getEvents'))
-      //Sofia
-      // state.events = state.events.filter(function (e) {
-      //   return e.id != id;
-      // });
-      // localStorage.setItem('events', JSON.stringify(state.events));
+    },
+
+    deleteEvent(state, id) {
+      if (!state.isOnline) {
+        // Sofia
+        state.offlineEvents = state.offlineEvents.filter(function(e) {
+          return e.id != id
+        })
+        localStorage.setItem(
+          'offlineEvents',
+          JSON.stringify(state.offlineEvents)
+        )
+      } else {
+        Vue.axios
+          .delete(`${state.serverAddress}${state.userName}/${id}`)
+          .then(() => this.commit('getEvents'))
+      }
     }
   },
 
@@ -110,21 +132,28 @@ export default new Vuex.Store({
       //   axios.get('/quoteAPI')
       // ])
       // Late version to tries if one fetch get error and replace with backup JSON file.
+      // Fix the issue of get from json backup - Patrik
 
       let holidays = []
       try {
         holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         )
-      } catch (error) {
-        holidays = await axios.get('/holidaysBackup2021')
+      } catch (err) {
+        holidays = await axios.get('/holidaysBackup2021.json')
+      }
+
+      let quotes = []
+      try {
+        quotes = await axios.get('http://api.quotable.io/random')
+      } catch (err) {
+        quotes = await axios.get('/quotesBackup.json')
       }
 
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
-      // Kommentera bort på grund av deras 522 Error -Patrik
+      // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
       // let quotes = await axios.get('/quoteAPI')
-      let quotes = []
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)

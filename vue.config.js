@@ -9,26 +9,28 @@ module.exports = {
     workboxOptions: {
       runtimeCaching: [
         {
+          // Caching the holidays
           handler: 'NetworkFirst',
           options: {
             networkTimeoutSeconds: 5
           },
           urlPattern: 'https://date.nager.at/api/v2/publicholidays/2021/SE'
         },
-        // Kommentera bort på grund av deras 522 Error -Patrik
-        // {
-        //   handler: 'NetworkFirst',
-        //   options: {
-        //     networkTimeoutSeconds: 5
-        //   },
-        //   urlPattern: 'https://type.fit/api/quotes'
-        // },
         {
+          // Caching the quotes
           handler: 'NetworkFirst',
           options: {
             networkTimeoutSeconds: 5
           },
-          urlPattern: 'http://bd2b6be57a20.ngrok.io/events/'
+          urlPattern: 'http://api.quotable.io/random'
+        },
+        {
+          // Caching the events
+          handler: 'NetworkFirst',
+          options: {
+            networkTimeoutSeconds: 5
+          },
+          urlPattern: 'http://061844f18b6a.ngrok.io/events/'
         }
       ]
     }
@@ -40,17 +42,7 @@ module.exports = {
         // logLevel: "debug",
         pathRewrite: { '^/calanderAPI': '' },
         target: 'https://date.nager.at/api'
-        // target: "https://avancera.app/cities/" < Test Run fetch if the link get error
-        // https://type.fit/api/quotes
       }
-
-      // Det hade varit att dom har blockad av CORS, men error 522 gäller så kommentera bort -Patrik
-      // '/quoteAPI': {
-      //   changeOrigin: true,
-      //   logLevel: "debug",
-      //   pathRewrite: { '^/quoteAPI': '' },
-      //   target: 'https://type.fit/api/quotes'
-      // }
     }
   }
 }

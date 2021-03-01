@@ -1,8 +1,8 @@
 module.exports = {
-    publicPath: "/newhopecal",
-    pwa: {
-        manifestOptions: {
-            background_color: "White"
+  publicPath: "/newhopecal",
+  pwa: {
+    manifestOptions: {
+      background_color: "White"
 
     },
     name: 'New Hope',
@@ -24,13 +24,13 @@ module.exports = {
         //   },
         //   urlPattern: 'https://type.fit/api/quotes'
         // },
-         {
+        {
           handler: 'NetworkFirst',
           options: {
             networkTimeoutSeconds: 5
           },
           urlPattern:
-            'http://bd2b6be57a20.ngrok.io/events/'
+            'http://061844f18b6a.ngrok.io/events/'
         }
       ]
     }

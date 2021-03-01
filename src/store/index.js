@@ -41,9 +41,9 @@ export default new Vuex.Store({
       state.selectedDay = ctx
     },
 
-    setQuote(state, quoteList) {
-      const number = Math.floor(Math.random() * (quoteList.length - 0))
-      const quote = quoteList[number].text
+    setQuote(state, quote) {
+      // const number = Math.floor(Math.random() * (quoteList.length - 0))
+      // const quote = quoteList[number].text
 
       state.quote = quote
     },
@@ -117,7 +117,7 @@ export default new Vuex.Store({
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         )
       } catch (err) {
-        holidays = await axios.get("/holidaysBackup2021")
+        holidays = await axios.get("/holidaysBackup2021.json")
       }
 
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')

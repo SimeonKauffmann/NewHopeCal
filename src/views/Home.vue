@@ -52,7 +52,7 @@
 
     data() {
       return {
-        popupTriggers: false
+        popupTriggers: true
       }
     },
 
@@ -84,7 +84,7 @@
     },
 
     mounted() {
-      this.time()
+      // this.time()
     },
 
     components: {
@@ -176,6 +176,7 @@
     height: 350px;
     margin: 5% auto;
     padding: 10px;
+    animation: 3s ease-in 0s 1 fadeIn;
 
     button {
       position: absolute;
@@ -197,6 +198,17 @@
     }
     .box3 {
       width: 370px;
+    }
+  }
+
+  //Animation for quote pop-up box
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 </style>

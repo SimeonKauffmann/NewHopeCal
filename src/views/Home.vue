@@ -166,7 +166,7 @@
   .box3 {
     width: 400px;
     padding: 10px;
-
+    cursor: pointer;
     border: 1px solid white;
     border-radius: 40px;
     margin: 2vh auto;

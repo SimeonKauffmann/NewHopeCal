@@ -205,9 +205,13 @@
     padding: 10px;
 
     button {
+<<<<<<< HEAD
+      position: absolute;
+=======
       justify-content: center;
+>>>>>>> 5f15603e0f2b7f197660cd8189f392196ac5cbf8
       background-color: white;
-      border: 1px solid black;
+      border: 5px solid black;
       border-radius: 40px;
       color: black;
       padding: 10px 32px;

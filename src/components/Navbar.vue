@@ -3,7 +3,9 @@
   <nav class="hope-navbar">
     <div class="container container-fluid">
       <ul class="d-flex flex-row">
-        <li><router-link to="/" class="nav-link">Home</router-link></li>
+        <li>
+          <router-link to="/" class="nav-link">Home</router-link>
+        </li>
         <li><router-link to="/week" class="nav-link">Week</router-link></li>
         <li><router-link to="/month" class="nav-link">Month</router-link></li>
         <li><router-link to="/year" class="nav-link">Year</router-link></li>
@@ -46,7 +48,6 @@
           position: relative;
 
           &::before {
-            transform: none !important;
             content: '';
             position: absolute;
             bottom: -20px;
@@ -55,6 +56,7 @@
             border-left: 30px solid transparent;
             border-right: 30px solid transparent;
             border-top: 20px solid $yellow-color;
+            // box-shadow: 1px 1px 3px rgba(88, 87, 75, 0.5);
           }
         }
       }

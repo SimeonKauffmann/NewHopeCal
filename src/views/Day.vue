@@ -248,7 +248,7 @@
       this.$store.dispatch('fetchAll')
       this.$store.state.publicHoliday.forEach(element => {
         if (element.date === this.$route.params.day) {
-          this.redDay === element.name
+          this.redDay = element.name
         }
       })
     },

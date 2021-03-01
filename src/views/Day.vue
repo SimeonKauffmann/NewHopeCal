@@ -177,17 +177,17 @@
       createEvent() {
         this.currentEvent = {
           date: this.$route.params.day,
-          title: null,
+          title: '',
           startTime: '09:00',
           endTime: '10:00',
-          text: null,
+          text: '',
           id: null,
           type: 'None'
         }
         this.modalShow = true
       },
 
-      // getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
+      // Getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
       getTodaysEvents() {
         let todayEvents = []
         this.$store.state.events.forEach(element => {
@@ -203,7 +203,7 @@
 
           let endNumber = parseInt(todayEvents[x].endTime.slice(0, 2))
           todayEvents[x].styles = {
-            // Styles used by the cards to get right position in grid
+            // Styles used by the cards to get right position in grid -Erik
             gridRowStart: startNumber + 1,
             gridRowEnd: endNumber + 1,
             height: `100%`,
@@ -244,7 +244,7 @@
         this.$router.push('/')
       }
 
-      //  Show if the day is a holiday-Sofia
+      //  Show if the day is a holiday -Sofia
       this.$store.dispatch('fetchAll')
       this.$store.state.publicHoliday.forEach(element => {
         if (element.date === this.$route.params.day) {

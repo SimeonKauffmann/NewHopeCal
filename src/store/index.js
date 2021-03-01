@@ -42,11 +42,10 @@ export default new Vuex.Store({
     },
 
     setQuote(state, quoteList) {
-      // Comment away and change "quote" to "quoteList" due of link 522 -Patrik
-      // const number = Math.floor(Math.random() * (quoteList.length - 0))
-      // const quote = quoteList[number].text
+      const number = Math.floor(Math.random() * (quoteList.length - 0))
+      const quote = quoteList[number].text
 
-      state.quote = quoteList
+      state.quote = quote
     },
 
     getEvents(state) {

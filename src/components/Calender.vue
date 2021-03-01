@@ -46,20 +46,27 @@
       },
       // Showing the events and holidays with the same url parameter(date) and marked them on calendar -Sofia
       cellStyling(ymd) {
-        let days = []
         let redDays = []
+        let eventsOfDay = []
         this.$store.state.events.forEach(element => {
-          days.push(element.date)
+          if (element.date == ymd) {
+            eventsOfDay.push(element)
+          }
         })
 
         this.$store.state.publicHoliday.forEach(element => {
           redDays.push(element.date)
         })
 
-        if (days.includes(ymd)) {
-          return 'calendar-cell-marked'
-        } else if (redDays.includes(ymd)) {
+        if (redDays.includes(ymd)) {
           return 'calendar-cell-red'
+        } // Showing the busy days  -Sofia
+        else if (eventsOfDay.length > 0 && eventsOfDay.length < 3) {
+          return 'calendar-cell-marked'
+        } else if (3 < eventsOfDay.length && eventsOfDay.length < 5) {
+          return 'calendar-cell-marked-medium'
+        } else if (5 < eventsOfDay.length) {
+          return 'calendar-cell-marked-max'
         } else {
           return 'calendar-cell'
         }
@@ -87,7 +94,19 @@
     margin: 0.5rem;
   }
   .calendar-cell-marked {
-    background-color: rgba(229, 152, 118, 1);
+    background-color: rgb(249, 153, 118);
+    box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
+    border-radius: 10px;
+    margin: 0.5rem;
+  }
+  .calendar-cell-marked-medium {
+    background-color: rgb(208, 115, 82);
+    box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
+    border-radius: 10px;
+    margin: 0.5rem;
+  }
+  .calendar-cell-marked-max {
+    background-color: rgb(191, 89, 51);
     box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
     border-radius: 10px;
     margin: 0.5rem;

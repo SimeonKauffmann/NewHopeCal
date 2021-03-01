@@ -85,6 +85,7 @@
 
         this.$emit('ok')
       },
+      // closing the modal event -Sofia
       onClose() {
         this.$emit('close')
       },
@@ -92,15 +93,15 @@
         this.$emit('cancel')
       }
     },
-    // If prop-event is null make a newEvent if not create a copy of current event-Sofia
+    // If prop-event is null make a new event if not create a copy of current event -Sofia
     computed: {
       currentEvent() {
         const newEvent = {
           date: this.$route.params.day,
-          title: null,
+          title: '',
           startTime: '09:00',
           endTime: '10:00',
-          text: null,
+          text: '',
           id: null,
           share: null
         }

@@ -125,6 +125,7 @@ export default new Vuex.Store({
       //   axios.get('/quoteAPI')
       // ])
       // Late version to tries if one fetch get error and replace with backup JSON file.
+      // Fix the issue of get from json backup - Patrik
 
       let holidays = []
       try {

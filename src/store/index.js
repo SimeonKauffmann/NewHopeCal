@@ -15,13 +15,22 @@ export default new Vuex.Store({
     // events: JSON.parse(localStorage.getItem('events') || '[]')
     events: [],
     userName: localStorage.getItem('userName') || null,
-    serverAddress:
-      'http://azureadsimeonkauffmann-88931a28.localhost.run/events/'
+    serverAddress: 'http://061844f18b6a.ngrok.io/events/',
+    offlineEvents: JSON.parse(localStorage.getItem('events') || '[]'),
+    isOnline: true
   },
 
   mutations: {
     importHoliday(state, publicHoliday) {
       state.publicHoliday = publicHoliday
+    },
+
+    setOnline(state) {
+      state.isOnline = true
+    },
+
+    setOffline(state) {
+      state.isOnline = false
     },
 
     setUserName(state, userName) {
@@ -59,19 +68,13 @@ export default new Vuex.Store({
       Vue.axios
         .put(`${state.serverAddress}${state.userName}/${info.id}`, info)
         .then(() => this.commit('getEvents'))
-
-      if (info.share) {
-        let names = info.share.split(' ')
-        for (let x = 0; x < names.length; x++) {
-          Vue.axios.post(`${state.serverAddress}${names[x]}`, info)
-        }
-      }
     },
 
     setInfo(state, info) {
-      // state.events = state.events.filter(function (e) {
-      //   return e.id != info.id;
-      // });
+      //Sofia
+      state.events = state.events.filter(function (e) {
+        return e.id != info.id;
+      });
 
       Vue.axios
         .post(`${state.serverAddress}${state.userName}`, info)
@@ -86,26 +89,57 @@ export default new Vuex.Store({
 
       // localStorage.setItem('events', JSON.stringify(state.events));
     },
-    deleteEvent(state, id) {
-      Vue.axios
-        .delete(`${state.serverAddress}${state.userName}/${id}`)
-        .then(() => this.commit('getEvents'))
 
-      // state.events = state.events.filter(function (e) {
-      //   return e.id != id;
-      // });
-      // localStorage.setItem('events', JSON.stringify(state.events));
+    sendOfflineEvents(state) {
+      state.offlineEvents.forEach(event => {
+        Vue.axios
+          .post(`${state.serverAddress}${state.userName}`, event)
+      }).then(() => this.commit('getEvents'))
+    },
+
+    deleteEvent(state, id) {
+      if (!state.isOnline) {
+        // Sofia
+        state.offlineEvents = state.offlineEvents.filter(function (e) {
+          return e.id != id;
+        });
+        localStorage.setItem('offlineEvents', JSON.stringify(state.offlineEvents));
+      } else {
+        Vue.axios
+          .delete(`${state.serverAddress}${state.userName}/${id}`)
+          .then(() => this.commit('getEvents'))
+      }
+
     }
   },
 
   actions: {
     async fetchAll({ commit }) {
-      const [holidays, quotes] = await Promise.all([
-        axios.get(
+      // Detta är tidigare testning för med eller utan Promise och med tries som för backup.
+      //Just nu låt detta vara tills vi eller mest jag som tar detta arbete tills hitta lösning -Patrik
+      // Early version fetch when promise all to get data before show website.
+      // const [holidays, quotes] = await Promise.all([
+      //   axios.get(
+      //     '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
+      //   ),
+      //   axios.get('/quoteAPI')
+      // ])
+      // Late version to tries if one fetch get error and replace with backup JSON file.
+
+      let holidays = []
+      try {
+        holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
-        ),
-        axios.get('https://type.fit/api/quotes')
-      ])
+        )
+      } catch (err) {
+        holidays = await axios.get("/holidaysBackup2021")
+      }
+
+      // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
+
+      // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
+      // let quotes = await axios.get('/quoteAPI')
+      let quotes = []
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)

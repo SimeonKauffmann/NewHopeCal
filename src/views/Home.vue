@@ -11,6 +11,7 @@
         v-for="event in events"
         :key="event.id"
         @click="openDayView(event.date)"
+        :style="eventTypeClass(event)"
       >
         <p>
           {{ event.title }}
@@ -19,7 +20,7 @@
           >
         </p>
       </div>
-      <h2 v-if="!events">You're free today!</h2>
+      <h2 v-if="!events">No plan for today!</h2>
       <!-- <div class="box1">
         <p>Meeting with ...</p>
       </div>
@@ -65,6 +66,16 @@
     },
 
     methods: {
+      eventTypeClass(event) {
+        if (event.type === 'Work') {
+          return 'background-color: rgba(96, 139, 150, 1)'
+        } else if (event.type === 'Sport') {
+          return 'background-color: rgba(132, 146, 131, 1)'
+        } else if (event.type === 'Fun') {
+          return 'background-color: rgb(246, 189, 96)'
+        }
+        return 'background-color: rgba(229, 152, 118, 1);'
+      },
       time() {
         setTimeout(() => {
           this.popupTriggers = true
@@ -144,65 +155,29 @@
   /* =================
        Layout
     ================*/
-.home-col {
-  margin: 15px 0px;
-}
-.img-container {
-  width: 200px;
-  height: 200px;
-}
-img {
-  width: 100%;
-  height: 100%;
-}
+  .home-col {
+    margin: 15px 0px;
+  }
+  .img-container {
+    width: 200px;
+    height: 200px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
-div {
-  border-spacing: 10px;
-}
+  div {
+    border-spacing: 10px;
+  }
 
-.box1 {
-  width: 400px;
-  padding: 10px;
-  background: #849283;
-  border: 1px solid white;
-  border-radius: 40px;
-  margin: 2vh auto;
-}
-
-.box2 {
-  width: 400px;
-  padding: 10px;
-  background: #828282;
-  border: 1px solid white;
-  border-radius: 40px;
-  margin: 2vh auto;
-}
-
-.box3 {
-  width: 400px;
-  padding: 10px;
-  background: #e59876;
-  border: 1px solid white;
-  border-radius: 40px;
-  margin: 2vh auto;
-}
-
-.quote {
-    width: 500px;
-    height: 350px;
-    margin: 5% auto;
+  .box1 {
+    width: 400px;
     padding: 10px;
-
-  button {
-    justify-content: center;
-    background-color: white;
-    border: 1px solid black;
+    background: #849283;
+    border: 1px solid white;
     border-radius: 40px;
-    color: black;
-    padding: 10px 32px;
-    margin: 50px;
-    text-align: center;
-    font-size: 16px;
+    margin: 2vh auto;
   }
 
   .box2 {
@@ -217,35 +192,76 @@ div {
   .box3 {
     width: 400px;
     padding: 10px;
-    background: #e59876;
+
     border: 1px solid white;
     border-radius: 40px;
     margin: 2vh auto;
   }
 
   .quote {
-    position: absolute;
-    top: 20vh;
-    left: 10vw;
+    width: 500px;
+    height: 350px;
+    margin: 5% auto;
+    padding: 10px;
 
     button {
+<<<<<<< HEAD
       position: absolute;
+=======
+      justify-content: center;
+>>>>>>> 5f15603e0f2b7f197660cd8189f392196ac5cbf8
       background-color: white;
       border: 5px solid black;
       border-radius: 40px;
       color: black;
-      padding: 15px 32px;
-      margin: 0px;
-      top: 70%;
-      left: 70%;
+      padding: 10px 32px;
+      margin: 50px;
       text-align: center;
       font-size: 16px;
     }
 
-    p {
-      font-style: italic;
-      text-align: center;
+    .box2 {
+      width: 400px;
+      padding: 10px;
+      background: #828282;
+      border: 1px solid white;
+      border-radius: 40px;
+      margin: 2vh auto;
+    }
+
+    .box3 {
+      width: 400px;
+      padding: 10px;
+      background: #e59876;
+      border: 1px solid white;
+      border-radius: 40px;
+      margin: 2vh auto;
+    }
+
+    .quote {
+      position: absolute;
+      top: 20vh;
+      left: 10vw;
+
+      button {
+        position: absolute;
+        justify-content: center;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 40px;
+        color: black;
+        padding: 15px 32px;
+        margin: 0px;
+        top: 70%;
+        left: 70%;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      p {
+        font-style: italic;
+        text-align: center;
+      }
     }
   }
-}
 </style>

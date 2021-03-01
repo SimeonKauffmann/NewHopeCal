@@ -20,7 +20,7 @@
         <input v-model="currentEvent.startTime" type="time" />
       </label>
       <label> Ends: <input v-model="currentEvent.endTime" type="time"/></label>
-      <label for="">
+      <label for="" v-if="!currentEvent.id">
         Share event? (separated by spaces)
         <input type="text" v-model="currentEvent.share" />
       </label>
@@ -33,6 +33,19 @@
           ></textarea>
         </label>
       </div>
+
+      <div>
+        <b-form-radio-group
+          id="event-type"
+          v-model="currentEvent.type"
+          :options="options"
+          class="mb-3"
+          value-field="item"
+          text-field="name"
+          disabled-field="notEnabled"
+        ></b-form-radio-group>
+        <div class="mt-3"></div>
+      </div>
     </b-modal>
   </div>
 </template>
@@ -41,12 +54,22 @@
   import Vue from 'vue'
   export default Vue.extend({
     name: 'Event',
-
+    data() {
+      // set different types for radio buttons -Sofia
+      return {
+        options: [
+          { item: 'None', name: 'None' },
+          { item: 'Work', name: 'Work' },
+          { item: 'Sport', name: 'Sport' },
+          { item: 'Fun', name: 'Fun' }
+        ]
+      }
+    },
     props: {
       show: Boolean,
       event: null
     },
-
+    // save the event in VueX and making id in case the event already exist(edited) -Sofia
     methods: {
       saveEvent() {
         if (this.currentEvent.id === null) {
@@ -62,6 +85,7 @@
 
         this.$emit('ok')
       },
+      // closing the modal event -Sofia
       onClose() {
         this.$emit('close')
       },
@@ -69,20 +93,36 @@
         this.$emit('cancel')
       }
     },
+    // If prop-event is null make a new event if not create a copy of current event -Sofia
     computed: {
       currentEvent() {
         const newEvent = {
           date: this.$route.params.day,
-          title: null,
+          title: '',
           startTime: '09:00',
           endTime: '10:00',
-          text: null,
+          text: '',
           id: null,
           share: null
         }
 
-        return this.event == null ? newEvent : Object.assign({}, this.event)
+        return this.event === null ? newEvent : Object.assign({}, this.event)
       }
     }
   })
 </script>
+
+<style>
+  #event-type_BV_option_0 + label::before {
+    background-color: rgba(229, 152, 118, 1);
+  }
+  #event-type_BV_option_1 + label::before {
+    background-color: rgba(96, 139, 150, 1);
+  }
+  #event-type_BV_option_2 + label::before {
+    background-color: rgba(132, 146, 131, 1);
+  }
+  #event-type_BV_option_3 + label::before {
+    background-color: rgb(246, 189, 96);
+  }
+</style>

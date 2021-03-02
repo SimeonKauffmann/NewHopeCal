@@ -139,6 +139,7 @@
 
       // create timelines
       createLines() {
+        this.lines = []
         for (let y = 0; y < 24; y++) {
           this.lines.push({
             count: y,

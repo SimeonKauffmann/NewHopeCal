@@ -10,7 +10,6 @@ export default new Vuex.Store({
     quote: '',
     year: null,
     publicHoliday: [],
-    selectedDay: null,
     today: moment().format('YYYY[-]MM[-]DD'),
     // events: JSON.parse(localStorage.getItem('events') || '[]')
     events: [],
@@ -45,10 +44,6 @@ export default new Vuex.Store({
 
     setYear(state, year) {
       state.year = year
-    },
-
-    setSelectedDay(state, ctx) {
-      state.selectedDay = ctx
     },
 
     setQuote(state, quoteList) {

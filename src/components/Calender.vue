@@ -39,7 +39,6 @@
       //Set selected day in VueX -Sofia
       onContext(ctx) {
         this.context = ctx
-        this.$store.commit('setSelectedDay', ctx)
       },
       // Opening the dagsvy-Sofia
       onClick(ymd) {

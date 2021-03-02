@@ -1,6 +1,6 @@
 <template>
   <div class="day">
-    <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
+    <h1 id="date">{{ getTodaysTitle() }}</h1>
     <h2 id="name">{{ redDay }}</h2>
 
     <!-- Mobile version -->
@@ -115,6 +115,7 @@
 
 <script>
   import Event from '@/components/Event.vue'
+  import moment from 'moment'
 
   export default {
     name: 'Day',
@@ -124,7 +125,8 @@
         editShow: false,
         currentEvent: null,
         redDay: null,
-        lines: []
+        lines: [],
+        title: null
       }
     },
     methods: {
@@ -193,6 +195,10 @@
         }
         this.modalShow = true
       },
+      //show the day and date(title) -Sofia
+      getTodaysTitle() {
+        return moment(this.$route.params.day).format('dddd, MMMM Do, YYYY')
+      },
       // Getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
       getTodaysEvents() {
         let todayEvents = []
@@ -242,10 +248,6 @@
 
       // Creates the timelines
       this.createLines()
-
-      if (!this.$store.state.selectedDay) {
-        this.$router.push('/')
-      }
 
       //  Show if the day is a holiday -Sofia
       this.$store.dispatch('fetchAll')

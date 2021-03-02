@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '/newhopecal',
+  publicPath: ".",
   pwa: {
     manifestOptions: {
       background_color: 'White'
@@ -8,7 +8,7 @@ module.exports = {
     themeColor: 'White',
     workboxOptions: {
       runtimeCaching: [
-        { 
+        {
           // Caching the holidays
           handler: 'NetworkFirst',
           options: {
@@ -16,7 +16,7 @@ module.exports = {
           },
           urlPattern: 'https://date.nager.at/api/v2/publicholidays/2021/SE'
         },
-        { 
+        {
           // Caching the quotes
           handler: 'NetworkFirst',
           options: {

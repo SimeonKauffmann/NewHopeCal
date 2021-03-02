@@ -52,7 +52,7 @@
 
     data() {
       return {
-        popupTriggers: false
+        popupTriggers: true
       }
     },
 
@@ -72,6 +72,7 @@
           this.popupTriggers = true
         }, 500)
       },
+
       openDayView(date) {
         router.push({ path: `/day/${date}` })
         this.$store.commit('setSelectedDay', {
@@ -84,7 +85,7 @@
     },
 
     mounted() {
-      this.time()
+      // this.time()
     },
 
     components: {
@@ -165,28 +166,41 @@
   .box3 {
     width: 400px;
     padding: 10px;
-
+    min-height: 70px;
+    cursor: pointer;
     border: 1px solid white;
     border-radius: 40px;
     margin: 2vh auto;
   }
+
+  //Styling Popup-box
 
   .quote {
     width: 500px;
     height: 350px;
     margin: 5% auto;
     padding: 10px;
+    position: relative;
+    animation: 2s ease-in 0s 1 fadeIn;
+    h2 {
+      padding: 20px 0 10px 11px;
+      text-align: left;
+    }
+    p {
+      font-style: italic;
+    }
 
+    //Button styling in Pop-up Box
     button {
       position: absolute;
+      bottom: 20px;
+      right: 20px;
       justify-content: center;
       background-color: white;
       border: none;
       box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
       border-radius: 40px;
-      //color: black;
       padding: 10px 32px;
-      margin: 50px;
       text-align: center;
       font-size: 16px;
     }
@@ -197,6 +211,17 @@
     }
     .box3 {
       width: 370px;
+    }
+  }
+
+  //Animation for quote pop-up box
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 </style>

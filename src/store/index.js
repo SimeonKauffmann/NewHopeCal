@@ -144,21 +144,21 @@ export default new Vuex.Store({
 
   actions: {
     async fetchAll({ commit }) {
-      // Detta är tidigare testning för med eller utan Promise och med tries som för backup.
-      //Just nu låt detta vara tills vi eller mest jag som tar detta arbete tills hitta lösning -Patrik
-      // Early version fetch when promise all to get data before show website.
+
+      // Early version fetch when promise all to get data before show website. -Patrik
       // const [holidays, quotes] = await Promise.all([
       //   axios.get(
       //     '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
       //   ),
       //   axios.get('/quoteAPI')
       // ])
-      // Late version to tries if one fetch get error and replace with backup JSON file.
-      // Fix the issue of get from json backup - Patrik
 
+
+      // Late version to tries if one fetch get error and replace with backup JSON file. -Patrik
       let holidays = []
       let quotes = []
       
+      // Try to fetch holidays, otherwise replace backup JSON
       try {
         holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
@@ -167,19 +167,12 @@ export default new Vuex.Store({
         holidays = await axios.get('/holidaysBackup2021.json')
       }
 
+      // Try to fetch quote, otherwise replace backup JSON
       try {
         quotes = await axios.get('http://api.quotable.io/random')
       } catch (err) {
-                quotes = await axios.get('/quotesBackup.json')
+        quotes = await axios.get('/quotesBackup.json')
       }
-
-     
-
-
-      // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
-
-      // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
-      // let quotes = await axios.get('/quoteAPI')
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)

@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: ".",
+  publicPath: '.',
   pwa: {
     manifestOptions: {
       background_color: 'White'

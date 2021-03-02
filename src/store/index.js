@@ -33,6 +33,7 @@ export default new Vuex.Store({
       state.isOnline = false
     },
 
+
     setUserName(state, userName) {
       state.userName = userName
       localStorage.setItem('userName', userName)
@@ -51,26 +52,39 @@ export default new Vuex.Store({
       state.selectedDay = ctx
     },
 
-    setQuote(state, quote) {
-      // const number = Math.floor(Math.random() * (quoteList.length - 0))
-      // const quote = quoteList[number].text
+    setQuote(state, quoteList) {
+      // Get content quote
+      const content = quoteList.content
+      // Get Author of quotes
+      const author = quoteList.author
 
+      // Assemble together
+      const quote = content + ' -' + author
       state.quote = quote
+    },
+
+    async sendOfflineEvents(state) {
+      for (let x = 0; x < state.offlineEvents.length; x++) {
+        Vue.axios
+          .post(`${state.serverAddress}${state.userName}`, state.offlineEvents[x])
+      }
+      state.offlineEvents = []
+      localStorage.setItem('offlineEvents', JSON.stringify(state.offlineEvents))
     },
 
     getEvents(state) {
       if (state.isOnline) {
         if (state.offlineEvents[0]) {
-          for (let x = 0; x < state.offlineEvents.length; x++) {
-            Vue.axios
-              .post(`${state.serverAddress}${state.userName}`, state.offlineEvents[x])
-          }
-          state.offlineEvents = []
-          localStorage.setItem('offlineEvents', JSON.stringify(state.offlineEvents))
+          this.commit('sendOfflineEvents').then(() => {
+            Vue.axios.get(`${state.serverAddress}${state.userName}`).then(events => {
+              this.commit('setEvents', events.data)
+            })
+          })
+        } else {
+          Vue.axios.get(`${state.serverAddress}${state.userName}`).then(events => {
+            this.commit('setEvents', events.data)
+          })
         }
-        Vue.axios.get(`${state.serverAddress}${state.userName}`).then(events => {
-          this.commit('setEvents', events.data)
-        })
       }
     },
 
@@ -108,20 +122,21 @@ export default new Vuex.Store({
     },
 
 
-
     deleteEvent(state, id) {
       if (!state.isOnline) {
         // Sofia
         state.offlineEvents = state.offlineEvents.filter(function (e) {
-          return e.id != id;
-        });
-        localStorage.setItem('offlineEvents', JSON.stringify(state.offlineEvents));
+          return e.id != id
+        })
+        localStorage.setItem(
+          'offlineEvents',
+          JSON.stringify(state.offlineEvents)
+        )
       } else {
         Vue.axios
           .delete(`${state.serverAddress}${state.userName}/${id}`)
           .then(() => this.commit('getEvents'))
       }
-
     }
   },
 
@@ -145,18 +160,26 @@ export default new Vuex.Store({
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
         )
       } catch (err) {
-        holidays = await axios.get("/holidaysBackup2021.json")
+        holidays = await axios.get('/holidaysBackup2021.json')
+      }
+
+      let quotes = []
+      try {
+        quotes = await axios.get('http://api.quotable.io/random')
+      } catch (err) {
+        quotes = await axios.get('/quotesBackup.json')
       }
 
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 
       // Kommentera bort på grund av deras 522 Error, fortfarande error -Patrik
       // let quotes = await axios.get('/quoteAPI')
-      let quotes = []
 
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)
     },
+
+
 
     saveInfo(context, info) {
       context.commit('setInfo', info)

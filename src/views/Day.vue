@@ -1,9 +1,12 @@
 <template>
   <div class="day">
-    <h1 id="date">{{ $store.state.selectedDay.selectedFormatted }}</h1>
+    <h1 id="date" v-if="$store.state.selectedDay">
+      {{ $store.state.selectedDay.selectedFormatted }}
+    </h1>
     <h2 id="name">{{ redDay }}</h2>
     <p :style="{ color: 'red' }">{{ offlineMessage }}</p>
 
+    <!-- Mobile version -->
     <div class="mobile">
       <div id="gridHolder">
         <b-card-group deck class="container">
@@ -45,6 +48,8 @@
         </b-card-group>
       </div>
     </div>
+
+    <!-- Desktop version -->
     <div class="desktop">
       <div id="gridHolder" ref="gridHolder">
         <div deck class="container">
@@ -93,6 +98,7 @@
         </div>
       </div>
     </div>
+    <!-- Edit plusbutton -->
     <span id="editHolder">
       <b-icon-plus-circle
         id="plus"
@@ -112,6 +118,7 @@
 
 <script>
 import Event from '@/components/Event.vue'
+import moment from 'moment'
 
 export default {
   name: 'Day',
@@ -128,12 +135,10 @@ export default {
   methods: {
     // Delete the event -Sofia
     removeAction(event) {
-      if (this.$store.state.isOnline) {
-        this.$store.commit('deleteEvent', event)
-      } else {
-        this.offlineMessage = 'You can not delete an event when offline'
-      }
+      this.$store.commit('deleteEvent', event)
     },
+
+    // create timelines
     createLines() {
       for (let y = 0; y < 24; y++) {
         this.lines.push({
@@ -161,6 +166,7 @@ export default {
       }
       return 'background-color: rgba(229, 152, 118, 1);'
     },
+
     // Showing the existing event using prop -Sofia
     editEvent(event) {
       this.currentEvent = event
@@ -171,8 +177,7 @@ export default {
       this.modalShow = false
       this.checkScroll()
     },
-    onOk(message) {
-      this.offlineMessage = message
+    onOk() {
       this.modalShow = false
       this.checkScroll()
     },
@@ -222,9 +227,10 @@ export default {
       })
       return todayEvents
     },
+
     // scrolls to 9.00 or first event of the day
     checkScroll() {
-      if (this.$refs['cardDay'] != undefined) {
+      if (this.$refs['cardDay'] !== undefined) {
         this.$refs['cardDay'][0].scrollIntoView({ behavior: 'smooth' })
       } else {
         this.$refs['gridHolder'].scrollTo({
@@ -236,14 +242,13 @@ export default {
     }
   },
   mounted() {
-    // scrolls to 9.00 or first event of the day
-    this.checkScroll()
-
-    // Creates the lines
-    this.createLines()
-
     if (!this.$store.state.selectedDay) {
-      this.$router.push('/')
+      let thisDay = moment(this.$route.params.day, 'YYYY-MM-DD').format(
+        'dddd, MMMM do, YYYY'
+      )
+
+      this.$store.commit('setSelectedDay', { selectedFormatted: thisDay })
+      // this.$router.push('/')
     }
 
     //  Show if the day is a holiday -Sofia
@@ -253,6 +258,12 @@ export default {
         this.redDay = element.name
       }
     })
+
+    // scrolls to 9.00 or first event of the day
+    this.checkScroll()
+
+    // Creates the timelines
+    this.createLines()
   },
 
   components: { Event }
@@ -419,6 +430,7 @@ ul {
     flex-direction: row;
     cursor: pointer;
     overflow: hidden;
+    animation: 1s ease-out 0s 1 fadeIn;
   }
   #event-text {
     margin: 10px 0;
@@ -437,13 +449,28 @@ ul {
   }
   // end of card content
   #gridHolder {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
     max-height: 70vh;
     overflow-x: hidden;
     scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 1) rgba(96, 139, 150, 1);
+    scrollbar-color: rgba(0, 0, 0, 1) white;
   }
 }
+@keyframes fadeIn {
+  from {
+    transform: translate(100px, 100px);
+    opacity: 0.5;
+    transform-origin: left;
+  }
 
+  to {
+    transform: translate(0px, 0px);
+    opacity: 1;
+    transform-origin: left;
+  }
+}
 @media screen and (min-width: 900px) {
   #plus {
     cursor: pointer;

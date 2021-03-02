@@ -229,6 +229,7 @@ export default {
   height: 100%;
   margin: 40px auto 10px;
   .days {
+    cursor: pointer;
     margin: 2.5vw auto;
     width: 100%;
     height: 60px;
@@ -315,6 +316,7 @@ export default {
     width: 100%;
     padding: 5px;
     margin: 5px 0;
+    overflow: clip;
     #month {
       margin: 0 auto;
       margin-top: 100px;

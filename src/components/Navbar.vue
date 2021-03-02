@@ -22,6 +22,8 @@
 
 <style lang="scss" scoped>
   $yellow-color: #d3d1c2;
+
+  //Navbar Style
   .hope-navbar {
     background-color: $yellow-color;
     box-shadow: 7px 7px 3px rgba(88, 87, 75, 0.5);
@@ -52,11 +54,10 @@
             position: absolute;
             bottom: -20px;
             left: calc(50% - 30px);
-            // Triangel
+            // CSS Triangel
             border-left: 30px solid transparent;
             border-right: 30px solid transparent;
             border-top: 20px solid $yellow-color;
-            // box-shadow: 1px 1px 3px rgba(88, 87, 75, 0.5);
           }
         }
       }

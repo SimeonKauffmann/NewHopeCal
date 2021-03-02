@@ -1,6 +1,7 @@
 <template>
   <b-container>
     <b-calendar
+      id="clnd"
       block
       class="calendar-main"
       @selected="onClick"
@@ -38,7 +39,6 @@
       //Set selected day in VueX -Sofia
       onContext(ctx) {
         this.context = ctx
-        this.$store.commit('setSelectedDay', ctx)
       },
       // Opening the dagsvy-Sofia
       onClick(ymd) {
@@ -106,7 +106,7 @@
     margin: 0.5rem;
   }
   .calendar-cell-marked-max {
-    background-color: rgb(191, 89, 51);
+    background-color: rgb(176, 75, 38);
     box-shadow: 3px 2px 4px rgba(88, 87, 75, 0.5);
     border-radius: 10px;
     margin: 0.5rem;

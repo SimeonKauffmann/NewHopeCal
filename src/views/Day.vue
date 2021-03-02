@@ -1,8 +1,6 @@
 <template>
   <div class="day">
-    <h1 id="date" v-if="$store.state.selectedDay">
-      {{ $store.state.selectedDay.selectedFormatted }}
-    </h1>
+    <h1 id="date">{{ getTodaysTitle() }}</h1>
     <h2 id="name">{{ redDay }}</h2>
     <p :style="{ color: 'red' }">{{ offlineMessage }}</p>
 
@@ -129,6 +127,7 @@
         currentEvent: null,
         redDay: null,
         lines: [],
+        title: null,
         offlineMessage: ''
       }
     },
@@ -198,6 +197,10 @@
         }
         this.modalShow = true
       },
+      //show the day and date(title) -Sofia
+      getTodaysTitle() {
+        return moment(this.$route.params.day).format('dddd, MMMM Do, YYYY')
+      },
       // Getting all the events from store and check if they have the same url parameter send them in todayEvents array -Sofia
       getTodaysEvents() {
         let todayEvents = []
@@ -242,14 +245,11 @@
       }
     },
     mounted() {
-      if (!this.$store.state.selectedDay) {
-        let thisDay = moment(this.$route.params.day, 'YYYY-MM-DD').format(
-          'dddd, MMMM do, YYYY'
-        )
+      // scrolls to 9.00 or first event of the day
+      this.checkScroll()
 
-        this.$store.commit('setSelectedDay', { selectedFormatted: thisDay })
-        // this.$router.push('/')
-      }
+      // Creates the timelines
+      this.createLines()
 
       //  Show if the day is a holiday -Sofia
       this.$store.dispatch('fetchAll')

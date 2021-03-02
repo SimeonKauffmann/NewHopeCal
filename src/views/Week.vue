@@ -197,10 +197,6 @@
       }, // Open the day view -Simeon
       openDayView(date) {
         router.push({ path: `/day/${date}` })
-        this.$store.commit('setSelectedDay', {
-          // Set the selected day in Vuex -Simeon
-          selectedFormatted: moment(date).format('dddd, MMMM Do, YYYY')
-        })
       }
     },
 

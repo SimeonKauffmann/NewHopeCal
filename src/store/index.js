@@ -96,6 +96,9 @@ export default new Vuex.Store({
 
     setInfo(state, info) {
       //Sofia
+      state.events = state.events.filter(function(e) {
+        return e.id != info.id
+      })
 
       if (state.isOnline) {
         state.events = state.events.filter(function (e) {
@@ -121,11 +124,10 @@ export default new Vuex.Store({
       // localStorage.setItem('events', JSON.stringify(state.events));
     },
 
-
     deleteEvent(state, id) {
       if (!state.isOnline) {
         // Sofia
-        state.offlineEvents = state.offlineEvents.filter(function (e) {
+        state.offlineEvents = state.offlineEvents.filter(function(e) {
           return e.id != id
         })
         localStorage.setItem(
@@ -155,20 +157,24 @@ export default new Vuex.Store({
       // Fix the issue of get from json backup - Patrik
 
       let holidays = []
+      let quotes = []
+      
       try {
         holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
-        )
+        )    
       } catch (err) {
         holidays = await axios.get('/holidaysBackup2021.json')
       }
 
-      let quotes = []
       try {
         quotes = await axios.get('http://api.quotable.io/random')
       } catch (err) {
-        quotes = await axios.get('/quotesBackup.json')
+                quotes = await axios.get('/quotesBackup.json')
       }
+
+     
+
 
       // let holidays = await axios.get('/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE')
 

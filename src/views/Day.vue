@@ -233,7 +233,7 @@
 
       // scrolls to 9.00 or first event of the day
       checkScroll() {
-        if (this.$refs['cardDay'] !== undefined) {
+        if (this.$refs['cardDay'] != undefined) {
           this.$refs['cardDay'][0].scrollIntoView({ behavior: 'smooth' })
         } else {
           this.$refs['gridHolder'].scrollTo({

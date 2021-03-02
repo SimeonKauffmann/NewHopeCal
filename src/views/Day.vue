@@ -282,7 +282,6 @@
   //     Layout
   // ============
   #gridHolder {
-    // border: 2px solid rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     width: 80%;
     min-height: 70vh;

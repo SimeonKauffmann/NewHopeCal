@@ -1,9 +1,5 @@
 module.exports = {
-<<<<<<< HEAD
   publicPath: ".",
-=======
-  publicPath: '/newhopecal',
->>>>>>> e6157812aaf635662544d07c72eda2fa8f044e64
   pwa: {
     manifestOptions: {
       background_color: 'White'
@@ -26,10 +22,6 @@ module.exports = {
           options: {
             networkTimeoutSeconds: 5
           },
-<<<<<<< HEAD
-          urlPattern:
-            'https://061844f18b6a.ngrok.io/events/'
-=======
           urlPattern: 'http://api.quotable.io/random'
         },
         {
@@ -39,7 +31,6 @@ module.exports = {
             networkTimeoutSeconds: 5
           },
           urlPattern: 'http://061844f18b6a.ngrok.io/events/'
->>>>>>> e6157812aaf635662544d07c72eda2fa8f044e64
         }
       ]
     }

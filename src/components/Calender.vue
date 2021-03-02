@@ -61,9 +61,9 @@
         if (redDays.includes(ymd)) {
           return 'calendar-cell-red'
         } // Showing the busy days  -Sofia
-        else if (eventsOfDay.length > 0 && eventsOfDay.length < 3) {
+        else if (eventsOfDay.length > 0 && eventsOfDay.length <= 3) {
           return 'calendar-cell-marked'
-        } else if (3 < eventsOfDay.length && eventsOfDay.length < 5) {
+        } else if (3 < eventsOfDay.length && eventsOfDay.length <= 5) {
           return 'calendar-cell-marked-medium'
         } else if (5 < eventsOfDay.length) {
           return 'calendar-cell-marked-max'

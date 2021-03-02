@@ -139,7 +139,6 @@
 
       // create timelines
       createLines() {
-        this.lines = []
         for (let y = 0; y < 24; y++) {
           this.lines.push({
             count: y,
@@ -259,12 +258,6 @@
           this.redDay = element.name
         }
       })
-
-      // scrolls to 9.00 or first event of the day
-      this.checkScroll()
-
-      // Creates the timelines
-      this.createLines()
     },
 
     components: { Event }

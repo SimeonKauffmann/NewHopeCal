@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <vue-online-offline
-      @online="isOnline"
-      @offline="isOffline"
-    ></vue-online-offline>
     <div class="navbar-mobile"><Sidebar /></div>
     <div class="navbar-desktop"><Navbar /></div>
 
@@ -12,27 +8,22 @@
 </template>
 
 <script>
-  import VueOnlineOffline from 'vue-online-offline'
   import Navbar from '@/components/Navbar.vue'
   import Sidebar from '@/components/Sidebar.vue'
   export default {
-    created() {
-      if (this.$store.state.offlineEvents[0]) {
-        this.$store.commit('sendOfflineEvents')
-      }
-    },
-    methods: {
-      isOnline() {
-        this.$store.commit('setOnline')
-      },
-      isOffline() {
-        this.$store.commit('setOffline')
-      }
-    },
     components: {
       Sidebar,
-      Navbar,
-      VueOnlineOffline
+      Navbar
+    },
+    mounted() {
+      this.$store.commit('setOnline')
+
+      this.$on('offline', () => {
+        this.$store.commit('setOffline')
+      })
+      this.$on('online', () => {
+        this.$store.commit('setOnline')
+      })
     }
   }
 </script>

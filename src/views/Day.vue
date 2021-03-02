@@ -2,6 +2,7 @@
   <div class="day">
     <h1 id="date">{{ getTodaysTitle() }}</h1>
     <h2 id="name">{{ redDay }}</h2>
+    <p :style="{ color: 'red' }">{{ offlineMessage }}</p>
 
     <!-- Mobile version -->
     <div class="mobile">
@@ -126,7 +127,8 @@
         currentEvent: null,
         redDay: null,
         lines: [],
-        title: null
+        title: null,
+        offlineMessage: ''
       }
     },
     methods: {
@@ -231,7 +233,7 @@
 
       // scrolls to 9.00 or first event of the day
       checkScroll() {
-        if (this.$refs['cardDay'] != undefined) {
+        if (this.$refs['cardDay'] !== undefined) {
           this.$refs['cardDay'][0].scrollIntoView({ behavior: 'smooth' })
         } else {
           this.$refs['gridHolder'].scrollTo({
@@ -256,6 +258,12 @@
           this.redDay = element.name
         }
       })
+
+      // scrolls to 9.00 or first event of the day
+      this.checkScroll()
+
+      // Creates the timelines
+      this.createLines()
     },
 
     components: { Event }

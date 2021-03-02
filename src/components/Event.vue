@@ -62,7 +62,8 @@
           { item: 'Work', name: 'Work' },
           { item: 'Sport', name: 'Sport' },
           { item: 'Fun', name: 'Fun' }
-        ]
+        ],
+        message: ''
       }
     },
     props: {
@@ -80,10 +81,14 @@
             this.currentEvent.startTime
           this.$store.dispatch('saveInfo', this.currentEvent)
         } else {
-          this.$store.dispatch('saveUpdateInfo', this.currentEvent)
+          if (this.$store.state.isOnline) {
+            this.$store.dispatch('saveUpdateInfo', this.currentEvent)
+          } else {
+            this.message = 'You can not change an event when offline'
+          }
         }
 
-        this.$emit('ok')
+        this.$emit('ok', this.message)
       },
       // closing the modal event -Sofia
       onClose() {

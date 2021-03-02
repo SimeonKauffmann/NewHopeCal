@@ -320,8 +320,10 @@
     }
     .events {
       width: 100%;
+      min-height: 35px;
       padding: 5px;
       margin: 5px 0;
+      overflow: clip;
       #month {
         margin: 0 auto;
         margin-top: 100px;

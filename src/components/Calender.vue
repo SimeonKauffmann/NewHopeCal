@@ -36,7 +36,7 @@
     },
 
     methods: {
-      //Set selected day in VueX -Sofia
+      //Sofia
       onContext(ctx) {
         this.context = ctx
       },

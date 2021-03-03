@@ -98,7 +98,8 @@
         this.$emit('cancel')
       }
     },
-    // If prop-event is null make a new event if not create a copy of current event -Sofia
+    // If prop-event is null make a new event if not create a copy of current event that it doesn't show the modal changing instantly-Sofia
+
     computed: {
       currentEvent() {
         const newEvent = {

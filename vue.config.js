@@ -35,6 +35,7 @@ module.exports = {
       ]
     }
   },
+  // Setup devServer to pass CORS problem and set target api key to fetch or link. -Patrik
   devServer: {
     proxy: {
       '/calanderAPI': {

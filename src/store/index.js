@@ -10,7 +10,6 @@ export default new Vuex.Store({
     quote: '',
     year: null,
     publicHoliday: [],
-    selectedDay: null,
     today: moment().format('YYYY[-]MM[-]DD'),
     events: [],
     userName: localStorage.getItem('userName') || null,
@@ -33,7 +32,6 @@ export default new Vuex.Store({
       state.isOnline = false
     },
 
-
     setUserName(state, userName) {
       state.userName = userName
       localStorage.setItem('userName', userName)
@@ -46,10 +44,6 @@ export default new Vuex.Store({
 
     setYear(state, year) {
       state.year = year
-    },
-
-    setSelectedDay(state, ctx) {
-      state.selectedDay = ctx
     },
 
     setQuote(state, quoteList) {
@@ -65,8 +59,10 @@ export default new Vuex.Store({
 
     async sendOfflineEvents(state) {
       for (let x = 0; x < state.offlineEvents.length; x++) {
-        Vue.axios
-          .post(`${state.serverAddress}${state.userName}`, state.offlineEvents[x])
+        Vue.axios.post(
+          `${state.serverAddress}${state.userName}`,
+          state.offlineEvents[x]
+        )
       }
       state.offlineEvents = []
       localStorage.setItem('offlineEvents', JSON.stringify(state.offlineEvents))
@@ -76,14 +72,18 @@ export default new Vuex.Store({
       if (state.isOnline) {
         if (state.offlineEvents[0]) {
           this.commit('sendOfflineEvents').then(() => {
-            Vue.axios.get(`${state.serverAddress}${state.userName}`).then(events => {
-              this.commit('setEvents', events.data)
-            })
+            Vue.axios
+              .get(`${state.serverAddress}${state.userName}`)
+              .then(events => {
+                this.commit('setEvents', events.data)
+              })
           })
         } else {
-          Vue.axios.get(`${state.serverAddress}${state.userName}`).then(events => {
-            this.commit('setEvents', events.data)
-          })
+          Vue.axios
+            .get(`${state.serverAddress}${state.userName}`)
+            .then(events => {
+              this.commit('setEvents', events.data)
+            })
         }
       }
     },
@@ -101,9 +101,9 @@ export default new Vuex.Store({
       })
 
       if (state.isOnline) {
-        state.events = state.events.filter(function (e) {
-          return e.id != info.id;
-        });
+        state.events = state.events.filter(function(e) {
+          return e.id != info.id
+        })
 
         Vue.axios
           .post(`${state.serverAddress}${state.userName}`, info)
@@ -118,7 +118,10 @@ export default new Vuex.Store({
       } else {
         state.offlineEvents.push(info)
         state.events.push(info)
-        localStorage.setItem('offlineEvents', JSON.stringify(state.offlineEvents))
+        localStorage.setItem(
+          'offlineEvents',
+          JSON.stringify(state.offlineEvents)
+        )
       }
 
       // localStorage.setItem('events', JSON.stringify(state.events));
@@ -162,7 +165,7 @@ export default new Vuex.Store({
       try {
         holidays = await axios.get(
           '/calanderAPI/v2/publicholidays/' + moment().format('YYYY') + '/SE'
-        )    
+        )
       } catch (err) {
         holidays = await axios.get('/holidaysBackup2021.json')
       }
@@ -177,8 +180,6 @@ export default new Vuex.Store({
       commit('importHoliday', holidays.data)
       commit('setQuote', quotes.data)
     },
-
-
 
     saveInfo(context, info) {
       context.commit('setInfo', info)

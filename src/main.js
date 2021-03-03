@@ -10,7 +10,6 @@ import VueAxios from 'vue-axios'
 import axios from 'axios'
 import VueOffline from 'vue-offline'
 
-
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueRouter)
